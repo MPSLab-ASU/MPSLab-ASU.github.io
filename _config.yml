@@ -1,0 +1,35 @@
+title: "MPS Lab @ ASU"
+description: "Making Programming Simple (MPS) Lab at Arizona State University"
+url: "" # set to your production URL when deploying
+baseurl: ""
+
+markdown: kramdown
+plugins:
+  - jekyll-scholar
+
+collections:
+  research:
+    output: true
+    permalink: /research/:name/
+
+scholar:
+  style: apa
+  sort_by: year
+  order: descending
+  bibliography: references
+  source: ./_bibliography
+  bibliography_template: bibentry
+  repository: publications/papers
+  details_dir: publications
+  details_layout: publication.html
+  query: "@*" # render all entries by default
+
+defaults:
+  - scope:
+      path: ""
+      type: "research"
+    values:
+      layout: research
+
+sass:
+  style: compressed

@@ -1,0 +1,41 @@
+- name: Dr. Aviral Shrivastava
+  role: Director, Professor
+  degree: Faculty
+  bio: Leads the Making Programming Simple Lab focusing on dependable, energy-efficient computing systems, compilers, and embedded AI.
+  focus: Safe autonomous systems, embedded machine learning, compiler optimizations
+
+- name: Hwisoo Andert
+  role: PhD Student
+  degree: PhD
+  bio: Designs compiler flows and accelerators for autonomous and robotic systems with strict latency constraints.
+  focus: Domain-specific accelerators, autonomous vehicles, real-time software stacks
+
+- name: Tanish Dave
+  role: PhD Student
+  degree: PhD
+  bio: Explores adaptive model compression and runtime systems for edge intelligence on constrained devices.
+  focus: Neural compression, edge AI, runtime scheduling
+
+- name: Priya Peddiraju
+  role: MS Student
+  degree: Masters
+  bio: Builds validation frameworks for perception pipelines and safety monitors for intelligent transportation.
+  focus: Sensor fusion, safety evaluation, autonomous driving
+
+- name: Ananya Jagadeesha
+  role: MS Student
+  degree: Masters
+  bio: Works on compiler-guided optimizations to reduce power and improve performance for embedded GPU workloads.
+  focus: GPU optimization, embedded systems, high-level synthesis
+
+- name: Rahul Szeto
+  role: Undergraduate Researcher
+  degree: Undergraduate
+  bio: Prototypes lightweight ML models for edge robotics and maintains lab demonstration platforms.
+  focus: TinyML, robotics demos, lab infrastructure
+
+- name: "Alumni Spotlight: Mehran Mehrabian"
+  role: Alumni (PhD, 2021)
+  degree: Alumni
+  bio: Architected reliability-aware design flows for heterogeneous SoCs; now building safety systems in industry.
+  focus: Reliability, heterogeneous systems, safety certification

@@ -1,0 +1,19 @@
+---
+layout: default
+---
+{% assign reference = page.reference %}
+<article class="card">
+  <h1>{{ reference.title }}</h1>
+  <p class="muted">{{ reference.author }}</p>
+  <p class="muted">
+    {% if reference.booktitle %}{{ reference.booktitle }}{% elsif reference.journal %}{{ reference.journal }}{% endif %},
+    {{ reference.year }}
+  </p>
+  {% if reference.url %}
+    <p><a class="badge" href="{{ reference.url }}">View full text</a></p>
+  {% endif %}
+  <div class="muted">
+    <strong>Citation:</strong><br>
+    {{ reference | cite }}
+  </div>
+</article>

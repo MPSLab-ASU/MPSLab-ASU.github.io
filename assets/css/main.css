@@ -1,0 +1,260 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+:root {
+  --mps-gold: #ffc627;
+  --mps-maroon: #8c1d40;
+  --mps-gray: #1f2933;
+  --mps-sand: #f7f2e9;
+  --radius: 14px;
+  --shadow: 0 14px 40px rgba(0, 0, 0, 0.08);
+  --font-sans: "Inter", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--mps-gray);
+  background: #f9fafb;
+  line-height: 1.6;
+}
+
+a {
+  color: var(--mps-maroon);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+header {
+  background: linear-gradient(135deg, rgba(140, 29, 64, 0.95), rgba(255, 198, 39, 0.9));
+  color: #fff;
+  padding: 18px 0 12px;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  backdrop-filter: blur(6px);
+}
+
+.topbar {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand span {
+  display: inline-flex;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.18);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 18px;
+  font-weight: 600;
+}
+
+nav a {
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 999px;
+  transition: background 0.2s ease;
+}
+
+nav a:hover,
+nav a:focus {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.page {
+  max-width: 1080px;
+  margin: 26px auto 80px;
+  padding: 0 20px;
+}
+
+.hero {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: 32px;
+  display: grid;
+  gap: 18px;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: 2.1rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(140, 29, 64, 0.08);
+  color: var(--mps-maroon);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-size: 0.78rem;
+}
+
+.grid {
+  display: grid;
+  gap: 18px;
+}
+
+.cards {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.card {
+  background: #fff;
+  border-radius: var(--radius);
+  padding: 18px;
+  box-shadow: var(--shadow);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+}
+
+.card h3 {
+  margin-top: 0;
+  margin-bottom: 6px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.chip {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.section-heading h2 {
+  margin: 0;
+}
+
+.section-heading a {
+  font-weight: 700;
+}
+
+.two-col {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.bio {
+  display: grid;
+  gap: 10px;
+}
+
+.bio strong {
+  font-size: 1.05rem;
+}
+
+.member-header {
+  font-weight: 800;
+  font-size: 1.1rem;
+  margin: 24px 0 10px;
+}
+
+.pub-list {
+  display: grid;
+  gap: 14px;
+}
+
+.pub {
+  padding: 14px 16px;
+  background: #fff;
+  border-radius: var(--radius);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: var(--shadow);
+}
+
+.pub .title {
+  font-weight: 700;
+}
+
+.pub .meta {
+  color: #4b5563;
+  font-size: 0.95rem;
+}
+
+.topic-hero {
+  background: linear-gradient(135deg, rgba(140, 29, 64, 0.92), rgba(255, 198, 39, 0.92));
+  color: #fff;
+  padding: 40px 32px;
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+
+.topic-hero h1 {
+  margin: 0;
+}
+
+.muted {
+  color: #4b5563;
+}
+
+.footer {
+  text-align: center;
+  color: #6b7280;
+  padding: 24px 0 40px;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 720px) {
+  .topbar {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start;
+  }
+
+  nav ul {
+    width: 100%;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+}

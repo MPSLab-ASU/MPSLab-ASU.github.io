@@ -1,1 +1,66 @@
-<meta http-equiv="refresh" content="0; URL='http://aviral.lab.asu.edu'" />
+---
+layout: default
+title: Home
+---
+<section class="hero">
+  <p class="badge">Making Programming Simple Lab · ASU</p>
+  <h1>Dependable, energy-efficient computing for the real world.</h1>
+  <p class="muted">
+    We design compilers, runtimes, and hardware/software co-design that power safe autonomy, efficient edge AI, and trustworthy cyber-physical systems.
+  </p>
+  <div class="chips">
+    <a class="chip" href="{{ '/research/' | relative_url }}">Explore research</a>
+    <a class="chip" href="{{ '/members/' | relative_url }}">Meet the team</a>
+    <a class="chip" href="{{ '/publications/' | relative_url }}">View publications</a>
+  </div>
+</section>
+
+<div class="grid" style="margin-top: 18px;">
+  <div class="section-heading">
+    <h2>Focus Areas</h2>
+    <a href="{{ '/research/' | relative_url }}">All research</a>
+  </div>
+  <div class="cards">
+    {% for topic in site.research limit:3 %}
+      <div class="card">
+        <h3><a href="{{ topic.url | relative_url }}">{{ topic.title }}</a></h3>
+        <p class="muted">{{ topic.summary }}</p>
+        <a class="badge" href="{{ topic.url | relative_url }}">Learn more</a>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="grid" style="margin-top: 26px;">
+  <div class="section-heading">
+    <h2>Featured Publications</h2>
+    <a href="{{ '/publications/' | relative_url }}">All publications</a>
+  </div>
+  <div class="pub-list">
+    {% bibliography --query @*[year>=2023] --max 3 %}
+  </div>
+</div>
+
+<div class="grid" style="margin-top: 26px;">
+  <div class="section-heading">
+    <h2>Lab Members</h2>
+    <a href="{{ '/members/' | relative_url }}">Meet everyone</a>
+  </div>
+  <div class="cards">
+    {% assign members = site.data.members | slice: 0, 3 %}
+    {% for member in members %}
+      <div class="card bio">
+        <div>
+          <strong>{{ member.name }}</strong><br>
+          <span class="muted">{{ member.role }}</span>
+        </div>
+        <div class="chips">
+          {% assign tags = member.focus | split: ',' %}
+          {% for tag in tags %}
+            <span class="chip">{{ tag | strip }}</span>
+          {% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
