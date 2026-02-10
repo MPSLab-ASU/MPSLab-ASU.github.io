@@ -5,8 +5,9 @@ Jekyll site for the Making Programming Simple Lab (ASU) using `jekyll-scholar` t
 ## Quick start
 
 ```bash
-# install deps
-export PATH="$HOME/.local/share/gem/ruby/3.2.0/bin:$PATH"
+# install deps (adjust RUBY_VER if needed)
+RUBY_VER=$(ruby -e 'print RbConfig::CONFIG["ruby_version"]')
+export PATH="$HOME/.local/share/gem/ruby/$RUBY_VER/bin:$PATH"
 bundle install
 
 # build once
