@@ -1,0 +1,13 @@
+version: "3.9"
+services:
+  site:
+    image: jekyll/jekyll:4.3
+    command: bundle exec jekyll serve --livereload --host 0.0.0.0
+    working_dir: /srv/jekyll
+    volumes:
+      - ./:/srv/jekyll
+    ports:
+      - "4000:4000"
+      - "35729:35729"
+    environment:
+      JEKYLL_ENV: development
