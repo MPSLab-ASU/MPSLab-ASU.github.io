@@ -1,0 +1,86 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/astro/Navbar.astro';
+import Footer from '../../components/astro/Footer.astro';
+import { getCollection } from 'astro:content';
+import { Cpu, Car, BookOpen, Brain, Shield, Zap } from 'lucide-react';
+
+const allResearch = await getCollection('research');
+allResearch.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+
+const activeResearch = allResearch.filter(r => r.data.status === 'Active');
+const extendedResearch = allResearch.filter(r => r.data.status === 'Extended');
+
+const IconMap: Record<string, any> = {
+  Cpu, Car, BookOpen, Brain, Shield, Zap
+};
+---
+
+<Layout title="Research">
+  <Navbar slot="header" />
+
+  <section class="py-16 md:py-24">
+    <div class="section-container">
+      <div class="text-center mb-16">
+        <h1 class="text-3xl md:text-5xl font-bold text-text mb-6">Research Areas</h1>
+        <p class="text-lg text-text-secondary max-w-3xl mx-auto">
+          The Make Programming Simple (MPS) Lab focuses on advancing computational methods and technologies to simplify programming and enhance system performance across diverse domains.
+        </p>
+      </div>
+
+      <!-- Active Research -->
+      <div class="mb-20">
+        <h2 class="text-2xl font-bold text-text mb-8 flex items-center gap-3">
+          <span class="w-1 h-8 bg-green-500 rounded-full"></span>
+          Active Research
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+          {activeResearch.map((area, i) => {
+            const IconComponent = area.data.icon ? IconMap[area.data.icon] : Zap;
+            return (
+              <a href={`/research/${area.slug}`} class="block group">
+                <div class="card p-8 h-full flex flex-col hover:-translate-y-2 transition-transform duration-300">
+                  <div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                    <IconComponent className="w-7 h-7 text-primary" />
+                  </div>
+                  <h3 class="font-bold text-xl text-text mb-3 group-hover:text-primary transition-colors">{area.data.title}</h3>
+                  <p class="text-text-secondary leading-relaxed flex-1">{area.data.description}</p>
+                  <div class="mt-6 font-medium text-primary inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                    Read more <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                  </div>
+                </div>
+              </a>
+            )
+          })}
+        </div>
+      </div>
+
+      <!-- Extended Research -->
+      <div>
+        <h2 class="text-2xl font-bold text-text mb-8 flex items-center gap-3">
+          <span class="w-1 h-8 bg-blue-500 rounded-full"></span>
+          Extended Research
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {extendedResearch.map((area, i) => {
+            const IconComponent = area.data.icon ? IconMap[area.data.icon] : Shield;
+            return (
+              <a href={`/research/${area.slug}`} class="block group">
+                <div class="card p-6 h-full flex flex-col hover:-translate-y-1 transition-transform duration-300">
+                  <div class="w-10 h-10 bg-bg-alt rounded-lg flex items-center justify-center mb-4">
+                    <IconComponent className="w-5 h-5 text-text-muted group-hover:text-primary transition-colors" />
+                  </div>
+                  <h3 class="font-semibold text-lg text-text mb-2 group-hover:text-primary transition-colors">{area.data.title}</h3>
+                  <p class="text-sm text-text-secondary leading-relaxed flex-1">{area.data.description}</p>
+                </div>
+              </a>
+            )
+          })}
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>

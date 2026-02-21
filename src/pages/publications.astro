@@ -1,0 +1,52 @@
+---
+import { getCollection } from "astro:content";
+import fs from "node:fs";
+import path from "node:path";
+import Footer from "../components/astro/Footer.astro";
+import Navbar from "../components/astro/Navbar.astro";
+import PublicationSearch from "../components/react/PublicationSearch";
+import Layout from "../layouts/Layout.astro";
+
+// Build-time BibTeX parsing
+const bibPath = path.join(process.cwd(), "src/data/publications.bib");
+const bibContent = fs.readFileSync(bibPath, "utf-8");
+
+// @ts-ignore - bibtex-parse-js doesn't have proper types
+const bibtexParse = await import("bibtex-parse-js");
+const parsedBib = bibtexParse.toJSON(bibContent);
+
+const membersCollection = await getCollection("members");
+const validAuthors = membersCollection.map((m) => m.data.name);
+
+const researchCollection = await getCollection("research");
+const validTags = researchCollection.map((r) => r.data.title);
+---
+
+<Layout title="Publications">
+  <Navbar slot="header" />
+
+  <section class="py-16 md:py-24">
+    <div class="section-container">
+      <div class="text-center mb-12">
+        <h1 class="text-3xl md:text-4xl font-bold text-text mb-4">
+          Publications
+        </h1>
+        <p class="text-text-secondary max-w-2xl mx-auto">
+          Browse our complete collection of research publications. Use the
+          search bar to find specific papers by title, author, or keywords.
+        </p>
+      </div>
+
+      <div class="max-w-4xl mx-auto">
+        <PublicationSearch
+          papers={parsedBib}
+          validAuthors={validAuthors}
+          validTags={validTags}
+          client:load
+        />
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>

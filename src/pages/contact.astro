@@ -1,0 +1,84 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/astro/Navbar.astro';
+import Footer from '../components/astro/Footer.astro';
+---
+
+<Layout title="Contact">
+  <Navbar slot="header" />
+
+  <section class="py-16 md:py-24">
+    <div class="section-container">
+      <div class="text-center mb-12">
+        <h1 class="text-3xl md:text-4xl font-bold text-text mb-4">Contact Us</h1>
+        <p class="text-text-secondary max-w-2xl mx-auto">
+          Interested in our research or looking to collaborate? Get in touch with MPS Lab.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
+        <!-- Contact Information -->
+        <div class="space-y-8">
+          <div class="card p-6">
+            <h2 class="font-semibold text-lg text-text mb-4">Lab Location</h2>
+            <div class="space-y-3 text-sm text-text-secondary">
+              <p><strong class="text-text">MPS Lab</strong></p>
+              <p>School of Computing & Augmented Intelligence</p>
+              <p>Arizona State University</p>
+              <p>Brickyard (BYENG) Building</p>
+              <p>699 S. Mill Avenue</p>
+              <p>Tempe, AZ 85281</p>
+            </div>
+          </div>
+
+          <div class="card p-6">
+            <h2 class="font-semibold text-lg text-text mb-4">Lab Director</h2>
+            <div class="space-y-2 text-sm text-text-secondary">
+              <p><strong class="text-text">Dr. Aviral Shrivastava</strong></p>
+              <p>Professor, SCAI</p>
+              <p>
+                <a href="mailto:aviral.shrivastava@asu.edu" class="text-primary hover:underline">
+                  aviral.shrivastava@asu.edu
+                </a>
+              </p>
+            </div>
+          </div>
+
+          <div class="card p-6">
+            <h2 class="font-semibold text-lg text-text mb-4">Useful Links</h2>
+            <ul class="space-y-2 text-sm">
+              <li><a href="https://labs.engineering.asu.edu/mps-lab/" target="_blank" rel="noopener" class="text-primary hover:underline">Official ASU Lab Page ↗</a></li>
+              <li><a href="https://github.com/MPSLab-ASU" target="_blank" rel="noopener" class="text-primary hover:underline">GitHub Organization ↗</a></li>
+              <li><a href="https://scai.engineering.asu.edu/" target="_blank" rel="noopener" class="text-primary hover:underline">School of Computing & AI ↗</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Contact Form / Google Form Placeholder -->
+        <div>
+          <div class="card p-6">
+            <h2 class="font-semibold text-lg text-text mb-4">Send a Message</h2>
+            <p class="text-sm text-text-secondary mb-6">
+              Use the form below to reach out to us. We typically respond within 2–3 business days.
+            </p>
+            <!-- Google Form iframe placeholder -->
+            <div class="aspect-video w-full max-w-2xl mx-auto rounded-lg overflow-hidden bg-bg-alt border border-border flex items-center justify-center">
+              <div class="text-center p-8">
+                <svg class="w-12 h-12 mx-auto text-text-muted mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <p class="text-text-muted text-sm">Google Form will be embedded here.</p>
+                <p class="text-text-muted text-xs mt-2">
+                  For now, please email us directly at
+                  <a href="mailto:aviral.shrivastava@asu.edu" class="text-primary hover:underline">aviral.shrivastava@asu.edu</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>

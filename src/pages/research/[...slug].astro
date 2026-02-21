@@ -1,0 +1,60 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/astro/Navbar.astro';
+import Footer from '../../components/astro/Footer.astro';
+import { Cpu, Car, BookOpen, Brain, Shield, Zap } from 'lucide-react';
+
+export async function getStaticPaths() {
+  const researchEntries = await getCollection('research');
+  return researchEntries.map(entry => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+const IconMap: Record<string, any> = {
+  Cpu, Car, BookOpen, Brain, Shield, Zap
+};
+const IconComponent = entry.data.icon ? IconMap[entry.data.icon] : Zap;
+---
+
+<Layout title={entry.data.title}>
+  <Navbar slot="header" />
+
+  <section class="py-16 md:py-24">
+    <div class="section-container max-w-4xl">
+      <!-- Back Link -->
+      <a href="/research" class="inline-flex items-center text-sm text-text-muted hover:text-primary transition-colors mb-8">
+        <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        Back to All Research
+      </a>
+
+      <!-- Header -->
+      <header class="mb-12 border-b border-border pb-8 text-center sm:text-left">
+        <div class="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-2xl mb-6 sm:float-right sm:ml-6 sm:mb-0">
+          <IconComponent className="w-8 h-8 text-primary" />
+        </div>
+        <div class="flex items-center gap-3 mb-4 justify-center sm:justify-start">
+          <span class:list={['badge', entry.data.status === 'Active' ? 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300' : 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300']}>
+            {entry.data.status} Research
+          </span>
+        </div>
+        <h1 class="text-3xl md:text-5xl font-bold text-text mb-6 tracking-tight leading-tight">{entry.data.title}</h1>
+        <p class="text-lg text-text-secondary leading-relaxed">{entry.data.description}</p>
+      </header>
+
+      <!-- Content -->
+      <article class="prose prose-lg dark:prose-invert prose-headings:font-heading prose-headings:font-semibold prose-a:text-primary hover:prose-a:text-primary-hover max-w-none">
+        <Content />
+      </article>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>

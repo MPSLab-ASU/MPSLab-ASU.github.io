@@ -1,0 +1,77 @@
+---
+import { getCollection } from 'astro:content';
+
+interface Props {
+  roleFilter?: string;
+}
+
+const { roleFilter } = Astro.props;
+
+let allMembers = await getCollection('members');
+if (roleFilter) {
+  allMembers = allMembers.filter(m => m.data.role === roleFilter);
+}
+allMembers.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+
+const roleColors: Record<string, string> = {
+  'Faculty': 'bg-primary/10 text-primary',
+  'Ph.D.': 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300',
+  'Masters': 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300',
+  'Postdoc': 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300',
+  'Alumni': 'bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400',
+};
+---
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+  {allMembers.map(async (member) => {
+    const { Content } = await member.render();
+    return (
+      <div class="card p-6 group hover:-translate-y-1 cursor-pointer member-card" data-member-id={member.id}>
+        <!-- Avatar -->
+        <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center text-2xl font-bold text-primary">
+          {member.data.name.split(' ').map(n => n[0]).join('')}
+        </div>
+
+        <!-- Info -->
+        <h3 class="text-center font-semibold text-lg text-text mb-1">{member.data.name}</h3>
+        <div class="text-center mb-3">
+          <span class:list={['badge', roleColors[member.data.role] ?? 'bg-gray-100 text-gray-600']}>
+            {member.data.role}
+          </span>
+        </div>
+
+        {member.data.researchInterests && (
+          <div class="flex flex-wrap gap-1 justify-center mb-3">
+            {member.data.researchInterests.slice(0, 3).map(tag => (
+              <span class="text-xs text-text-muted bg-bg-alt px-2 py-0.5 rounded">{tag}</span>
+            ))}
+          </div>
+        )}
+
+        {member.data.email && (
+          <p class="text-center text-xs text-text-muted truncate">{member.data.email}</p>
+        )}
+
+        <!-- Expandable Bio (hidden, shown via JS) -->
+        <div class="member-bio hidden mt-4 pt-4 border-t border-border text-sm text-text-secondary leading-relaxed">
+          <Content />
+          {member.data.website && (
+            <a href={member.data.website} target="_blank" rel="noopener"
+               class="inline-block mt-2 text-primary hover:underline text-xs">
+              Visit website ↗
+            </a>
+          )}
+        </div>
+      </div>
+    );
+  })}
+</div>
+
+<script>
+  document.querySelectorAll('.member-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const bio = card.querySelector('.member-bio');
+      bio?.classList.toggle('hidden');
+    });
+  });
+</script>

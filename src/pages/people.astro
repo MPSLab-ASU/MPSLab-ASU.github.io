@@ -1,0 +1,50 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/astro/Navbar.astro';
+import Footer from '../components/astro/Footer.astro';
+import MemberGrid from '../components/astro/MemberGrid.astro';
+---
+
+<Layout title="People">
+  <Navbar slot="header" />
+
+  <section class="py-16 md:py-24">
+    <div class="section-container">
+      <div class="text-center mb-12">
+        <h1 class="text-3xl md:text-4xl font-bold text-text mb-4">Our Team</h1>
+        <p class="text-text-secondary max-w-2xl mx-auto">
+          Meet the researchers and students driving innovation at MPS Lab. Click on a member to learn more about their work.
+        </p>
+      </div>
+
+      <!-- Faculty -->
+      <div class="mb-16">
+        <h2 class="text-2xl font-bold text-text mb-6 flex items-center gap-3">
+          <span class="w-1 h-8 bg-primary rounded-full"></span>
+          Faculty
+        </h2>
+        <MemberGrid roleFilter="Faculty" />
+      </div>
+
+      <!-- Current Students -->
+      <div class="mb-16">
+        <h2 class="text-2xl font-bold text-text mb-6 flex items-center gap-3">
+          <span class="w-1 h-8 bg-accent rounded-full"></span>
+          Ph.D. Students
+        </h2>
+        <MemberGrid roleFilter="Ph.D." />
+      </div>
+
+      <!-- Alumni -->
+      <div>
+        <h2 class="text-2xl font-bold text-text mb-6 flex items-center gap-3">
+          <span class="w-1 h-8 bg-text-muted rounded-full"></span>
+          Alumni
+        </h2>
+        <MemberGrid roleFilter="Alumni" />
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>
