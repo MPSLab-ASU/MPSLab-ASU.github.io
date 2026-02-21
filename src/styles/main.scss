@@ -43,4 +43,70 @@
     .badge {
         @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
     }
+
+    .prose {
+        @apply text-text-secondary;
+
+        p {
+            @apply mb-4 leading-relaxed;
+        }
+
+        ul {
+            @apply list-disc list-outside ml-6 space-y-2 mb-6;
+        }
+
+        ol {
+            @apply list-decimal list-outside ml-6 space-y-2 mb-6;
+        }
+
+        li>p {
+            @apply inline;
+        }
+
+        img {
+            @apply rounded-xl shadow-md border border-border w-full h-auto my-8 object-cover max-h-[600px];
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            @apply mt-8 mb-4 font-bold text-text;
+        }
+
+        h2 {
+            @apply text-2xl border-b border-border pb-2;
+        }
+
+        h3 {
+            @apply text-xl;
+        }
+
+        a {
+            @apply text-primary hover:text-primary-hover hover:underline transition-colors;
+        }
+
+        strong,
+        b {
+            @apply font-semibold text-text;
+        }
+
+        blockquote {
+            @apply border-l-4 border-primary pl-4 italic text-text-muted my-6;
+        }
+
+        figure.research-figure {
+            @apply my-8 flex flex-col items-center;
+
+            img {
+                @apply rounded-xl shadow-md border border-border w-full h-auto object-cover max-h-[600px] my-0;
+            }
+
+            figcaption {
+                @apply text-sm text-text-muted text-center mt-3 italic px-4;
+            }
+        }
+    }
 }

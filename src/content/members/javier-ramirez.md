@@ -7,11 +7,8 @@ linkedin: "https://www.linkedin.com/in/javier-c-ramirez/"
 resume: "/docs/resumes/javier-ramirez.pdf"
 order: 4
 image: "/images/members/javier-ramirez.png"
+researchInterests: ["Intelligent Transportation Systems"]
 ---
-
-LinkedIn
-
-GitHub
 
 I am currently a third year undergraduate at SCAI and SoMSS, pursuing a dual degree in Computer Science and Mathematics (Statistics). My work at MPS Lab is focused on intelligent transportation systems (ITS) — specifically, the problem of predicting traffic flow.
 

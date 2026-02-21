@@ -6,6 +6,7 @@ github: "https://github.com/eandert"
 linkedin: "https://www.linkedin.com/in/eddie-andert-00428056/"
 order: 2
 image: "/images/members/edward-andert.jpg"
+researchInterests: ["Intelligent Transportation Systems"]
 ---
 
 LinkedIn

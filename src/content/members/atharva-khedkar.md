@@ -7,10 +7,7 @@ linkedin: "http://www.linkedin.com/in/atharvakhedkar/"
 resume: "/docs/resumes/atharva-khedkar.pdf"
 order: 2
 image: "/images/members/atharva-khedkar.svg"
+researchInterests: ["AI-driven Multi-Level Compilers"]
 ---
-
-LinkedIn
-
-GitHub
 
 I’m a Ph.D in Computer Science Student at ASU working in Compiler Design and Machine Learning Accelerators@MPS-Lab. Previously I worked as a Machine Learning Intern atAMDandHackerRank.

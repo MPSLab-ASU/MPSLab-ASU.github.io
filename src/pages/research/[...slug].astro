@@ -112,6 +112,17 @@ const relatedPublications = parsedBib
         <p class="text-lg text-text-secondary leading-relaxed">
           {entry.data.description}
         </p>
+        {
+          entry.data.image && (
+            <div class="mt-8 rounded-xl overflow-hidden shadow-lg border border-border">
+              <img
+                src={entry.data.image}
+                alt={entry.data.title}
+                class="w-full h-auto object-cover"
+              />
+            </div>
+          )
+        }
       </header>
 
       <!-- Content -->

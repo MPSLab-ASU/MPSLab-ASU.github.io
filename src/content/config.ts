@@ -41,6 +41,7 @@ const research = defineCollection({
         title: z.string(),
         status: z.enum(['Active', 'Extended']),
         description: z.string(),
+        image: z.string().optional(),
         icon: z.string().optional(),
         order: z.number().optional(),
     }),
