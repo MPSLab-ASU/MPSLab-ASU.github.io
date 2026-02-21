@@ -50,3 +50,5 @@ Icon
 # Temporary files
 tmp/
 temp/
+
+scrape_bibtex*

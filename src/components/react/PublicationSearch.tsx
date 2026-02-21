@@ -45,7 +45,7 @@ export default function PublicationSearch({ papers, validAuthors = [], validTags
     }, [validAuthors]);
 
     const types = useMemo(() => {
-        return [...new Set(papers.map(p => p.entryTags.tppubtype).filter(Boolean))].sort() as string[];
+        return [...new Set(papers.map(p => p.entryTags.category).filter(Boolean))].sort() as string[];
     }, [papers]);
 
     const tags = useMemo(() => {
@@ -56,7 +56,7 @@ export default function PublicationSearch({ papers, validAuthors = [], validTags
         keys: [
             { name: 'entryTags.title', weight: 0.4 },
             { name: 'entryTags.author', weight: 0.3 },
-            { name: 'entryTags.keywords', weight: 0.2 },
+            { name: 'entryTags.research', weight: 0.2 },
             { name: 'entryTags.year', weight: 0.1 },
             { name: 'entryTags.booktitle', weight: 0.1 },
             { name: 'entryTags.journal', weight: 0.1 },
@@ -74,10 +74,10 @@ export default function PublicationSearch({ papers, validAuthors = [], validTags
             results = results.filter(p => p.entryTags.author?.includes(authorFilter));
         }
         if (typeFilter) {
-            results = results.filter(p => p.entryTags.tppubtype === typeFilter);
+            results = results.filter(p => p.entryTags.category === typeFilter);
         }
         if (tagFilter) {
-            results = results.filter(p => p.entryTags.keywords?.includes(tagFilter));
+            results = results.filter(p => p.entryTags.research?.includes(tagFilter));
         }
         return results;
     }, [query, yearFilter, authorFilter, typeFilter, tagFilter, papers, fuse]);
@@ -95,7 +95,7 @@ export default function PublicationSearch({ papers, validAuthors = [], validTags
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-[var(--color-text-muted)]" />
                 <input
                     type="text"
-                    placeholder="Search publications by title, author, or keywords..."
+                    placeholder="Search publications by title, author, or research areas..."
                     value={query}
                     onChange={e => setQuery(e.target.value)}
                     className="w-full pl-10 pr-4 py-3 rounded-xl border bg-[var(--color-bg-card)] text-[var(--color-text)] border-[var(--color-border)] focus:ring-2 focus:ring-[var(--color-primary)] focus:border-transparent outline-none transition-all"

@@ -10,9 +10,9 @@ export interface Publication {
         booktitle?: string;
         journal?: string;
         year?: string;
-        keywords?: string;
+        research?: string;
         url?: string;
-        tppubtype?: string;
+        category?: string;
     };
 }
 
@@ -96,17 +96,17 @@ export default function PublicationCard({ pub, validTags = [], onTypeClick, onTa
                             style={{ opacity: 0.9 }}>
                             {pub.entryTags.year}
                         </span>
-                        {pub.entryTags.tppubtype && (
+                        {pub.entryTags.category && (
                             onTypeClick ? (
                                 <button
-                                    onClick={() => onTypeClick(pub.entryTags.tppubtype!)}
+                                    onClick={() => onTypeClick(pub.entryTags.category!)}
                                     className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[var(--color-bg-alt)] border border-[var(--color-border)] text-[var(--color-text-secondary)] capitalize cursor-pointer hover:bg-[var(--color-border)] hover:text-[var(--color-text)] transition-colors"
                                 >
-                                    {pub.entryTags.tppubtype}
+                                    {pub.entryTags.category}
                                 </button>
                             ) : (
                                 <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[var(--color-bg-alt)] border border-[var(--color-border)] text-[var(--color-text-secondary)] capitalize">
-                                    {pub.entryTags.tppubtype}
+                                    {pub.entryTags.category}
                                 </span>
                             )
                         )}
@@ -114,9 +114,9 @@ export default function PublicationCard({ pub, validTags = [], onTypeClick, onTa
                             {getVenue(pub)}
                         </span>
                     </div>
-                    {pub.entryTags.keywords && (
+                    {pub.entryTags.research && (
                         <div className="flex flex-wrap gap-1 mt-2">
-                            {pub.entryTags.keywords.split(',').map(t => t.trim())
+                            {pub.entryTags.research.split(',').map(t => t.trim())
                                 .filter(t => validTags.length === 0 || validTags.some(v => v.toLowerCase() === t.toLowerCase()))
                                 .map(kw => (
                                     onTagClick ? (

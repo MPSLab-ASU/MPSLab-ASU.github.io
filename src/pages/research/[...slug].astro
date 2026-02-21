@@ -41,8 +41,8 @@ const parsedBib: Publication[] = bibtexParse.toJSON(bibContent);
 const relatedPublications = parsedBib
   .filter(
     (pub) =>
-      pub.entryTags.keywords &&
-      pub.entryTags.keywords
+      pub.entryTags.research &&
+      pub.entryTags.research
         .toLowerCase()
         .includes(entry.data.title.toLowerCase()),
   )
