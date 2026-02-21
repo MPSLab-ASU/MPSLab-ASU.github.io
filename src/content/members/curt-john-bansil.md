@@ -4,6 +4,7 @@ role: "Masters"
 joinDate: "2024"
 github: "https://github.com/kurtis-b"
 linkedin: "https://www.linkedin.com/in/curtbansil/"
+resume: "/docs/resumes/curt-john-bansil.pdf"
 order: 3
 image: "/images/members/curt-john-bansil.jpg"
 ---

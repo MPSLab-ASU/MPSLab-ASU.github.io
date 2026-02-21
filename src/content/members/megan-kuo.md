@@ -4,6 +4,7 @@ role: "Masters"
 joinDate: "2024"
 github: "https://github.com/Megan0704-1"
 linkedin: "https://linkedin.com/in/megankuo2001"
+resume: "/docs/resumes/megan-kuo.pdf"
 order: 3
 image: "/images/members/megan-kuo.jpg"
 ---

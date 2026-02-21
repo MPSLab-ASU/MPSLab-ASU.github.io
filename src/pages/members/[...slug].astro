@@ -18,6 +18,8 @@ export async function getStaticPaths() {
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 
+const researchEntries = await getCollection("research");
+
 const roleColors: Record<string, string> = {
     Faculty: "bg-primary/10 text-primary",
     "Ph.D.": "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300",
@@ -131,7 +133,9 @@ const relatedPublications = parsedBib
                         {entry.data.name}
                     </h1>
 
-                    <div class="flex flex-col gap-2 text-text-secondary">
+                    <div
+                        class="grid grid-cols-1 sm:grid-cols-2 gap-y-3 gap-x-6 text-text-secondary w-fit mx-auto sm:mx-0"
+                    >
                         {
                             entry.data.email && (
                                 <div class="flex items-center justify-center sm:justify-start gap-2">
@@ -261,6 +265,33 @@ const relatedPublications = parsedBib
                                 </div>
                             )
                         }
+                        {
+                            entry.data.resume && (
+                                <div class="flex items-center justify-center sm:justify-start gap-2">
+                                    <svg
+                                        class="w-4 h-4"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                                        />
+                                    </svg>
+                                    <a
+                                        href={entry.data.resume}
+                                        target="_blank"
+                                        rel="noopener"
+                                        class="hover:text-primary transition-colors"
+                                    >
+                                        Resume ↗
+                                    </a>
+                                </div>
+                            )
+                        }
                     </div>
 
                     {
@@ -271,11 +302,31 @@ const relatedPublications = parsedBib
                                 </h3>
                                 <div class="flex flex-wrap gap-2 justify-center sm:justify-start">
                                     {entry.data.researchInterests.map(
-                                        (tag: string) => (
-                                            <span class="text-xs text-text border border-border bg-bg-alt px-3 py-1 rounded-full">
-                                                {tag}
-                                            </span>
-                                        ),
+                                        (tag: string) => {
+                                            const matchingResearch =
+                                                researchEntries.find(
+                                                    (r) =>
+                                                        r.data.title.toLowerCase() ===
+                                                        tag.toLowerCase(),
+                                                );
+
+                                            if (matchingResearch) {
+                                                return (
+                                                    <a
+                                                        href={`/research/${matchingResearch.slug}`}
+                                                        class="text-xs text-text border border-border bg-bg-alt px-3 py-1 rounded-full hover:border-primary hover:text-primary transition-colors cursor-pointer"
+                                                    >
+                                                        {tag}
+                                                    </a>
+                                                );
+                                            }
+
+                                            return (
+                                                <span class="text-xs text-text border border-border bg-bg-alt px-3 py-1 rounded-full">
+                                                    {tag}
+                                                </span>
+                                            );
+                                        },
                                     )}
                                 </div>
                             </div>

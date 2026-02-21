@@ -4,6 +4,7 @@ role: "Ph.D."
 joinDate: "2024"
 github: "http://github.com/atharvaKhedkar"
 linkedin: "http://www.linkedin.com/in/atharvakhedkar/"
+resume: "/docs/resumes/atharva-khedkar.pdf"
 order: 2
 image: "/images/members/atharva-khedkar.svg"
 ---

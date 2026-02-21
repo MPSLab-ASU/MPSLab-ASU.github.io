@@ -4,6 +4,7 @@ role: "Undergraduate"
 joinDate: "2024"
 github: "https://github.com/synamalhan"
 linkedin: "https://www.linkedin.com/in/synamalhan/"
+resume: "/docs/resumes/syna-malhan.pdf"
 order: 4
 image: "/images/members/syna-malhan.jpeg"
 ---

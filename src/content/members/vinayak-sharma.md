@@ -4,6 +4,7 @@ role: "Ph.D."
 joinDate: "2024"
 github: "https://github.com/ryo-ma/github-profile-trophy"
 linkedin: "https://www.linkedin.com/in/vinayak19th/"
+resume: "/docs/resumes/vinayak-sharma.pdf"
 order: 2
 image: "/images/members/vinayak-sharma.svg"
 ---

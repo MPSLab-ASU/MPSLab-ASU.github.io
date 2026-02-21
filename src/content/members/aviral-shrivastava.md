@@ -4,6 +4,7 @@ role: "Faculty"
 joinDate: "2006"
 email: "aviral.shrivastava@asu.edu"
 website: "https://labs.engineering.asu.edu/mps-lab/"
+resume: "/docs/resumes/aviral-shrivastava.pdf"
 researchInterests: ["Embedded Systems", "Compiler Design", "Computer Architecture", "Cyber-Physical Systems", "Autonomous Vehicles"]
 order: 1
 image: "/images/members/aviral-shrivastava.png"

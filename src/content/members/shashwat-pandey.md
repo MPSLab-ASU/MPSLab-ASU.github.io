@@ -4,6 +4,7 @@ role: "Masters"
 joinDate: "2024"
 github: "https://github.com/Shashwatpandey4"
 linkedin: "https://www.linkedin.com/in/shashwat023/"
+resume: "/docs/resumes/shashwat-pandey.pdf"
 order: 3
 image: "/images/members/shashwat-pandey.jpg"
 ---

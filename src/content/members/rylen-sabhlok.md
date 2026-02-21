@@ -4,6 +4,7 @@ role: "Undergraduate"
 joinDate: "2024"
 github: "https://github.com/Rylen-s"
 linkedin: "https://www.linkedin.com/in/rylen-sabhlok"
+resume: "/docs/resumes/rylen-sabhlok.pdf"
 order: 4
 image: "/images/members/rylen-sabhlok.jpeg"
 ---

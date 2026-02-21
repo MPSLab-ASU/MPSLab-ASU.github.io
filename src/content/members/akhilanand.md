@@ -4,6 +4,7 @@ role: "Undergraduate"
 joinDate: "2024"
 github: "https://github.com/kel404x"
 linkedin: "https://www.linkedin.com/in/akhil-a-576b56288/"
+resume: "/docs/resumes/akhilanand.pdf"
 order: 4
 image: "/images/members/akhilanand.jpg"
 ---

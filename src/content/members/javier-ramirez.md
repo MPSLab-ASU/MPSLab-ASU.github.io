@@ -4,6 +4,7 @@ role: "Undergraduate"
 joinDate: "2024"
 github: "https://github.com/javier-cramirez"
 linkedin: "https://www.linkedin.com/in/javier-c-ramirez/"
+resume: "/docs/resumes/javier-ramirez.pdf"
 order: 4
 image: "/images/members/javier-ramirez.png"
 ---

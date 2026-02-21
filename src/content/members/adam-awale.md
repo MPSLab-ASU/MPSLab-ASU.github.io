@@ -4,6 +4,7 @@ role: "Ph.D."
 joinDate: "2024"
 github: "https://github.com/awaleadam"
 linkedin: "https://www.linkedin.com/in/adam-awale/"
+resume: "/docs/resumes/adam-awale.pdf"
 order: 2
 image: "/images/members/adam-awale.jpeg"
 ---

@@ -12,6 +12,7 @@ const members = defineCollection({
         github: z.string().optional(),
         linkedin: z.string().optional(),
         portfolio: z.string().optional(),
+        resume: z.string().optional(),
         researchInterests: z.array(z.string()).optional(),
         order: z.number().optional(),
         image: z.string().optional(),

@@ -4,6 +4,7 @@ role: "Undergraduate"
 joinDate: "2024"
 github: "https://github.com/papapizzeria0608"
 linkedin: "https://www.linkedin.com/in/ayush-gupta-90237a218/"
+resume: "/docs/resumes/ayush-gupta.pdf"
 order: 4
 image: "/images/members/ayush-gupta.jpg"
 ---
