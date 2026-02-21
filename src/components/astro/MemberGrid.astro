@@ -3,13 +3,22 @@ import { getCollection } from 'astro:content';
 
 interface Props {
   roleFilter?: string;
+  researchFilter?: string;
+  compact?: boolean;
 }
 
-const { roleFilter } = Astro.props;
+const { roleFilter, researchFilter, compact = false } = Astro.props;
 
 let allMembers = await getCollection('members');
 if (roleFilter) {
   allMembers = allMembers.filter(m => m.data.role === roleFilter);
+}
+if (researchFilter) {
+  const filterLower = researchFilter.toLowerCase();
+  allMembers = allMembers.filter(m => 
+    m.data.researchInterests && 
+    m.data.researchInterests.some(ri => ri.toLowerCase() === filterLower)
+  );
 }
 allMembers.sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
 
@@ -22,7 +31,20 @@ const roleColors: Record<string, string> = {
 };
 ---
 
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+{allMembers.length > 0 && compact && (
+  <ul class="space-y-3 list-disc list-inside text-text-secondary">
+    {allMembers.map((member) => (
+      <li>
+        <a href={`/members/${member.slug}`} class="hover:text-primary transition-colors hover:underline text-lg">
+          {member.data.name}
+        </a>
+      </li>
+    ))}
+  </ul>
+)}
+
+{allMembers.length > 0 && !compact && (
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
   {allMembers.map(async (member) => {
     const { Content } = await member.render();
     return (
@@ -62,4 +84,5 @@ const roleColors: Record<string, string> = {
       </a>
     );
   })}
-</div>
+  </div>
+)}

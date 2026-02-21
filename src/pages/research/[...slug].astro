@@ -4,6 +4,7 @@ import { BookOpen, Brain, Car, Cpu, Shield, Zap } from "lucide-react";
 import fs from "node:fs";
 import path from "node:path";
 import Footer from "../../components/astro/Footer.astro";
+import MemberGrid from "../../components/astro/MemberGrid.astro";
 import Navbar from "../../components/astro/Navbar.astro";
 import type { Publication } from "../../components/react/PublicationCard";
 import Layout from "../../layouts/Layout.astro";
@@ -119,6 +120,11 @@ const relatedPublications = parsedBib
       >
         <Content />
       </article>
+
+      <div class="mt-16 pt-12 border-t border-border">
+        <h2 class="text-2xl font-bold text-text mb-8">Researchers</h2>
+        <MemberGrid researchFilter={entry.data.title} compact={true} />
+      </div>
 
       {
         relatedPublications.length > 0 && (
