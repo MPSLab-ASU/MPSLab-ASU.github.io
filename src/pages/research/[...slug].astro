@@ -39,13 +39,16 @@ const bibtexParse = await import("bibtex-parse-js");
 const parsedBib: Publication[] = bibtexParse.toJSON(bibContent);
 
 // Filter for related publications based on the research title matching a keyword
+// Exclude thesis documents (mastersthesis, phdthesis, bachelorthesis)
+const thesisTypes = ["mastersthesis", "phdthesis", "bachelorthesis"];
 const relatedPublications = parsedBib
   .filter(
     (pub) =>
       pub.entryTags.research &&
       pub.entryTags.research
         .toLowerCase()
-        .includes(entry.data.title.toLowerCase()),
+        .includes(entry.data.title.toLowerCase()) &&
+      !thesisTypes.includes(pub.entryType?.toLowerCase() ?? ""),
   )
   .sort((a, b) => {
     // Sort by descending year
@@ -54,6 +57,12 @@ const relatedPublications = parsedBib
     return yearB - yearA;
   })
   .slice(0, 5); // Take top 5
+
+// Check if resources exist for this research area
+const allResources = await getCollection("resources");
+const hasResources = allResources.some(
+  (r) => r.data.researchArea === entry.data.title,
+);
 ---
 
 <Layout title={entry.data.title}>
@@ -125,6 +134,33 @@ const relatedPublications = parsedBib
         }
       </header>
 
+      <!-- Quick Links -->
+      {
+        hasResources && (
+          <div class="mb-10 flex flex-wrap gap-3">
+            <a
+              href={`/research/resources/${entry.slug}`}
+              class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 font-medium text-sm transition-all"
+            >
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                />
+              </svg>
+              Reading List
+            </a>
+          </div>
+        )
+      }
+
       <!-- Content -->
       <article
         class="prose prose-lg dark:prose-invert prose-headings:font-heading prose-headings:font-semibold prose-a:text-primary hover:prose-a:text-primary-hover max-w-none"
@@ -155,6 +191,27 @@ const relatedPublications = parsedBib
                 </li>
               ))}
             </ul>
+            <div class="mt-8">
+              <a
+                href={`/publications?tag=${encodeURIComponent(entry.data.title)}`}
+                class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-primary text-primary hover:bg-primary hover:text-white font-medium text-sm transition-all"
+              >
+                View All Publications
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
+                </svg>
+              </a>
+            </div>
           </div>
         )
       }

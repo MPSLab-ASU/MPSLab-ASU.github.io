@@ -47,4 +47,18 @@ const research = defineCollection({
     }),
 });
 
-export const collections = { members, news, research };
+const resources = defineCollection({
+    type: 'content',
+    schema: z.object({
+        researchArea: z.string(),
+        resources: z.array(z.object({
+            title: z.string(),
+            type: z.enum(['Paper', 'Book', 'Video', 'Tutorial', 'Tool', 'Publication']),
+            url: z.string().optional(),
+            authors: z.string().optional(),
+            description: z.string().optional(),
+        })),
+    }),
+});
+
+export const collections = { members, news, research, resources };

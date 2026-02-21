@@ -19,13 +19,17 @@ export default function PublicationSearch({ papers, validAuthors = [], validTags
     const [currentPage, setCurrentPage] = useState(1);
     const ITEMS_PER_PAGE = 20;
 
-    // Initialize query from URL parameters if present
+    // Initialize query and tag filter from URL parameters if present
     useEffect(() => {
         if (typeof window !== 'undefined') {
             const params = new URLSearchParams(window.location.search);
             const q = params.get('q');
             if (q) {
                 setQuery(q);
+            }
+            const tag = params.get('tag');
+            if (tag) {
+                setTagFilter(tag);
             }
         }
     }, []);
