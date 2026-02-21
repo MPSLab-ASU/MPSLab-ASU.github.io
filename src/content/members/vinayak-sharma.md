@@ -11,6 +11,7 @@ graduated: "Spring 2024"
 github: "https://github.com/ryo-ma/github-profile-trophy"
 linkedin: "https://www.linkedin.com/in/vinayak19th/"
 resume: "/docs/resumes/vinayak-sharma.pdf"
+researchInterests: ["Quantum Machine Learning"]
 ---
 
 Ph.D. Student working on Machine Learning & Quantum Computing. Currently, I’m working on ML algorithms that can improve the performance and functionality of NISQ Quantum computers at@MPS-Lab. I have full-time experience as a Deep Learning Developer at@Myelin Foundry.
