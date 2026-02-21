@@ -100,14 +100,60 @@ import Layout from "../layouts/Layout.astro";
 
           <!-- Alumni Tab -->
           <div id="tab-alumni" class="tab-content hidden">
-            <div>
+            <!-- Post-docs -->
+            <div class="mb-16">
+              <h2
+                class="text-2xl font-bold text-text mb-6 flex items-center gap-3"
+              >
+                <span class="w-1 h-8 bg-purple-500 rounded-full"></span>
+                Post-Doctoral Researchers
+              </h2>
+              <MemberGrid
+                roleFilter="Alumni"
+                alumniTypeFilter="Post-Doctoral Researchers"
+              />
+            </div>
+
+            <!-- Ph.D. -->
+            <div class="mb-16">
+              <h2
+                class="text-2xl font-bold text-text mb-6 flex items-center gap-3"
+              >
+                <span class="w-1 h-8 bg-blue-500 rounded-full"></span>
+                Ph.D. Graduates
+              </h2>
+              <MemberGrid
+                roleFilter="Alumni"
+                alumniTypeFilter="Ph.D. Graduates"
+              />
+            </div>
+
+            <!-- Masters -->
+            <div class="mb-16">
+              <h2
+                class="text-2xl font-bold text-text mb-6 flex items-center gap-3"
+              >
+                <span class="w-1 h-8 bg-green-500 rounded-full"></span>
+                Master's Graduates
+              </h2>
+              <MemberGrid
+                roleFilter="Alumni"
+                alumniTypeFilter={["Master’s Graduates", "Master’s Graduate"]}
+              />
+            </div>
+
+            <!-- Undergraduates -->
+            <div class="mb-16">
               <h2
                 class="text-2xl font-bold text-text mb-6 flex items-center gap-3"
               >
                 <span class="w-1 h-8 bg-text-muted rounded-full"></span>
-                Alumni
+                Undergraduate Researchers
               </h2>
-              <MemberGrid roleFilter="Alumni" />
+              <MemberGrid
+                roleFilter="Alumni"
+                alumniTypeFilter="Undergraduate Researchers"
+              />
             </div>
           </div>
 

@@ -4,16 +4,21 @@ import { getCollection } from 'astro:content';
 interface Props {
   roleFilter?: string;
   researchFilter?: string;
+  alumniTypeFilter?: string | string[];
   compact?: boolean;
 }
 
-const { roleFilter, researchFilter, compact = false } = Astro.props;
+const { roleFilter, researchFilter, alumniTypeFilter, compact = false } = Astro.props;
 
 let allMembers = await getCollection('members');
 if (roleFilter === 'Alumni') {
   allMembers = allMembers.filter(m => m.data.role === 'Alumni' || m.data.isAlumni === true);
 } else if (roleFilter) {
   allMembers = allMembers.filter(m => m.data.role === roleFilter);
+}
+if (alumniTypeFilter) {
+  const types = Array.isArray(alumniTypeFilter) ? alumniTypeFilter : [alumniTypeFilter];
+  allMembers = allMembers.filter(m => m.data.alumniType && types.includes(m.data.alumniType));
 }
 if (researchFilter) {
   const filterLower = researchFilter.toLowerCase();
@@ -71,7 +76,6 @@ const roleColors: Record<string, string> = {
         {(member.data.graduated || member.data.alumniType) && (
           <div class="mb-3 text-center">
             <p class="text-xs font-medium text-text-secondary">
-              {member.data.alumniType && <span class="block">{member.data.alumniType}</span>}
               {member.data.graduated && <span class="block text-text-muted">Graduated: {member.data.graduated}</span>}
             </p>
           </div>
@@ -86,7 +90,7 @@ const roleColors: Record<string, string> = {
 
         {member.data.currentPosition && (
           <div class="mb-3 text-center">
-             <p class="text-xs text-text-secondary line-clamp-2" title={member.data.currentPosition}>{member.data.currentPosition}</p>
+             <p class="text-xs text-text-secondary" title={member.data.currentPosition}>{member.data.currentPosition}</p>
           </div>
         )}
 
