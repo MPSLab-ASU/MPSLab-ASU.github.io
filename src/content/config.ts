@@ -4,7 +4,7 @@ const members = defineCollection({
     type: 'content',
     schema: z.object({
         name: z.string(),
-        role: z.enum(['Faculty', 'Ph.D.', 'Masters', 'Undergraduate', 'Alumni', 'Postdoc']),
+        role: z.enum(['Faculty', 'Ph.D.', 'Masters', 'Undergraduate', 'Alumni', 'Postdoc', 'Visiting Student', 'Visiting Faculty']),
         photoUrl: z.string().optional(),
         joinDate: z.string(),
         email: z.string().optional(),
@@ -16,6 +16,12 @@ const members = defineCollection({
         researchInterests: z.array(z.string()).optional(),
         order: z.number().optional(),
         image: z.string().optional(),
+        isAlumni: z.boolean().optional(),
+        alumniType: z.string().optional(),
+        currentPosition: z.string().optional(),
+        graduated: z.string().optional(),
+        university: z.string().optional(),
+        duration: z.string().optional(),
     }),
 });
 

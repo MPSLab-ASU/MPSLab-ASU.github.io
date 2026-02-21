@@ -1,0 +1,13 @@
+---
+name: "Shreehari Jagadeesha"
+role: "Alumni"
+joinDate: "2024"
+website: "https://www.linkedin.com/in/shreehari-j/"
+order: 5
+image: "/images/members/shreehari-jagadeesha.jpg"
+isAlumni: true
+alumniType: "Master’s Graduates"
+graduated: "Fall 2023"
+---
+
+TIPANGLE: A Machine Learning Approach for Accurate Spatial Pan and Tilt Angle Determination of Pan Tilt Traffic Cameras

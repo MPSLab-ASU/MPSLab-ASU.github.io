@@ -1,9 +1,14 @@
 ---
 name: "Hwisoo So"
 role: "Alumni"
-joinDate: "2020"
-researchInterests: ["DNN Accelerators", "Hardware Design", "Edge Computing"]
+joinDate: "2024"
+website: "https://scholar.google.com/citations?user=hzKEf24AAAAJ&hl=en"
 order: 5
+image: "/images/members/hwisoo-so.jpg"
+isAlumni: true
+alumniType: "Post-Doctoral Researchers"
+currentPosition: "Assistant Professor, Kyungpook National University, Daegu, South Korea"
+graduated: "Spring 2019"
 ---
 
-Hwisoo So is a former student at MPS Lab working on efficient neural network accelerator architectures for edge devices. His research focuses on designing hardware that enables practical deployment of deep learning models.
+

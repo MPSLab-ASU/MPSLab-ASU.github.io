@@ -10,7 +10,9 @@ interface Props {
 const { roleFilter, researchFilter, compact = false } = Astro.props;
 
 let allMembers = await getCollection('members');
-if (roleFilter) {
+if (roleFilter === 'Alumni') {
+  allMembers = allMembers.filter(m => m.data.role === 'Alumni' || m.data.isAlumni === true);
+} else if (roleFilter) {
   allMembers = allMembers.filter(m => m.data.role === roleFilter);
 }
 if (researchFilter) {
@@ -65,6 +67,28 @@ const roleColors: Record<string, string> = {
             {member.data.role}
           </span>
         </div>
+
+        {(member.data.graduated || member.data.alumniType) && (
+          <div class="mb-3 text-center">
+            <p class="text-xs font-medium text-text-secondary">
+              {member.data.alumniType && <span class="block">{member.data.alumniType}</span>}
+              {member.data.graduated && <span class="block text-text-muted">Graduated: {member.data.graduated}</span>}
+            </p>
+          </div>
+        )}
+
+        {(member.data.university || member.data.duration) && (
+          <div class="mb-3 text-center text-xs">
+            {member.data.university && <p class="font-medium text-text-secondary mb-0.5">{member.data.university}</p>}
+            {member.data.duration && <p class="text-text-muted">{member.data.duration}</p>}
+          </div>
+        )}
+
+        {member.data.currentPosition && (
+          <div class="mb-3 text-center">
+             <p class="text-xs text-text-secondary line-clamp-2" title={member.data.currentPosition}>{member.data.currentPosition}</p>
+          </div>
+        )}
 
         {member.data.researchInterests && member.data.researchInterests.length > 0 && (
           <div class="mb-3">

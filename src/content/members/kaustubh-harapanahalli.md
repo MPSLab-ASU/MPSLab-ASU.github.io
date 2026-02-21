@@ -9,6 +9,9 @@ resume: "/docs/resumes/kaustubh-harapanahalli.pdf"
 researchInterests: ["Intelligent Transportation Systems"]
 order: 2
 image: "/images/members/kaustubh-harapanahalli.jpeg"
+isAlumni: true
+alumniType: "Master’s Graduate"
+graduated: "Summer 2025"
 ---
 
 I have developed my core foundation in Computer Vision and AI, which presented opportunities for research and solution development in industrial settings, particularly with Siemens. Balancing technical work with a commitment to my education, my path has evolved from organizing and instructing in learning programs to contributing to corporate roles in a research capacity, focusing on practical applications and collaborative growth in Computer Vision and AI.

@@ -1,9 +1,14 @@
 ---
 name: "Shail Dave"
 role: "Alumni"
-joinDate: "2018"
-researchInterests: ["Machine Learning Accelerators", "Neural Architecture Search", "Hardware-Software Co-design"]
-order: 10
+joinDate: "2024"
+website: "https://sites.google.com/view/shail/"
+order: 5
+image: "/images/members/shail-dave.jpg"
+isAlumni: true
+alumniType: "Ph.D. Graduates"
+currentPosition: "AR/VR Systems Modeling Engineer at Qualcomm, San Diego, California."
+graduated: "Summer 2024"
 ---
 
-Dr. Shail Dave completed his Ph.D. at MPS Lab working on efficient deployment of deep learning models on specialized hardware accelerators. His research contributed to compiler techniques for spatial DNN accelerators.
+An Agile Methodology for Designing Efficient Domain-Specific Architectures

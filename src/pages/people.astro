@@ -18,50 +18,173 @@ import Layout from "../layouts/Layout.astro";
         </p>
       </div>
 
-      <!-- Faculty -->
-      <div class="mb-16">
-        <h2 class="text-2xl font-bold text-text mb-6 flex items-center gap-3">
-          <span class="w-1 h-8 bg-primary rounded-full"></span>
-          Faculty
-        </h2>
-        <MemberGrid roleFilter="Faculty" />
-      </div>
+      <div
+        class="grid grid-cols-1 md:grid-cols-[14rem_1fr] lg:grid-cols-[16rem_1fr] gap-8 lg:gap-12 items-start text-sm w-full"
+      >
+        <!-- Sidebar -->
+        <aside class="w-full relative">
+          <div class="sticky top-24 flex flex-col gap-2 w-full pr-4 md:pr-0">
+            <button
+              id="btn-current"
+              class="text-left px-4 py-3 rounded-xl transition-all font-medium bg-primary text-white shadow-md"
+            >
+              Current Members
+            </button>
+            <button
+              id="btn-alumni"
+              class="text-left px-4 py-3 rounded-xl transition-all font-medium text-text-secondary hover:bg-bg-alt hover:text-text"
+            >
+              Alumni
+            </button>
+            <button
+              id="btn-visiting-students"
+              class="text-left px-4 py-3 rounded-xl transition-all font-medium text-text-secondary hover:bg-bg-alt hover:text-text"
+            >
+              Visiting Students
+            </button>
+            <button
+              id="btn-visiting-faculty"
+              class="text-left px-4 py-3 rounded-xl transition-all font-medium text-text-secondary hover:bg-bg-alt hover:text-text"
+            >
+              Visiting Faculty
+            </button>
+          </div>
+        </aside>
 
-      <!-- Current Students -->
-      <div class="mb-16">
-        <h2 class="text-2xl font-bold text-text mb-6 flex items-center gap-3">
-          <span class="w-1 h-8 bg-accent rounded-full"></span>
-          Ph.D. Students
-        </h2>
-        <MemberGrid roleFilter="Ph.D." />
-      </div>
+        <!-- Content Area -->
+        <div class="flex-grow">
+          <!-- Current Members Tab -->
+          <div id="tab-current" class="tab-content block">
+            <!-- Faculty -->
+            <div class="mb-16">
+              <h2
+                class="text-2xl font-bold text-text mb-6 flex items-center gap-3"
+              >
+                <span class="w-1 h-8 bg-primary rounded-full"></span>
+                Faculty
+              </h2>
+              <MemberGrid roleFilter="Faculty" />
+            </div>
 
-      <div class="mb-16">
-        <h2 class="text-2xl font-bold text-text mb-6 flex items-center gap-3">
-          <span class="w-1 h-8 bg-green-500 rounded-full"></span>
-          Master's Students
-        </h2>
-        <MemberGrid roleFilter="Masters" />
-      </div>
+            <!-- Current Students -->
+            <div class="mb-16">
+              <h2
+                class="text-2xl font-bold text-text mb-6 flex items-center gap-3"
+              >
+                <span class="w-1 h-8 bg-accent rounded-full"></span>
+                Ph.D. Students
+              </h2>
+              <MemberGrid roleFilter="Ph.D." />
+            </div>
 
-      <div class="mb-16">
-        <h2 class="text-2xl font-bold text-text mb-6 flex items-center gap-3">
-          <span class="w-1 h-8 bg-purple-500 rounded-full"></span>
-          Undergraduate Students
-        </h2>
-        <MemberGrid roleFilter="Undergraduate" />
-      </div>
+            <div class="mb-16">
+              <h2
+                class="text-2xl font-bold text-text mb-6 flex items-center gap-3"
+              >
+                <span class="w-1 h-8 bg-green-500 rounded-full"></span>
+                Master's Students
+              </h2>
+              <MemberGrid roleFilter="Masters" />
+            </div>
 
-      <!-- Alumni -->
-      <div>
-        <h2 class="text-2xl font-bold text-text mb-6 flex items-center gap-3">
-          <span class="w-1 h-8 bg-text-muted rounded-full"></span>
-          Alumni
-        </h2>
-        <MemberGrid roleFilter="Alumni" />
+            <div class="mb-16">
+              <h2
+                class="text-2xl font-bold text-text mb-6 flex items-center gap-3"
+              >
+                <span class="w-1 h-8 bg-purple-500 rounded-full"></span>
+                Undergraduate Students
+              </h2>
+              <MemberGrid roleFilter="Undergraduate" />
+            </div>
+          </div>
+
+          <!-- Alumni Tab -->
+          <div id="tab-alumni" class="tab-content hidden">
+            <div>
+              <h2
+                class="text-2xl font-bold text-text mb-6 flex items-center gap-3"
+              >
+                <span class="w-1 h-8 bg-text-muted rounded-full"></span>
+                Alumni
+              </h2>
+              <MemberGrid roleFilter="Alumni" />
+            </div>
+          </div>
+
+          <!-- Visiting Students Tab -->
+          <div id="tab-visiting-students" class="tab-content hidden">
+            <div>
+              <h2
+                class="text-2xl font-bold text-text mb-6 flex items-center gap-3"
+              >
+                <span class="w-1 h-8 bg-blue-500 rounded-full"></span>
+                Visiting Students
+              </h2>
+              <MemberGrid roleFilter="Visiting Student" />
+            </div>
+          </div>
+
+          <!-- Visiting Faculty Tab -->
+          <div id="tab-visiting-faculty" class="tab-content hidden">
+            <div>
+              <h2
+                class="text-2xl font-bold text-text mb-6 flex items-center gap-3"
+              >
+                <span class="w-1 h-8 bg-orange-500 rounded-full"></span>
+                Visiting Faculty
+              </h2>
+              <MemberGrid roleFilter="Visiting Faculty" />
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <Footer slot="footer" />
 </Layout>
+
+<script>
+  function setupTabs() {
+    const tabs = ["current", "alumni", "visiting-students", "visiting-faculty"];
+
+    tabs.forEach((tab) => {
+      const btn = document.getElementById(`btn-${tab}`);
+      if (btn) {
+        btn.addEventListener("click", () => {
+          // Hide all content
+          document.querySelectorAll(".tab-content").forEach((el) => {
+            el.classList.remove("block");
+            el.classList.add("hidden");
+          });
+
+          // Reset all buttons
+          tabs.forEach((t) => {
+            const b = document.getElementById(`btn-${t}`);
+            if (b) {
+              b.className =
+                "text-left px-4 py-3 rounded-xl transition-all font-medium text-text-secondary hover:bg-bg-alt hover:text-text";
+            }
+          });
+
+          // Show selected content
+          const content = document.getElementById(`tab-${tab}`);
+          if (content) {
+            content.classList.remove("hidden");
+            content.classList.add("block");
+          }
+
+          // Style selected button
+          btn.className =
+            "text-left px-4 py-3 rounded-xl transition-all font-medium bg-primary text-white shadow-md";
+        });
+      }
+    });
+  }
+
+  // Setup on initial load
+  setupTabs();
+
+  // Re-setup after Astro page transitions
+  document.addEventListener("astro:page-load", setupTabs);
+</script>
