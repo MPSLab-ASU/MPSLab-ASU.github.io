@@ -1,8 +1,8 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/astro/Navbar.astro';
-import Footer from '../components/astro/Footer.astro';
-import MemberGrid from '../components/astro/MemberGrid.astro';
+import Footer from "../components/astro/Footer.astro";
+import MemberGrid from "../components/astro/MemberGrid.astro";
+import Navbar from "../components/astro/Navbar.astro";
+import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout title="People">
@@ -13,7 +13,8 @@ import MemberGrid from '../components/astro/MemberGrid.astro';
       <div class="text-center mb-12">
         <h1 class="text-3xl md:text-4xl font-bold text-text mb-4">Our Team</h1>
         <p class="text-text-secondary max-w-2xl mx-auto">
-          Meet the researchers and students driving innovation at MPS Lab. Click on a member to learn more about their work.
+          Meet the researchers and students driving innovation at MPS Lab. Click
+          on a member to learn more about their work.
         </p>
       </div>
 
@@ -33,6 +34,22 @@ import MemberGrid from '../components/astro/MemberGrid.astro';
           Ph.D. Students
         </h2>
         <MemberGrid roleFilter="Ph.D." />
+      </div>
+
+      <div class="mb-16">
+        <h2 class="text-2xl font-bold text-text mb-6 flex items-center gap-3">
+          <span class="w-1 h-8 bg-green-500 rounded-full"></span>
+          Master's Students
+        </h2>
+        <MemberGrid roleFilter="Masters" />
+      </div>
+
+      <div class="mb-16">
+        <h2 class="text-2xl font-bold text-text mb-6 flex items-center gap-3">
+          <span class="w-1 h-8 bg-purple-500 rounded-full"></span>
+          Undergraduate Students
+        </h2>
+        <MemberGrid roleFilter="Undergraduate" />
       </div>
 
       <!-- Alumni -->

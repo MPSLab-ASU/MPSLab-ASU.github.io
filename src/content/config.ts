@@ -9,8 +9,12 @@ const members = defineCollection({
         joinDate: z.string(),
         email: z.string().optional(),
         website: z.string().optional(),
+        github: z.string().optional(),
+        linkedin: z.string().optional(),
+        portfolio: z.string().optional(),
         researchInterests: z.array(z.string()).optional(),
         order: z.number().optional(),
+        image: z.string().optional(),
     }),
 });
 

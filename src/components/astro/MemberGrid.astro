@@ -26,11 +26,15 @@ const roleColors: Record<string, string> = {
   {allMembers.map(async (member) => {
     const { Content } = await member.render();
     return (
-      <div class="card p-6 group hover:-translate-y-1 cursor-pointer member-card" data-member-id={member.id}>
+      <a href={`/members/${member.slug}`} class="card p-6 block group hover:-translate-y-1 transition-transform">
         <!-- Avatar -->
-        <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center text-2xl font-bold text-primary">
-          {member.data.name.split(' ').map(n => n[0]).join('')}
-        </div>
+        {member.data.image || member.data.photoUrl ? (
+          <img src={member.data.image || member.data.photoUrl} alt={member.data.name} class="w-20 h-20 mx-auto mb-4 rounded-full object-cover shadow-sm bg-white border-2 border-primary/20" />
+        ) : (
+          <div class="w-20 h-20 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center text-2xl font-bold text-primary shadow-sm border-2 border-primary/20">
+            {member.data.name.split(' ').map((n: string) => n[0]).join('')}
+          </div>
+        )}
 
         <!-- Info -->
         <h3 class="text-center font-semibold text-lg text-text mb-1">{member.data.name}</h3>
@@ -40,11 +44,14 @@ const roleColors: Record<string, string> = {
           </span>
         </div>
 
-        {member.data.researchInterests && (
-          <div class="flex flex-wrap gap-1 justify-center mb-3">
-            {member.data.researchInterests.slice(0, 3).map(tag => (
-              <span class="text-xs text-text-muted bg-bg-alt px-2 py-0.5 rounded">{tag}</span>
-            ))}
+        {member.data.researchInterests && member.data.researchInterests.length > 0 && (
+          <div class="mb-3">
+             <h4 class="text-[10px] font-semibold text-text-muted uppercase tracking-wider text-center mb-1.5 pt-2 border-t border-border">Research Areas</h4>
+             <div class="flex flex-wrap gap-1 justify-center">
+                {member.data.researchInterests.slice(0, 3).map(tag => (
+                  <span class="text-xs text-text-secondary bg-bg-alt border border-border px-2 py-0.5 rounded text-center leading-tight">{tag}</span>
+                ))}
+             </div>
           </div>
         )}
 
@@ -52,26 +59,7 @@ const roleColors: Record<string, string> = {
           <p class="text-center text-xs text-text-muted truncate">{member.data.email}</p>
         )}
 
-        <!-- Expandable Bio (hidden, shown via JS) -->
-        <div class="member-bio hidden mt-4 pt-4 border-t border-border text-sm text-text-secondary leading-relaxed">
-          <Content />
-          {member.data.website && (
-            <a href={member.data.website} target="_blank" rel="noopener"
-               class="inline-block mt-2 text-primary hover:underline text-xs">
-              Visit website ↗
-            </a>
-          )}
-        </div>
-      </div>
+      </a>
     );
   })}
 </div>
-
-<script>
-  document.querySelectorAll('.member-card').forEach(card => {
-    card.addEventListener('click', () => {
-      const bio = card.querySelector('.member-bio');
-      bio?.classList.toggle('hidden');
-    });
-  });
-</script>
