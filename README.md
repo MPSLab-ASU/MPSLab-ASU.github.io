@@ -1,72 +1,214 @@
-# MPS Lab @ ASU - Website
+# MPS Lab @ ASU — Website
 
-This repository contains the source code for the Make Programming Simple (MPS) Lab website at Arizona State University. The site is built using [Astro](https://astro.build/), [React](https://react.dev/), and [Tailwind CSS](https://tailwindcss.com/).
+The official website for the **Make Programming Simple (MPS) Lab** at Arizona State University. Built with [Astro](https://astro.build/), [React](https://react.dev/), and [Tailwind CSS](https://tailwindcss.com/).
 
-**Live Website:** [https://labs.engineering.asu.edu/mps-lab/](https://labs.engineering.asu.edu/mps-lab/)
-**Publications list:** [https://labs.engineering.asu.edu/mps-lab/publications/](https://labs.engineering.asu.edu/mps-lab/publications/)
-
----
-
-## Prerequisites
-To run this project locally, you will need either:
-- **Node.js**: v20 or higher
-- **Docker & Docker Compose** (Optional, recommended for isolated environments)
+**Live Website:** [https://mpslab-asu.github.io](https://mpslab-asu.github.io)
 
 ---
 
-## Local Development (Node.js)
+## Tech Stack
 
-1. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-2. **Start the development server:**
-   ```bash
-   npm run dev
-   ```
-3. Open `http://localhost:4321` in your browser.
+| Layer | Technology |
+|-------|-----------|
+| Framework | Astro 5 (static output) |
+| UI Components | Astro (`.astro`) + React Islands |
+| Styling | Tailwind CSS + SCSS (light/dark themes) |
+| Icons | Lucide React |
+| Search | Fuse.js (fuzzy search for publications) |
+| Publications | BibTeX → `bibtex-parse-js` |
+| Markdown | Custom `rehype-figure-caption` plugin for image captions |
 
 ---
 
-## Local Development (Docker)
-If you prefer not to install Node locally, you can use the provided Docker Compose configuration.
+## Project Structure
 
-1. **Start the environment:**
-   ```bash
-   docker compose up
-   ```
-   *(This maps port 4321 to your local machine and automatically runs `npm install` and `npm run dev -- --host 0.0.0.0`)*
-
-2. Open `http://localhost:4321` in your browser.
-
-To stop the container:
-```bash
-docker compose down
+```
+src/
+├── components/
+│   ├── astro/           # Navbar, Footer, MemberGrid
+│   └── react/           # PublicationSearch, PublicationCard, ThemeToggle
+├── content/             # Astro Content Collections
+│   ├── members/         # Lab member profiles (47 files)
+│   ├── news/            # News & announcements
+│   ├── research/        # Research area pages
+│   └── resources/       # Reading lists per research area
+├── data/
+│   └── publications.bib # BibTeX publication database
+├── layouts/
+│   └── Layout.astro     # Base HTML layout
+├── pages/
+│   ├── index.astro              # Home page
+│   ├── people.astro             # People directory (tabbed by role)
+│   ├── publications.astro       # Searchable publications
+│   ├── contact.astro            # Contact page
+│   ├── members/[...slug].astro  # Individual member profiles
+│   ├── research/index.astro     # Research overview
+│   ├── research/[...slug].astro # Individual research pages
+│   └── research/resources/[...slug].astro  # Reading list pages
+├── plugins/
+│   └── rehype-figure-caption.mjs  # Image caption plugin
+└── styles/
+    ├── main.scss          # Global styles, prose formatting
+    ├── _theme-light.scss  # Light theme variables
+    └── _theme-dark.scss   # Dark theme variables
+public/
+├── images/              # Member photos, research images
+└── docs/                # Resumes, documents
 ```
 
 ---
 
-## Deployment (GitHub Pages)
+## Prerequisites
 
-This project is configured to be deployed as a static site to GitHub pages.
+- **Node.js** v20+ (or Docker)
 
-1. **Build the project:**
-   ```bash
-   npm run build
-   ```
-   This generates the static HTML files into the `dist/` directory.
+---
 
-2. **GitHub Actions Overview:**
-   The site uses a continuous integration pipeline (via `.github/workflows/deploy.yml` if configured) to build and publish the Astro site automatically on pushes to the `main` branch. 
-   *(Note: Ensure Astro's `site` and `base` config in `astro.config.mjs` match your GitHub Pages repository settings).*
+## Local Development
+
+### Node.js
+
+```bash
+npm install
+npm run dev
+```
+
+Open [http://localhost:4321](http://localhost:4321).
+
+### Docker
+
+```bash
+docker compose up
+```
+
+Open [http://localhost:4321](http://localhost:4321). Stop with `docker compose down`.
+
+---
+
+## Build & Deploy
+
+```bash
+npm run build    # Type-check + static build → dist/
+npm run preview  # Preview the built site locally
+```
+
+The site deploys as a static site to **GitHub Pages**. Ensure `site` in `astro.config.mjs` matches your deployment URL.
 
 ---
 
 ## Content Management
 
-The website content is powered by **Astro Content Collections** located in `src/content/`.
+All content is managed through **Astro Content Collections** in `src/content/`. Schemas are defined in [`src/content/config.ts`](src/content/config.ts).
 
-- **Members:** Add new markdown files to `src/content/members/`. The schema requires `name`, `role`, and `joinDate`. 
-- **News:** Add new markdown files to `src/content/news/`. The schema requires `title`, `date`, and `type`.
-- **Research:** Add new markdown files to `src/content/research/`. The schema requires `title`, `status` ("Active" or "Extended"), and `description`.
-- **Publications:** Managed via a single BibTeX file located at `src/data/publications.bib`. The site uses a React island to parse and search publications flawlessly.
+### Members (`src/content/members/`)
+
+Each `.md` file represents a lab member.
+
+```yaml
+---
+name: "Jane Doe"
+role: "Ph.D."           # Faculty | Ph.D. | Masters | Undergraduate | Postdoc | Alumni | Visiting Student | Visiting Faculty
+joinDate: "2023"
+image: "/images/members/jane-doe.jpg"
+email: "jdoe@asu.edu"          # optional
+website: "https://..."         # optional
+github: "https://github.com/..." # optional
+linkedin: "https://..."        # optional
+resume: "/docs/resumes/..."    # optional
+researchInterests: ["Topic A"] # optional
+isAlumni: false                # optional
+currentPosition: "..."        # optional (for alumni)
+---
+
+Bio text goes here (markdown supported).
+```
+
+### News (`src/content/news/`)
+
+```yaml
+---
+title: "Award Title"
+date: 2024-06-26
+type: "Award"          # Award | Publication | Event | Announcement | General
+excerpt: "Short desc"  # optional
+---
+
+Full news body in markdown.
+```
+
+### Research Areas (`src/content/research/`)
+
+```yaml
+---
+title: "Research Area Name"
+status: "Active"       # Active | Extended
+description: "One-line summary of the area."
+image: "/images/research/hero.jpg"  # optional banner image
+icon: "Cpu"            # optional, Lucide icon name (Cpu | Car | BookOpen | Brain | Shield | Zap)
+order: 1               # optional, display order
+---
+
+Markdown content for the research page. Supports:
+- **Bullet points** and numbered lists
+- **Images with captions** — put caption text on the next line (no blank line):
+
+![Alt Text](/images/research/figure.png)
+This text becomes a styled caption under the image.
+```
+
+### Resources / Reading Lists (`src/content/resources/`)
+
+One file per research area containing curated resources.
+
+```yaml
+---
+researchArea: "Intelligent Transportation Systems"  # must match research title exactly
+resources:
+  - title: "Paper Title"
+    type: "Paper"       # Paper | Book | Video | Tutorial | Tool | Publication
+    url: "https://..."  # optional
+    authors: "Authors"  # optional
+    description: "..."  # optional
+  - title: "Another Resource"
+    type: "Book"
+    url: "https://..."
+---
+```
+
+The reading list page appears at `/research/resources/{slug}` and is linked from the corresponding research page via a **Reading List** button.
+
+### Publications (`src/data/publications.bib`)
+
+Publications are managed in a single **BibTeX** file. The site parses this at build time and powers the searchable `/publications` page.
+
+Key BibTeX fields:
+- `research` — Comma-separated research area tags (must match research page titles for filtering)
+- `category` — Display type (Conference, Article, Proceedings, Patent, Masters Thesis, PhD Thesis, etc.)
+- `url` — Space-separated pairs of `URL, label` (e.g., `https://example.com/paper.pdf, pdf https://example.com/slides.pptx, slides`)
+
+> **Note:** Thesis entries (`mastersthesis`, `phdthesis`, `bachelorthesis`) are automatically excluded from the "Recent Publications" section on individual research pages.
+
+The publications page supports URL-based filtering:
+- `/publications?q=search+term` — Pre-fills the search box
+- `/publications?tag=Research+Area+Name` — Pre-selects the tag filter
+
+---
+
+## Theming
+
+The site supports **light and dark modes** via CSS custom properties defined in `_theme-light.scss` and `_theme-dark.scss`. The `ThemeToggle` React component handles switching and persists the preference.
+
+---
+
+## Custom Plugins
+
+### `rehype-figure-caption`
+
+A custom rehype plugin (`src/plugins/rehype-figure-caption.mjs`) that converts markdown images followed by caption text into semantic `<figure>` + `<figcaption>` HTML. Just write:
+
+```markdown
+![Alt text](/path/to/image.png)
+Caption text on the very next line (no blank line).
+```
+
+This renders as a styled figure with a centered, italic caption below the image.
