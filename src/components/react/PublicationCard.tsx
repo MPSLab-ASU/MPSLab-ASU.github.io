@@ -12,6 +12,7 @@ export interface Publication {
         year?: string;
         research?: string;
         url?: string;
+        website?: string;
         category?: string;
     };
 }
@@ -62,7 +63,7 @@ export default function PublicationCard({ pub, validTags = [], onTypeClick, onTa
     const generateBibtex = (pub: Publication) => {
         let result = `@${pub.entryType}{${pub.citationKey},\n`;
         for (const [key, value] of Object.entries(pub.entryTags)) {
-            if (value !== undefined && value !== null && key !== 'url') {
+            if (value !== undefined && value !== null && key !== 'url' && key !== 'website') {
                 result += `  ${key} = {${value}},\n`;
             }
         }
@@ -138,6 +139,18 @@ export default function PublicationCard({ pub, validTags = [], onTypeClick, onTa
                 </div>
                 <div className="flex-shrink-0 flex flex-col gap-2 items-end">
                     <div className="flex flex-wrap justify-end gap-2">
+                        {pub.entryTags.website && (
+                            <a
+                                href={pub.entryTags.website}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm text-[var(--color-text-muted)] hover:text-[var(--color-primary)] hover:bg-[var(--color-bg-alt)] border border-transparent hover:border-[var(--color-border)] transition-all"
+                                title="Project Website"
+                            >
+                                <Link className="w-4 h-4" />
+                                <span className="capitalize hidden sm:inline">Website</span>
+                            </a>
+                        )}
                         {parseUrls(pub.entryTags.url).map((resource, i) => (
                             <a
                                 key={i}
