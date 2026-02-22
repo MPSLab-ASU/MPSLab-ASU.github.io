@@ -123,18 +123,31 @@ currentPosition: "..."        # optional (for alumni)
 Bio text goes here (markdown supported).
 ```
 
-### News (`src/content/news/`)
+### News and Awards (`src/content/news/`)
+
+News and awards can be added either manually or by using the included Python scraper.
+
+#### Manual Addition
+To manually add an entry, create a new `.md` file in `src/content/news/`.
 
 ```yaml
 ---
-title: "Award Title"
-date: 2024-06-26
-type: "Award"          # Award | Publication | Event | Announcement | General
-excerpt: "Short desc"  # optional
+date: "2024"             # Can be a full date (YYYY-MM-DD) or just the year
+type: "Publication"      # Award | Publication | Event | Announcement | General
+description: "A concise description of the news or award. Supports **Markdown** and HTML tags."
 ---
-
-Full news body in markdown.
 ```
+> **Note:** The `description` field is required and directly dictates what gets rendered on the UI. The site automatically groups entries by their `date` year.
+
+#### Automated Scraping
+Run the Python scraper to fetch and parse the latest updates directly from the legacy lab website pages:
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install requests beautifulsoup4 python-dotenv
+python scrape_news.py
+```
+This generates properly formatted markdown files spanning all historical updates, placing them directly into `src/content/news/`.
 
 ### Research Areas (`src/content/research/`)
 
