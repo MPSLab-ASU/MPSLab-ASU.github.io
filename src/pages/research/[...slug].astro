@@ -1,6 +1,24 @@
 ---
 import { getCollection } from "astro:content";
-import { BookOpen, Brain, Car, Cpu, Shield, Zap } from "lucide-react";
+import {
+  Battery,
+  Binary,
+  BookOpen,
+  Brain,
+  Car,
+  CircuitBoard,
+  Clock,
+  Cpu,
+  GitBranch,
+  Grid3X3,
+  MessageSquare,
+  Monitor,
+  Server,
+  Shield,
+  Thermometer,
+  Wifi,
+  Zap,
+} from "lucide-react";
 import fs from "node:fs";
 import path from "node:path";
 import Footer from "../../components/astro/Footer.astro";
@@ -27,6 +45,17 @@ const IconMap: Record<string, any> = {
   Brain,
   Shield,
   Zap,
+  Monitor,
+  Wifi,
+  Server,
+  GitBranch,
+  Grid3X3,
+  Thermometer,
+  CircuitBoard,
+  Binary,
+  Clock,
+  MessageSquare,
+  Battery,
 };
 const IconComponent = entry.data.icon ? IconMap[entry.data.icon] : Zap;
 

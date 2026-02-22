@@ -2,7 +2,6 @@
 title: "Intelligent Transportation Systems"
 status: "Active"
 description: "Developing robust software, perception pipelines, and safety-critical architectures for next-generation intelligent and autonomous vehicles."
-# image: "/images/research/intelligent-transportation.jpg"
 icon: "Car"
 order: 2
 ---
@@ -30,6 +29,3 @@ Our work on the infrastructure side centers on turning sparse roadside sensors i
 ![IncidentNet](/images/research/its/incidentnet.png)
 IncidentNet is a deep learning framework that utilizes microscopic traffic patterns from sparse roadside sensors to detect, localize, and estimate the severity of traffic incidents, even when they occur outside the sensor's direct field of view.
 
-<!-- Link to our Publications
-Link to Reading List
-Lead: Kaustubh Harapanahalli -->
