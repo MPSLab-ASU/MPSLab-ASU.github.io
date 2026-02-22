@@ -1,0 +1,7 @@
+---
+date: "2022"
+type: "Publication"
+description: "<a href=\"https://labs.engineering.asu.edu/mps-lab/person/aviral-shrivastava/\" rel=\"noreferrer noopener\" target=\"_blank\">Aviral</a> and <a href=\"https://sites.google.com/view/shail/\">Shail</a> are invited to organize a special session on “<span class=\"il\">Towards</span> an Agile Design Methodology for Efficient, Reliable, and Secure ML Systems” at 40th IEEE VLSI and Test Symposium (<a href=\"https://tttc-vts.org/public_html/new/2022/\" rel=\"noopener\" target=\"_blank\">VTS 2022</a>). [<a href=\"https://mpslab-asu.github.io/publications/papers/Dave2022VTS.pdf\" rel=\"noopener\" target=\"_blank\">Paper</a>] [<a href=\"https://mpslab-asu.github.io/publications/slides/Dave2022VTS.pptx\">Slides</a>]"
+---
+
+<a href=\"https://labs.engineering.asu.edu/mps-lab/person/aviral-shrivastava/\" rel=\"noreferrer noopener\" target=\"_blank\">Aviral</a> and <a href=\"https://sites.google.com/view/shail/\">Shail</a> are invited to organize a special session on “<span class=\"il\">Towards</span> an Agile Design Methodology for Efficient, Reliable, and Secure ML Systems” at 40th IEEE VLSI and Test Symposium (<a href=\"https://tttc-vts.org/public_html/new/2022/\" rel=\"noopener\" target=\"_blank\">VTS 2022</a>). [<a href=\"https://mpslab-asu.github.io/publications/papers/Dave2022VTS.pdf\" rel=\"noopener\" target=\"_blank\">Paper</a>] [<a href=\"https://mpslab-asu.github.io/publications/slides/Dave2022VTS.pptx\">Slides</a>]

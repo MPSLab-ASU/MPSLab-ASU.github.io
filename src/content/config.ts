@@ -28,10 +28,9 @@ const members = defineCollection({
 const news = defineCollection({
     type: 'content',
     schema: z.object({
-        title: z.string(),
-        date: z.coerce.date(),
+        date: z.union([z.string(), z.date(), z.number()]),
         type: z.enum(['Award', 'Publication', 'Event', 'Announcement', 'General']),
-        excerpt: z.string().optional(),
+        description: z.string(),
     }),
 });
 

@@ -1,0 +1,7 @@
+---
+date: "2018"
+type: "Event"
+description: "<a href=\"http://www.public.asu.edu/~ashriva6\" rel=\"noreferrer noopener\" target=\"_blank\">Aviral</a> will present on Energy efficient acceleration of residual neural networks using CGRA at <a href=\"https://community.arm.com/developer/research/b/articles/posts/catch-up-on-the-arm-research-summit-2018\">ARM Research Summit 2018</a>. [<a href=\"https://www.youtube.com/watch?v=9_iRCPxCMZo\">Talk</a>] [<a href=\"https://community.arm.com/cfs-file/__key/communityserver-blogs-components-weblogfiles/00-00-00-37-98/Aviral-Shrivastava.pdf\">Slides</a>] [<a href=\"https://insidehpc.com/2018/09/video-energy-efficient-acceleration-rnns-using-cgra/\" rel=\"noreferrer noopener\" target=\"_blank\">insideHPC</a>]"
+---
+
+<a href=\"http://www.public.asu.edu/~ashriva6\" rel=\"noreferrer noopener\" target=\"_blank\">Aviral</a> will present on Energy efficient acceleration of residual neural networks using CGRA at <a href=\"https://community.arm.com/developer/research/b/articles/posts/catch-up-on-the-arm-research-summit-2018\">ARM Research Summit 2018</a>. [<a href=\"https://www.youtube.com/watch?v=9_iRCPxCMZo\">Talk</a>] [<a href=\"https://community.arm.com/cfs-file/__key/communityserver-blogs-components-weblogfiles/00-00-00-37-98/Aviral-Shrivastava.pdf\">Slides</a>] [<a href=\"https://insidehpc.com/2018/09/video-energy-efficient-acceleration-rnns-using-cgra/\" rel=\"noreferrer noopener\" target=\"_blank\">insideHPC</a>]

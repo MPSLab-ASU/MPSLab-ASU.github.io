@@ -1,0 +1,7 @@
+---
+date: "2018"
+type: "Event"
+description: "<a href=\"http://www.public.asu.edu/~ashriva6\" rel=\"noreferrer noopener\" target=\"_blank\">Aviral</a> talks about <a href=\"https://asunow.asu.edu/20180326-solutions-asu-engineer-autonomous-vehicles-traveling-wrong-road-safety\" rel=\"noreferrer noopener\" target=\"_blank\">Autonomous vehicles traveling wrong road to safety [ASU Now]</a> [<a href=\"https://science.asu.edu/autonomous-vehicles-traveling-wrong-road-safety-engineer-says\">science@ASU</a>] [<a href=\"https://ui.asu.edu/content/autonomous-vehicles-traveling-wrong-road-safety-engineer-says\">Office of University Initiatives, ASU</a>] <a href=\"https://www.claimsjournal.com/news/west/2018/04/12/284076.htm\" rel=\"noopener noreferrer\" target=\"_blank\">[Claims Journal]</a>"
+---
+
+<a href=\"http://www.public.asu.edu/~ashriva6\" rel=\"noreferrer noopener\" target=\"_blank\">Aviral</a> talks about <a href=\"https://asunow.asu.edu/20180326-solutions-asu-engineer-autonomous-vehicles-traveling-wrong-road-safety\" rel=\"noreferrer noopener\" target=\"_blank\">Autonomous vehicles traveling wrong road to safety [ASU Now]</a> [<a href=\"https://science.asu.edu/autonomous-vehicles-traveling-wrong-road-safety-engineer-says\">science@ASU</a>] [<a href=\"https://ui.asu.edu/content/autonomous-vehicles-traveling-wrong-road-safety-engineer-says\">Office of University Initiatives, ASU</a>] <a href=\"https://www.claimsjournal.com/news/west/2018/04/12/284076.htm\" rel=\"noopener noreferrer\" target=\"_blank\">[Claims Journal]</a>

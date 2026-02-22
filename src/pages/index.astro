@@ -1,27 +1,37 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Navbar from '../components/astro/Navbar.astro';
-import Footer from '../components/astro/Footer.astro';
-import { getCollection } from 'astro:content';
-import { BookOpen, Cpu, Car, Shield, Brain, Zap } from 'lucide-react';
+import { getCollection } from "astro:content";
+import { BookOpen, Brain, Car, Cpu, Shield, Zap } from "lucide-react";
+import Footer from "../components/astro/Footer.astro";
+import Navbar from "../components/astro/Navbar.astro";
+import Layout from "../layouts/Layout.astro";
 
-const news = (await getCollection('news')).sort((a, b) =>
-  new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
+const news = (await getCollection("news")).sort(
+  (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
 );
 
-const allResearch = await getCollection('research');
-const activeResearch = allResearch.filter(r => r.data.status === 'Active').sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+const allResearch = await getCollection("research");
+const activeResearch = allResearch
+  .filter((r) => r.data.status === "Active")
+  .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
 
 const IconMap: Record<string, any> = {
-  Cpu, Car, BookOpen, Brain, Shield, Zap
+  Cpu,
+  Car,
+  BookOpen,
+  Brain,
+  Shield,
+  Zap,
 };
 
 const typeColors: Record<string, string> = {
-  'Award': 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300',
-  'Publication': 'bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300',
-  'Event': 'bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300',
-  'Announcement': 'bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300',
-  'General': 'bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400',
+  Award:
+    "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300",
+  Publication:
+    "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300",
+  Event: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300",
+  Announcement:
+    "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300",
+  General: "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400",
 };
 ---
 
@@ -31,26 +41,60 @@ const typeColors: Record<string, string> = {
   <!-- Hero Section -->
   <section class="bg-hero text-hero-text relative overflow-hidden">
     <div class="absolute inset-0 opacity-10">
-      <div class="absolute inset-0" style="background-image: radial-gradient(circle at 25% 25%, rgba(140, 29, 64, 0.3) 0%, transparent 50%), radial-gradient(circle at 75% 75%, rgba(255, 198, 39, 0.2) 0%, transparent 50%);"></div>
+      <div
+        class="absolute inset-0"
+        style="background-image: radial-gradient(circle at 25% 25%, rgba(140, 29, 64, 0.3) 0%, transparent 50%), radial-gradient(circle at 75% 75%, rgba(255, 198, 39, 0.2) 0%, transparent 50%);"
+      >
+      </div>
     </div>
     <div class="section-container relative z-10 py-20 md:py-32">
       <div class="max-w-3xl">
-        <div class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/20 text-primary mb-6 animate-fade-in" style="animation-delay: 0.1s">
+        <div
+          class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-primary/20 text-primary mb-6 animate-fade-in"
+          style="animation-delay: 0.1s"
+        >
           Arizona State University
         </div>
-        <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight animate-fade-in" style="animation-delay: 0.2s">
+        <h1
+          class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight animate-fade-in"
+          style="animation-delay: 0.2s"
+        >
           Making Programming
           <span class="text-secondary"> Simple</span>
         </h1>
-        <p class="text-lg md:text-xl text-hero-text/70 mb-8 leading-relaxed animate-fade-in" style="animation-delay: 0.3s">
-          The MPS Lab develops innovative compilers, tools, and methodologies to simplify programming for complex computing platforms — from embedded systems to autonomous vehicles.
+        <p
+          class="text-lg md:text-xl text-hero-text/70 mb-8 leading-relaxed animate-fade-in"
+          style="animation-delay: 0.3s"
+        >
+          The MPS Lab develops innovative compilers, tools, and methodologies to
+          simplify programming for complex computing platforms — from embedded
+          systems to autonomous vehicles.
         </p>
-        <div class="flex flex-wrap gap-4 animate-fade-in" style="animation-delay: 0.4s">
-          <a href="/publications" class="btn-primary inline-flex items-center gap-2">
+        <div
+          class="flex flex-wrap gap-4 animate-fade-in"
+          style="animation-delay: 0.4s"
+        >
+          <a
+            href="/publications"
+            class="btn-primary inline-flex items-center gap-2"
+          >
             Explore Research
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg
+            >
           </a>
-          <a href="/people" class="px-6 py-3 rounded-lg font-medium border border-hero-text/30 text-hero-text hover:bg-white/10 transition-all duration-200">
+          <a
+            href="/people"
+            class="px-6 py-3 rounded-lg font-medium border border-hero-text/30 text-hero-text hover:bg-white/10 transition-all duration-200"
+          >
             Meet the Team
           </a>
         </div>
@@ -62,33 +106,72 @@ const typeColors: Record<string, string> = {
   <section class="py-16 md:py-24 bg-bg-alt">
     <div class="section-container">
       <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-text mb-4">Research Areas</h2>
-        <p class="text-text-secondary max-w-2xl mx-auto">Our work spans multiple domains in computer science and engineering, with a focus on bridging the gap between hardware and software.</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-text mb-4">
+          Research Areas
+        </h2>
+        <p class="text-text-secondary max-w-2xl mx-auto">
+          Our work spans multiple domains in computer science and engineering,
+          with a focus on bridging the gap between hardware and software.
+        </p>
       </div>
       <div class="text-center mb-10">
         <a href="/research" class="btn-primary inline-flex items-center gap-2">
           View All Research
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            ><path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg
+          >
         </a>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
-        {activeResearch.map((area, i) => {
-          const IconComponent = area.data.icon ? IconMap[area.data.icon] : Zap;
-          return (
-            <a href={`/research/${area.slug}`} class="block group">
-              <div class="card p-6 h-full flex flex-col hover:-translate-y-1 animate-slide-up transition-transform duration-300" style={`animation-delay: ${i * 0.1}s`}>
-                <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <IconComponent className="w-6 h-6 text-primary" />
+        {
+          activeResearch.map((area, i) => {
+            const IconComponent = area.data.icon
+              ? IconMap[area.data.icon]
+              : Zap;
+            return (
+              <a href={`/research/${area.slug}`} class="block group">
+                <div
+                  class="card p-6 h-full flex flex-col hover:-translate-y-1 animate-slide-up transition-transform duration-300"
+                  style={`animation-delay: ${i * 0.1}s`}
+                >
+                  <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                    <IconComponent className="w-6 h-6 text-primary" />
+                  </div>
+                  <h3 class="font-semibold text-lg text-text mb-2 group-hover:text-primary transition-colors">
+                    {area.data.title}
+                  </h3>
+                  <p class="text-sm text-text-secondary leading-relaxed flex-1">
+                    {area.data.description}
+                  </p>
+                  <div class="mt-4 font-medium text-primary inline-flex items-center gap-1 text-sm group-hover:gap-2 transition-all">
+                    Read more{" "}
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
+                    </svg>
+                  </div>
                 </div>
-                <h3 class="font-semibold text-lg text-text mb-2 group-hover:text-primary transition-colors">{area.data.title}</h3>
-                <p class="text-sm text-text-secondary leading-relaxed flex-1">{area.data.description}</p>
-                <div class="mt-4 font-medium text-primary inline-flex items-center gap-1 text-sm group-hover:gap-2 transition-all">
-                  Read more <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
-                </div>
-              </div>
-            </a>
-          )
-        })}
+              </a>
+            );
+          })
+        }
       </div>
     </div>
   </section>
@@ -97,26 +180,68 @@ const typeColors: Record<string, string> = {
   <section class="py-16 md:py-24">
     <div class="section-container">
       <div class="text-center mb-12">
-        <h2 class="text-3xl md:text-4xl font-bold text-text mb-4">Latest News</h2>
-        <p class="text-text-secondary">Stay updated with the latest from MPS Lab.</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-text mb-4">
+          Latest News & Awards
+        </h2>
+        <p class="text-text-secondary">
+          Stay updated with the latest from MPS Lab.
+        </p>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-        {news.map(item => (
-          <div class="card p-6">
-            <div class="flex items-center gap-3 mb-3">
-              <span class:list={['badge', typeColors[item.data.type] ?? typeColors['General']]}>
-                {item.data.type}
-              </span>
-              <time class="text-xs text-text-muted" datetime={item.data.date.toISOString()}>
-                {item.data.date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-              </time>
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-10"
+      >
+        {
+          news.slice(0, 5).map((item) => (
+            <div class="card p-6">
+              <div class="flex items-center gap-3 mb-3">
+                <span
+                  class:list={[
+                    "badge",
+                    typeColors[item.data.type] ?? typeColors["General"],
+                  ]}
+                >
+                  {item.data.type}
+                </span>
+                <time
+                  class="text-xs text-text-muted"
+                  datetime={new Date(item.data.date).toISOString()}
+                >
+                  {typeof item.data.date === "string" ||
+                  typeof item.data.date === "number"
+                    ? item.data.date
+                    : new Date(item.data.date).toLocaleDateString("en-US", {
+                        timeZone: "UTC",
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                </time>
+              </div>
+              {item.data.description && (
+                <div
+                  class="text-sm text-text-secondary leading-relaxed prose prose-sm dark:prose-invert"
+                  set:html={item.data.description}
+                />
+              )}
             </div>
-            <h3 class="font-semibold text-text mb-2">{item.data.title}</h3>
-            {item.data.excerpt && (
-              <p class="text-sm text-text-secondary leading-relaxed">{item.data.excerpt}</p>
-            )}
-          </div>
-        ))}
+          ))
+        }
+      </div>
+      <div class="text-center">
+        <a href="/news" class="btn-primary inline-flex items-center gap-2">
+          View all news
+          <svg
+            class="w-4 h-4"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            ><path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg
+          >
+        </a>
       </div>
     </div>
   </section>

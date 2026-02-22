@@ -52,3 +52,5 @@ tmp/
 temp/
 
 scrape_bibtex*
+
+venv/
