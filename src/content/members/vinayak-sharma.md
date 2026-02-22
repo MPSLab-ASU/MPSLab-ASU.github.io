@@ -2,7 +2,6 @@
 name: "Vinayak Sharma"
 role: "Ph.D."
 joinDate: "2024"
-website: "https://www.linkedin.com/in/vinayak19th/"
 order: 2
 image: "/images/members/vinayak-sharma.jpg"
 isAlumni: true

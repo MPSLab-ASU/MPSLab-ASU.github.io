@@ -2,7 +2,7 @@
 name: "Shreehari Jagadeesha"
 role: "Alumni"
 joinDate: "2024"
-website: "https://www.linkedin.com/in/shreehari-j/"
+linkedin: "https://www.linkedin.com/in/shreehari-j/"
 order: 5
 image: "/images/members/shreehari-jagadeesha.jpg"
 isAlumni: true

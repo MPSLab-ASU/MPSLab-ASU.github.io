@@ -2,7 +2,7 @@
 name: "Guna Lagudu"
 role: "Alumni"
 joinDate: "2024"
-website: "https://www.linkedin.com/in/guna-sekhar-sai-harsha-lagudu"
+linkedin: "https://www.linkedin.com/in/guna-sekhar-sai-harsha-lagudu"
 order: 5
 image: "/images/members/guna-lagudu.png"
 isAlumni: true

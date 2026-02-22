@@ -2,7 +2,7 @@
 name: "Sai Shashank Peddiraju"
 role: "Alumni"
 joinDate: "2024"
-website: "https://www.linkedin.com/in/sai-shashank-peddiraju"
+linkedin: "https://www.linkedin.com/in/sai-shashank-peddiraju"
 order: 5
 image: "/images/members/sai-shashank-peddiraju.jpg"
 isAlumni: true

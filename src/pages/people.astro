@@ -110,7 +110,10 @@ import Layout from "../layouts/Layout.astro";
               </h2>
               <MemberGrid
                 roleFilter="Alumni"
-                alumniTypeFilter="Post-Doctoral Researchers"
+                alumniTypeFilter={[
+                  "Post-Doctoral Researchers",
+                  "Post-Doctoral Researcher",
+                ]}
               />
             </div>
 
@@ -124,7 +127,7 @@ import Layout from "../layouts/Layout.astro";
               </h2>
               <MemberGrid
                 roleFilter="Alumni"
-                alumniTypeFilter="Ph.D. Graduates"
+                alumniTypeFilter={["Ph.D. Graduates", "Ph.D. Graduate"]}
               />
             </div>
 
@@ -152,7 +155,10 @@ import Layout from "../layouts/Layout.astro";
               </h2>
               <MemberGrid
                 roleFilter="Alumni"
-                alumniTypeFilter="Undergraduate Researchers"
+                alumniTypeFilter={[
+                  "Undergraduate Researchers",
+                  "Undergraduate Researcher",
+                ]}
               />
             </div>
           </div>

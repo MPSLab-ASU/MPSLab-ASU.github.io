@@ -2,7 +2,7 @@
 name: "Mohammadreza Mehrabian"
 role: "Alumni"
 joinDate: "2024"
-website: "https://www.linkedin.com/in/mohammadreza-mehrabian"
+linkedin: "https://www.linkedin.com/in/mohammadreza-mehrabian"
 order: 5
 image: "/images/members/mohammadreza-mehrabian.jpg"
 isAlumni: true

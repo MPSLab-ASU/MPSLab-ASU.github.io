@@ -2,7 +2,7 @@
 name: "Jian Cai"
 role: "Alumni"
 joinDate: "2024"
-website: "https://www.linkedin.com/in/jian-cai-05721142/"
+linkedin: "https://www.linkedin.com/in/jian-cai-05721142/"
 order: 5
 image: "/images/members/jian-cai.jpg"
 isAlumni: true

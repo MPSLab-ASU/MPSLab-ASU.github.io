@@ -2,7 +2,7 @@
 name: "Mohammad Khayatian"
 role: "Alumni"
 joinDate: "2024"
-website: "https://www.linkedin.com/in/mohammad-khayatian-b82347b7"
+linkedin: "https://www.linkedin.com/in/mohammad-khayatian-b82347b7"
 order: 5
 image: "/images/members/mohammad-khayatian.jpg"
 isAlumni: true

@@ -17,11 +17,11 @@ const members = defineCollection({
         order: z.number().optional(),
         image: z.string().optional(),
         isAlumni: z.boolean().optional(),
-        alumniType: z.string().optional(),
+        alumniType: z.union([z.string(), z.array(z.string())]).optional(),
         currentPosition: z.string().optional(),
-        graduated: z.string().optional(),
-        university: z.string().optional(),
-        duration: z.string().optional(),
+        graduated: z.union([z.string(), z.array(z.string())]).optional(),
+        university: z.union([z.string(), z.array(z.string())]).optional(),
+        duration: z.union([z.string(), z.array(z.string())]).optional(),
     }),
 });
 

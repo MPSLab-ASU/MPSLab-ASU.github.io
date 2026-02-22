@@ -2,7 +2,7 @@
 name: "Jing Lu"
 role: "Alumni"
 joinDate: "2024"
-website: "https://www.linkedin.com/in/jing-lu-06a86021"
+linkedin: "https://www.linkedin.com/in/jing-lu-06a86021"
 order: 5
 image: "/images/members/jing-lu.jpg"
 isAlumni: true

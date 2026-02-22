@@ -2,7 +2,7 @@
 name: "Moslem Didehban"
 role: "Alumni"
 joinDate: "2024"
-website: "https://www.linkedin.com/in/moslem-didehban-49546559"
+linkedin: "https://www.linkedin.com/in/moslem-didehban-49546559"
 order: 5
 image: "/images/members/moslem-didehban.jpg"
 isAlumni: true

@@ -2,7 +2,7 @@
 name: "Ke Bai"
 role: "Alumni"
 joinDate: "2024"
-website: "https://www.linkedin.com/in/ke-bai-0844b820"
+linkedin: "https://www.linkedin.com/in/ke-bai-0844b820"
 order: 5
 image: "/images/members/ke-bai.jpg"
 isAlumni: true
