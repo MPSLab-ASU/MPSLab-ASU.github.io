@@ -245,18 +245,6 @@ Displayed on the homepage. Scraped using `scrape_sponsors.py`.
 
 ---
 
-## Scrapers
-
-| Script | Purpose | Output |
-|--------|---------|--------|
-| `scrape_news.py` | News & awards | `src/content/news/` |
-| `scrape_faq.py` | Legacy FAQ import | `src/data/faq.json` (deprecated, see `src/content/faq/`) |
-| `scrape_software.py` | Software releases | `src/data/software.json` |
-| `scrape_research.py` | Research areas | `src/content/research/` |
-| `scrape_sponsors.py` | Sponsor logos & links | `src/data/sponsors.json` |
-
----
-
 ## Theming & UI
 
 - **Light/Dark Mode**: Persisted theme switch via `ThemeToggle`.
