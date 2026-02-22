@@ -198,6 +198,7 @@ Key custom BibTeX fields:
 - `research` — Comma-separated research area tags (must match research page titles for filtering).
 - `category` — Display type (Conference, Article, Proceedings, Patent, Masters Thesis, PhD Thesis, etc.).
 - `website` — (Optional) A direct link to the project or publisher website (renders as a "Website" button).
+- `code` — (Optional) A direct link to the source code repository, e.g., GitHub (renders as a "Code" button).
 - `url` — (Optional) Space/comma separated pairs of links to papers and slide decks. Format: `https://link.com/file.pdf, pdf https://link.com/slides.ppt, slides`.
 
 **Example Entry:**
@@ -210,6 +211,7 @@ Key custom BibTeX fields:
   research = {Cyber-Physical Systems, Intelligent Transportation Systems},
   category = {Conference},
   website  = {https://project-website.com},
+  code     = {https://github.com/mpslab-asu/project},
   url      = {https://example.com/paper.pdf, pdf https://example.com/demo.mp4, video}
 }
 ```

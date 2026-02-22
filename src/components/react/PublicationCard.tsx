@@ -1,4 +1,4 @@
-import { Check, Clipboard, FileText, Image as ImageIcon, Link, PlaySquare, Presentation, Quote } from 'lucide-react';
+import { Check, Clipboard, Code, FileText, Image as ImageIcon, Link, PlaySquare, Presentation, Quote } from 'lucide-react';
 import { useState } from 'react';
 
 export interface Publication {
@@ -13,6 +13,7 @@ export interface Publication {
         research?: string;
         url?: string;
         website?: string;
+        code?: string;
         category?: string;
     };
 }
@@ -63,7 +64,7 @@ export default function PublicationCard({ pub, validTags = [], onTypeClick, onTa
     const generateBibtex = (pub: Publication) => {
         let result = `@${pub.entryType}{${pub.citationKey},\n`;
         for (const [key, value] of Object.entries(pub.entryTags)) {
-            if (value !== undefined && value !== null && key !== 'url' && key !== 'website') {
+            if (value !== undefined && value !== null && key !== 'url' && key !== 'website' && key !== 'code') {
                 result += `  ${key} = {${value}},\n`;
             }
         }
@@ -83,129 +84,141 @@ export default function PublicationCard({ pub, validTags = [], onTypeClick, onTa
     };
 
     return (
-        <div className="p-5 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-card)] hover:shadow-md transition-all duration-200 group">
-            <div className="flex items-start justify-between gap-4">
-                <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-[var(--color-text)] group-hover:text-[var(--color-primary)] transition-colors leading-snug">
-                        {pub.entryTags.title || pub.citationKey}
-                    </h3>
-                    <p className="text-sm text-[var(--color-text-secondary)] mt-1">
-                        {pub.entryTags.author?.replace(/ and /ig, '; ')}
-                    </p>
-                    <div className="flex items-center gap-3 mt-2 flex-wrap">
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[var(--color-primary)] text-white"
-                            style={{ opacity: 0.9 }}>
-                            {pub.entryTags.year}
-                        </span>
-                        {pub.entryTags.category && (
-                            onTypeClick ? (
-                                <button
-                                    onClick={() => onTypeClick(pub.entryTags.category!)}
-                                    className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[var(--color-bg-alt)] border border-[var(--color-border)] text-[var(--color-text-secondary)] capitalize cursor-pointer hover:bg-[var(--color-border)] hover:text-[var(--color-text)] transition-colors"
-                                >
-                                    {pub.entryTags.category}
-                                </button>
-                            ) : (
-                                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[var(--color-bg-alt)] border border-[var(--color-border)] text-[var(--color-text-secondary)] capitalize">
-                                    {pub.entryTags.category}
-                                </span>
-                            )
-                        )}
-                        <span className="text-xs text-[var(--color-text-muted)] italic truncate">
-                            {getVenue(pub)}
-                        </span>
-                    </div>
-                    {pub.entryTags.research && (
-                        <div className="flex flex-wrap gap-1 mt-2">
-                            {pub.entryTags.research.split(',').map(t => t.trim())
-                                .filter(t => validTags.length === 0 || validTags.some(v => v.toLowerCase() === t.toLowerCase()))
-                                .map(kw => (
-                                    onTagClick ? (
-                                        <button
-                                            key={kw}
-                                            onClick={() => onTagClick(kw)}
-                                            className="text-xs px-2 py-0.5 rounded bg-[var(--color-bg-alt)] text-[var(--color-text-muted)] cursor-pointer hover:bg-[var(--color-primary)] hover:text-white transition-colors text-left"
-                                        >
-                                            {kw}
-                                        </button>
-                                    ) : (
-                                        <span key={kw} className="text-xs px-2 py-0.5 rounded bg-[var(--color-bg-alt)] text-[var(--color-text-muted)]">
-                                            {kw}
-                                        </span>
-                                    )
-                                ))}
-                        </div>
+        <div className="p-5 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-card)] hover:shadow-md transition-all duration-200 group flex flex-col h-full">
+            <div className="flex-1 min-w-0 mb-4">
+                <h3 className="font-semibold text-[var(--color-text)] group-hover:text-[var(--color-primary)] transition-colors leading-snug">
+                    {pub.entryTags.title || pub.citationKey}
+                </h3>
+                <p className="text-sm text-[var(--color-text-secondary)] mt-1">
+                    {pub.entryTags.author?.replace(/ and /ig, '; ')}
+                </p>
+                <div className="flex items-center gap-3 mt-2 flex-wrap">
+                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[var(--color-primary)] text-white"
+                        style={{ opacity: 0.9 }}>
+                        {pub.entryTags.year}
+                    </span>
+                    {pub.entryTags.category && (
+                        onTypeClick ? (
+                            <button
+                                onClick={() => onTypeClick(pub.entryTags.category!)}
+                                className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[var(--color-bg-alt)] border border-[var(--color-border)] text-[var(--color-text-secondary)] capitalize cursor-pointer hover:bg-[var(--color-border)] hover:text-[var(--color-text)] transition-colors"
+                            >
+                                {pub.entryTags.category}
+                            </button>
+                        ) : (
+                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-[var(--color-bg-alt)] border border-[var(--color-border)] text-[var(--color-text-secondary)] capitalize">
+                                {pub.entryTags.category}
+                            </span>
+                        )
                     )}
+                    <span className="text-xs text-[var(--color-text-muted)] italic truncate">
+                        {getVenue(pub)}
+                    </span>
                 </div>
-                <div className="flex-shrink-0 flex flex-col gap-2 items-end">
-                    <div className="flex flex-wrap justify-end gap-2">
-                        {pub.entryTags.website && (
-                            <a
-                                href={pub.entryTags.website}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm text-[var(--color-text-muted)] hover:text-[var(--color-primary)] hover:bg-[var(--color-bg-alt)] border border-transparent hover:border-[var(--color-border)] transition-all"
-                                title="Project Website"
-                            >
-                                <Link className="w-4 h-4" />
-                                <span className="capitalize hidden sm:inline">Website</span>
-                            </a>
-                        )}
-                        {parseUrls(pub.entryTags.url).map((resource, i) => (
-                            <a
-                                key={i}
-                                href={resource.url}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm text-[var(--color-text-muted)] hover:text-[var(--color-primary)] hover:bg-[var(--color-bg-alt)] border border-transparent hover:border-[var(--color-border)] transition-all"
-                                title={resource.label}
-                            >
-                                {getIconForLabel(resource.label)}
-                                <span className="capitalize hidden sm:inline">{resource.label}</span>
-                            </a>
-                        ))}
-                        <button
-                            onClick={() => setExpandedBibtex(expandedBibtex === pub.citationKey ? null : pub.citationKey)}
-                            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm transition-all border ${expandedBibtex === pub.citationKey
-                                ? 'bg-[var(--color-primary)] text-white border-[var(--color-primary)]'
-                                : 'text-[var(--color-text-muted)] hover:text-[var(--color-primary)] hover:bg-[var(--color-bg-alt)] border-transparent hover:border-[var(--color-border)]'
-                                }`}
-                            title="Cite via BibTeX"
-                        >
-                            <Quote className="w-4 h-4" />
-                            <span className="capitalize hidden sm:inline">Cite</span>
-                        </button>
+                {pub.entryTags.research && (
+                    <div className="flex flex-wrap gap-1 mt-2">
+                        {pub.entryTags.research.split(',').map(t => t.trim())
+                            .filter(t => validTags.length === 0 || validTags.some(v => v.toLowerCase() === t.toLowerCase()))
+                            .map(kw => (
+                                onTagClick ? (
+                                    <button
+                                        key={kw}
+                                        onClick={() => onTagClick(kw)}
+                                        className="text-xs px-2 py-0.5 rounded bg-[var(--color-bg-alt)] text-[var(--color-text-muted)] cursor-pointer hover:bg-[var(--color-primary)] hover:text-white transition-colors text-left"
+                                    >
+                                        {kw}
+                                    </button>
+                                ) : (
+                                    <span key={kw} className="text-xs px-2 py-0.5 rounded bg-[var(--color-bg-alt)] text-[var(--color-text-muted)]">
+                                        {kw}
+                                    </span>
+                                )
+                            ))}
                     </div>
+                )}
+            </div>
+            <div className="mt-auto pt-3">
+                <div className="flex flex-wrap gap-2">
+                    {pub.entryTags.code && (
+                        <a
+                            href={pub.entryTags.code}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm text-[var(--color-text-muted)] hover:text-[var(--color-primary)] hover:bg-[var(--color-bg-alt)] border border-transparent hover:border-[var(--color-border)] transition-all"
+                            title="Source Code"
+                        >
+                            <Code className="w-4 h-4" />
+                            <span className="capitalize">Code</span>
+                        </a>
+                    )}
+                    {pub.entryTags.website && (
+                        <a
+                            href={pub.entryTags.website}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm text-[var(--color-text-muted)] hover:text-[var(--color-primary)] hover:bg-[var(--color-bg-alt)] border border-transparent hover:border-[var(--color-border)] transition-all"
+                            title="Project Website"
+                        >
+                            <Link className="w-4 h-4" />
+                            <span className="capitalize">Website</span>
+                        </a>
+                    )}
+                    {parseUrls(pub.entryTags.url).map((resource, i) => (
+                        <a
+                            key={i}
+                            href={resource.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm text-[var(--color-text-muted)] hover:text-[var(--color-primary)] hover:bg-[var(--color-bg-alt)] border border-transparent hover:border-[var(--color-border)] transition-all"
+                            title={resource.label}
+                        >
+                            {getIconForLabel(resource.label)}
+                            <span className="capitalize">{resource.label}</span>
+                        </a>
+                    ))}
+                    <button
+                        onClick={() => setExpandedBibtex(expandedBibtex === pub.citationKey ? null : pub.citationKey)}
+                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm transition-all border ${expandedBibtex === pub.citationKey
+                            ? 'bg-[var(--color-primary)] text-white border-[var(--color-primary)]'
+                            : 'text-[var(--color-text-muted)] hover:text-[var(--color-primary)] hover:bg-[var(--color-bg-alt)] border-transparent hover:border-[var(--color-border)]'
+                            }`}
+                        title="Cite via BibTeX"
+                    >
+                        <Quote className="w-4 h-4" />
+                        <span className="capitalize">Cite</span>
+                    </button>
                 </div>
             </div>
 
             {/* Expandable BibTeX Output */}
-            {expandedBibtex === pub.citationKey && (
-                <div className="mt-4 p-4 rounded-lg bg-[#0d1117] border border-[#30363d] relative animate-in fade-in slide-in-from-top-2 duration-200">
-                    <div className="flex justify-between items-center mb-2">
-                        <span className="text-xs font-mono text-gray-400">BibTeX</span>
-                        <button
-                            onClick={() => handleCopyBibtex(pub)}
-                            className="flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-colors"
-                        >
-                            {copiedKey === pub.citationKey ? (
-                                <>
-                                    <Check className="w-3.5 h-3.5 text-green-400" />
-                                    <span className="text-green-400">Copied!</span>
-                                </>
-                            ) : (
-                                <>
-                                    <Clipboard className="w-3.5 h-3.5" />
-                                    <span>Copy</span>
-                                </>
-                            )}
-                        </button>
+            {
+                expandedBibtex === pub.citationKey && (
+                    <div className="mt-4 p-4 rounded-lg bg-[#0d1117] border border-[#30363d] relative animate-in fade-in slide-in-from-top-2 duration-200">
+                        <div className="flex justify-between items-center mb-2">
+                            <span className="text-xs font-mono text-gray-400">BibTeX</span>
+                            <button
+                                onClick={() => handleCopyBibtex(pub)}
+                                className="flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-colors"
+                            >
+                                {copiedKey === pub.citationKey ? (
+                                    <>
+                                        <Check className="w-3.5 h-3.5 text-green-400" />
+                                        <span className="text-green-400">Copied!</span>
+                                    </>
+                                ) : (
+                                    <>
+                                        <Clipboard className="w-3.5 h-3.5" />
+                                        <span>Copy</span>
+                                    </>
+                                )}
+                            </button>
+                        </div>
+                        <pre className="text-sm font-mono text-gray-300 overflow-x-auto pb-2 custom-scrollbar">
+                            <code>{generateBibtex(pub)}</code>
+                        </pre>
                     </div>
-                    <pre className="text-sm font-mono text-gray-300 overflow-x-auto pb-2 custom-scrollbar">
-                        <code>{generateBibtex(pub)}</code>
-                    </pre>
-                </div>
-            )}
-        </div>
+                )
+            }
+        </div >
     );
 }
