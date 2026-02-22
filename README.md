@@ -179,12 +179,27 @@ The reading list page appears at `/research/resources/{slug}` and is linked from
 
 ### Publications (`src/data/publications.bib`)
 
-Publications are managed in a single **BibTeX** file. The site parses this at build time and powers the searchable `/publications` page.
+Publications are managed in a single **BibTeX** file. The site parses this at build time and powers the searchable `/publications` page, as well as the related publications lists on individual member/research pages.
 
-Key BibTeX fields:
-- `research` — Comma-separated research area tags (must match research page titles for filtering)
-- `category` — Display type (Conference, Article, Proceedings, Patent, Masters Thesis, PhD Thesis, etc.)
-- `url` — Space-separated pairs of `URL, label` (e.g., `https://example.com/paper.pdf, pdf https://example.com/slides.pptx, slides`)
+Key custom BibTeX fields:
+- `research` — Comma-separated research area tags (must match research page titles for filtering).
+- `category` — Display type (Conference, Article, Proceedings, Patent, Masters Thesis, PhD Thesis, etc.).
+- `website` — (Optional) A direct link to the project or publisher website (renders as a "Website" button).
+- `url` — (Optional) Space/comma separated pairs of links to papers and slide decks. Format: `https://link.com/file.pdf, pdf https://link.com/slides.ppt, slides`.
+
+**Example Entry:**
+```bibtex
+@inproceedings{Example2024,
+  author   = {Jane Doe and John Smith},
+  title    = {A Novel Approach to Embedded Systems},
+  booktitle= {Proceedings of the International Conference on Cyber-Physical Systems},
+  year     = {2024},
+  research = {Cyber-Physical Systems, Intelligent Transportation Systems},
+  category = {Conference},
+  website  = {https://project-website.com},
+  url      = {https://example.com/paper.pdf, pdf https://example.com/demo.mp4, video}
+}
+```
 
 > **Note:** Thesis entries (`mastersthesis`, `phdthesis`, `bachelorthesis`) are automatically excluded from the "Recent Publications" section on individual research pages.
 
