@@ -1,0 +1,191 @@
+---
+import Footer from "../../components/astro/Footer.astro";
+import Navbar from "../../components/astro/Navbar.astro";
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="CSE 325 - Embedded Microprocessor Systems">
+    <Navbar slot="header" />
+
+    <section class="py-16 md:py-24">
+        <div class="section-container max-w-4xl mx-auto">
+            <div class="mb-8">
+                <h1 class="text-3xl md:text-4xl font-bold text-text mb-4">
+                    CSE 325 &ndash; Embedded Microprocessor Systems
+                </h1>
+            </div>
+
+            <article class="prose prose-lg max-w-none text-text-secondary">
+                <h3 class="mt-8">Overview</h3>
+                <p>
+                    Embedded Microprocessor Systems are often used to design
+                    Cyber-Physical Systems, or robotic systems, in which the
+                    computing system interacts with the real world, e.g., an
+                    autonomous car. Computers interacting with real-world is
+                    very different from the scenario when a computer interacts
+                    with another computer. When computers interact with the real
+                    world, they have to operate in real-time &mdash; their
+                    actions cannot be late. A late action may be same as a wrong
+                    action (think of delay in the application of brakes in a
+                    car). But, computers interacting with real world make all
+                    the exciting applications in robotics possible! It is this
+                    excitement, and the feeling that I can "Control Anything"
+                    using an embedded microprocessor system is what the newly
+                    redesigned course attempts to instill in students. And at
+                    the center of this entire course experience is the process
+                    of designing and building an autonomous toy car from
+                    scratch. And at the end of the course, students race their
+                    autonomous cars to participate in a race to win prizes.
+                </p>
+
+                <h3 class="mt-8">Main Topics</h3>
+                <p>
+                    A cyber-physical system comprises of sensors, actuators and
+                    control engine. Sensors sense the environment, the control
+                    engine reads in the sensor values, and decide on how the
+                    system should react, and then affect the change through
+                    actuators. Designing a Cyber-Physical System or in simple
+                    terms a robotic system requires knowledge in three domains:
+                </p>
+
+                <h4 class="mt-6">
+                    i) How the different components of the system work?
+                </h4>
+                <p>
+                    A robotic system is built using many different parts, and to
+                    be able to successfully and reliably design the system one
+                    needs to know how all the parts of the system work. In
+                    particular the autonomous toy car in the course is built
+                    using batteries, Internal Measurement Unit (IMU), (Light
+                    Detection and Ranging system) LIDAR, GPS (Geographical
+                    Positioning System), motors etc. The first part of the
+                    course deals with understanding how these components work,
+                    and how they interface with the software.
+                </p>
+
+                <h4 class="mt-6">ii) How to write real-time software?</h4>
+                <p>
+                    Real-time software is very differently organized as compared
+                    to general-purpose software. The software is
+                    often-architected in what is called a time-triggered
+                    architecture. In this, all the sensing, actuation and
+                    compute functionality is written in terms of parallel tasks.
+                    These tasks have a repetition frequency, e.g., the task that
+                    reads the current GPS coordinates may be run every 0.1
+                    second, and update the variable. The actuation values, e.g.,
+                    how much to steer may be calculated in multiple steps, but
+                    it is written to the final steer variable only once. The
+                    actuation tasks will also repeatedly read the value of the
+                    actuation variable, and affect the actuator, e.g., motor.
+                    The software is designed in a way, so that it becomes easier
+                    to analyze the timing of the system, and make sure that the
+                    timing is being met or not.
+                </p>
+
+                <h4 class="mt-6">
+                    iii) How to make a system do what you want it to?
+                </h4>
+                <p>
+                    Just the fact that you can make the steering turn does not
+                    mean that you can drive the car. How do you make the car
+                    obey a specific trajectory requires you to issue the control
+                    signals properly. Control theory studies the fundamentals of
+                    how to accurately control a system?, is the control system
+                    stable, or it will start oscillating wildly, (for example,
+                    if we steer the car too much, then we may never go straight,
+                    but always oscillate from one side to another), how good is
+                    the control of the system, and ultimately how to design a
+                    controller for a system that will be quick and stable.
+                </p>
+
+                <h3 class="mt-8">Projects</h3>
+                <p>
+                    A very important aspect of the course is the projects. In
+                    fact, this is a project driven course, in which students are
+                    motivated to learn the various concepts in order to build
+                    their autonomous car. The build process is divided into 7
+                    projects that build on each other, and eventually, the
+                    students have designed an obstacle avoiding, GPS-way-point
+                    driven autonomous toy race car. The projects are:
+                </p>
+                <ol>
+                    <li>Generate Morse code for text strings on Arduino.</li>
+                    <li>
+                        Use another Arduino to read the Morse code generated by
+                        the first Arduino &ndash; implement it using polling as
+                        well as interrupts.
+                    </li>
+                    <li>
+                        Assemble the car, and make it drive a circle and a
+                        square.
+                    </li>
+                    <li>
+                        Set the car in any orientation, it should be able to
+                        drive towards the north.
+                    </li>
+                    <li>Navigate to a specified GPS location.</li>
+                    <li>Drive with a fence created by GPS coordinates.</li>
+                    <li>Drive to a GPS location while avoiding obstacles.</li>
+                </ol>
+
+                <h3 class="mt-8">Learning outcomes</h3>
+                <p>
+                    Ultimately the main goal of the course is for the students
+                    to get the skills and the confidence to build anything. The
+                    theme of the course is, therefore "Control Anything". In
+                    general terms, students learn the fundamentals of how to
+                    design robotic systems. In more technical term, students
+                    learn how the components of a robotic
+                    system,&ndash;different sensors and actuators&ndash; work,
+                    they learn how to control them through software, how to
+                    correctly write and analyze real-time software, and they
+                    learn how to analyze the stability and responsiveness of a
+                    control system.
+                </p>
+
+                <h3 class="mt-8">Conclusion</h3>
+                <p>
+                    Ultimately, it is not from listening to the lectures, but
+                    from doing the projects, those students get the confidence
+                    &mdash; that they can now build any control system. This
+                    autonomously navigating car is not a simple project, and
+                    once you do this, building a garage controller, or
+                    controlling your Christmas lights are very simple things.
+                    And doing that is our dream of Internet-of-Things &ndash;
+                    where we will be able to control everything… from the
+                    furniture in the house to the direction of power flow
+                    between your solar panels and the national power grid.
+                </p>
+
+                <h3 class="mt-8">Press Release</h3>
+                <ul>
+                    <li>
+                        <a
+                            href="https://asunow.asu.edu/20160427-discoveries-engineering-robotic-cars"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >ASU Discoveries - Robotics Cars</a>
+                    </li>
+                    <li>
+                        <a
+                            href="http://www.statepress.com/article/2016/04/robotics-from-az-new-class-shows-students-how-robots-come-full-circle"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >State Press - New class shows students how robots
+                            come full circle</a>
+                    </li>
+                    <li>
+                        <a
+                            href="https://ktar.com/story/1198941/arizona-universities-drawing-in-technology-companies/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >Arizona universities drawing in technology
+                            companies</a>
+                    </li>
+                </ul>
+            </article>
+        </div>
+    </section>
+
+    <Footer slot="footer" />
+</Layout>

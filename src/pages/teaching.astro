@@ -1,0 +1,71 @@
+---
+import Footer from "../components/astro/Footer.astro";
+import Navbar from "../components/astro/Navbar.astro";
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="Teaching">
+    <Navbar slot="header" />
+
+    <section class="py-16 md:py-24">
+        <div class="section-container max-w-4xl mx-auto">
+            <div class="mb-12">
+                <h1 class="text-3xl md:text-4xl font-bold text-text mb-4">
+                    Teaching
+                </h1>
+            </div>
+
+            <div class="space-y-8">
+                <div>
+                    <h2 class="text-2xl font-semibold mb-4 text-text">
+                        Courses Developed and Taught Recently
+                    </h2>
+                    <ul class="space-y-4 prose prose-lg">
+                        <li>
+                            <a
+                                href="/teaching/quantum-computation"
+                                class="text-primary hover:underline"
+                                >CSE 494/598: Quantum Computation</a>
+                        </li>
+                        <li>
+                            <a
+                                href="/teaching/mla"
+                                class="text-primary hover:underline"
+                                >CSE/CEN 598: Machine Learning Accelerator
+                                Design</a
+                            >
+                            [<a
+                                href="https://github.com/MPSLab-ASU/ML-Accelerators/blob/main/README.md"
+                                class="text-primary hover:underline"
+                                target="_blank"
+                                rel="noopener noreferrer">Reading List</a
+                            >]
+                        </li>
+                        <li>
+                            <a
+                                href="/teaching/cse420"
+                                class="text-primary hover:underline"
+                                >CSE 420/520: Computer Architecture</a>
+                        </li>
+                        <li>
+                            <a
+                                href="/teaching/cse325"
+                                class="text-primary hover:underline"
+                                >CSE 325: Embedded Microprocessor Systems</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <a
+                        href="/teaching/older-courses"
+                        class="text-primary hover:underline inline-flex font-semibold text-lg"
+                        >Older Courses &rarr;</a
+                    >
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <Footer slot="footer" />
+</Layout>

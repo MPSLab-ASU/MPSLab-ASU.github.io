@@ -57,14 +57,14 @@
     },
     {
         "name": "SMM toolchain",
-        "url": "https://labs.engineering.asu.edu/mps-lab/smm-toolchain-download/",
+        "url": "https://github.com/cmlasu/smm_frameworks",
         "description": "Toolchain for application execution on SMM architectures.",
         "researchGroup": "Software Managed Manycores",
         "image": "/images/software/smm-toolchain.png"
     },
     {
         "name": "TMA",
-        "url": "https://labs.engineering.asu.edu/mps-lab/cps-software-download/",
+        "url": "https://github.com/cmlasu/tma",
         "description": "Timestamp based monitoring tool for CPS applications.",
         "researchGroup": "Cyber-Physical & IoT Systems",
         "image": "/images/software/tma.png"

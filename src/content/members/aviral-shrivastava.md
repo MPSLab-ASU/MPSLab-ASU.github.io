@@ -3,7 +3,6 @@ name: "Aviral Shrivastava"
 role: "Principle Investigator"
 joinDate: "2006"
 email: "aviral.shrivastava@asu.edu"
-website: "https://labs.engineering.asu.edu/mps-lab/"
 resume: "/docs/resumes/aviral-shrivastava.pdf"
 researchInterests: ["Machine Learning Acceleration", "AI-driven Multi-Level Compilers", "Intelligent Transportation Systems", "Quantum Machine Learning"]
 order: 1
