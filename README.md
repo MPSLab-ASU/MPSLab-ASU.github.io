@@ -157,7 +157,7 @@ title: "Research Area Name"
 status: "Active"       # Active | Extended
 description: "One-line summary of the area."
 image: "/images/research/hero.jpg"  # optional banner image
-icon: "Cpu"            # optional, Lucide icon name (Cpu | Car | BookOpen | Brain | Shield | Zap)
+icon: "Cpu"            # Lucide icon: Cpu | Car | BookOpen | Brain | Shield | Zap | Monitor | Wifi | Server | GitBranch | Grid3X3 | Thermometer | CircuitBoard | Binary | Clock | MessageSquare | Battery
 order: 1               # optional, display order
 ---
 
@@ -218,9 +218,30 @@ Key custom BibTeX fields:
 
 > **Note:** Thesis entries (`mastersthesis`, `phdthesis`, `bachelorthesis`) are automatically excluded from the "Recent Publications" section on individual research pages.
 
+The publications page also includes a **Software** tab, powered by `src/data/software.json`. Each entry has a `name`, `url`, `description`, `researchGroup`, and `image`.
+
 The publications page supports URL-based filtering:
 - `/publications?q=search+term` — Pre-fills the search box
 - `/publications?tag=Research+Area+Name` — Pre-selects the tag filter
+- `/publications#software` — Opens the Software tab directly
+
+---
+
+## Scrapers
+
+The project includes Python scrapers to import legacy content. All scripts should be run inside a virtual environment:
+
+```bash
+python3 -m venv venv
+source venv/bin/activate
+pip install requests beautifulsoup4 python-dotenv
+```
+
+| Script | Purpose | Output |
+|--------|---------|--------|
+| `scrape_news.py` | Scrape news & awards from the legacy site | `src/content/news/*.md` |
+| `scrape_software.py` | Scrape software releases | `src/data/software.json` + `public/images/software/` |
+| `scrape_research.py` | Scrape extended research areas | `src/content/research/*.md` + `public/images/research/` |
 
 ---
 
