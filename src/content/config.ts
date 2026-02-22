@@ -74,4 +74,16 @@ const faq = defineCollection({
     }),
 });
 
-export const collections = { members, news, research, resources, faq };
+const gallery = defineCollection({
+    type: 'content',
+    schema: z.object({
+        title: z.string(),
+        description: z.string(),
+        date: z.date(),
+        coverImage: z.string(),
+        images: z.array(z.string()),
+        location: z.string().optional(),
+    }),
+});
+
+export const collections = { members, news, research, resources, faq, gallery };

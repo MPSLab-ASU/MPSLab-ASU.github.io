@@ -16,7 +16,7 @@ The official website for the **Make Programming Simple (MPS) Lab** at Arizona St
 | Icons | Lucide React |
 | Search | Fuse.js (fuzzy search for publications) |
 | Publications | BibTeX → `bibtex-parse-js` |
-| Markdown | Custom `rehype-figure-caption` plugin for image captions |
+| Markdown | `marked` (for FAQ) + Custom `rehype-figure-caption` plugin |
 
 ---
 
@@ -26,33 +26,35 @@ The official website for the **Make Programming Simple (MPS) Lab** at Arizona St
 src/
 ├── components/
 │   ├── astro/           # Navbar, Footer, MemberGrid
-│   └── react/           # PublicationSearch, PublicationCard, ThemeToggle
+│   └── react/           # PublicationSearch, GalleryGrid, ImageLightbox, ThemeToggle
 ├── content/             # Astro Content Collections
-│   ├── members/         # Lab member profiles (47 files)
+│   ├── members/         # Lab member profiles
 │   ├── news/            # News & announcements
 │   ├── research/        # Research area pages
-│   └── resources/       # Reading lists per research area
+│   ├── resources/       # Reading lists per research area
+│   ├── faq/             # Categorized FAQs (Markdown files)
+│   └── gallery/         # Lab event galleries
 ├── data/
-│   └── publications.bib # BibTeX publication database
+│   ├── publications.bib # BibTeX publication database
+│   ├── software.json    # Scraped software projects
+│   └── sponsors.json    # Scraped sponsor data
 ├── layouts/
 │   └── Layout.astro     # Base HTML layout
 ├── pages/
-│   ├── index.astro              # Home page
+│   ├── index.astro              # Home page (includes Sponsors)
 │   ├── people.astro             # People directory (tabbed by role)
-│   ├── publications.astro       # Searchable publications
+│   ├── publications.astro       # Searchable publications & Software tabs
+│   ├── gallery/index.astro      # Lab Gallery archive
+│   ├── gallery/[...slug].astro  # Event-specific photo grids (React Lightbox)
+│   ├── faq.astro                # Categorized accordion FAQ
 │   ├── contact.astro            # Contact page
 │   ├── members/[...slug].astro  # Individual member profiles
 │   ├── research/index.astro     # Research overview
-│   ├── research/[...slug].astro # Individual research pages
-│   └── research/resources/[...slug].astro  # Reading list pages
-├── plugins/
-│   └── rehype-figure-caption.mjs  # Image caption plugin
-└── styles/
-    ├── main.scss          # Global styles, prose formatting
-    ├── _theme-light.scss  # Light theme variables
-    └── _theme-dark.scss   # Dark theme variables
+│   └── research/[...slug].astro # Individual research pages
+└── plugins/
+    └── rehype-figure-caption.mjs  # Image caption plugin
 public/
-├── images/              # Member photos, research images
+├── images/              # Member photos, research, gallery assets, sponsor logos
 └── docs/                # Resumes, documents
 ```
 
@@ -92,13 +94,11 @@ npm run build    # Type-check + static build → dist/
 npm run preview  # Preview the built site locally
 ```
 
-The site deploys as a static site to **GitHub Pages**. Ensure `site` in `astro.config.mjs` matches your deployment URL.
+The site deploys as a static site to **GitHub Pages**.
 
 ---
 
 ## Content Management
-
-All content is managed through **Astro Content Collections** in `src/content/`. Schemas are defined in [`src/content/config.ts`](src/content/config.ts).
 
 ### Members (`src/content/members/`)
 
@@ -115,7 +115,7 @@ website: "https://..."         # optional
 github: "https://github.com/..." # optional
 linkedin: "https://..."        # optional
 resume: "/docs/resumes/..."    # optional
-researchInterests: ["Topic A"] # optional
+researchInterests: ["Topic A", "Topic B"] # optional
 isAlumni: false                # optional
 currentPosition: "..."        # optional (for alumni)
 ---
@@ -125,29 +125,22 @@ Bio text goes here (markdown supported).
 
 ### News and Awards (`src/content/news/`)
 
-News and awards can be added either manually or by using the included Python scraper.
-
 #### Manual Addition
-To manually add an entry, create a new `.md` file in `src/content/news/`.
+Create a new `.md` file in `src/content/news/`.
 
 ```yaml
 ---
 date: "2024"             # Can be a full date (YYYY-MM-DD) or just the year
 type: "Publication"      # Award | Publication | Event | Announcement | General
-description: "A concise description of the news or award. Supports **Markdown** and HTML tags."
+description: "A concise description of the news. Supports **Markdown**."
 ---
 ```
-> **Note:** The `description` field is required and directly dictates what gets rendered on the UI. The site automatically groups entries by their `date` year.
 
 #### Automated Scraping
-Run the Python scraper to fetch and parse the latest updates directly from the legacy lab website pages:
+Run the scraper to fetch updates from the legacy site:
 ```bash
-python3 -m venv venv
-source venv/bin/activate
-pip install requests beautifulsoup4 python-dotenv
 python scrape_news.py
 ```
-This generates properly formatted markdown files spanning all historical updates, placing them directly into `src/content/news/`.
 
 ### Research Areas (`src/content/research/`)
 
@@ -155,23 +148,19 @@ This generates properly formatted markdown files spanning all historical updates
 ---
 title: "Research Area Name"
 status: "Active"       # Active | Extended
-description: "One-line summary of the area."
-image: "/images/research/hero.jpg"  # optional banner image
-icon: "Cpu"            # Lucide icon: Cpu | Car | BookOpen | Brain | Shield | Zap | Monitor | Wifi | Server | GitBranch | Grid3X3 | Thermometer | CircuitBoard | Binary | Clock | MessageSquare | Battery
-order: 1               # optional, display order
+description: "One-line summary."
+image: "/images/research/hero.jpg"  # optional banner
+icon: "Cpu"            # Lucide icon name
+order: 1               # display order
 ---
 
-Markdown content for the research page. Supports:
-- **Bullet points** and numbered lists
-- **Images with captions** — put caption text on the next line (no blank line):
+Markdown content. Supports images with captions:
 
 ![Alt Text](/images/research/figure.png)
-This text becomes a styled caption under the image.
+This text becomes a styled caption under the image (no blank line above).
 ```
 
 ### Resources / Reading Lists (`src/content/resources/`)
-
-One file per research area containing curated resources.
 
 ```yaml
 ---
@@ -179,87 +168,97 @@ researchArea: "Intelligent Transportation Systems"  # must match research title 
 resources:
   - title: "Paper Title"
     type: "Paper"       # Paper | Book | Video | Tutorial | Tool | Publication
-    url: "https://..."  # optional
-    authors: "Authors"  # optional
-    description: "..."  # optional
-  - title: "Another Resource"
-    type: "Book"
     url: "https://..."
+    authors: "Authors"
+    description: "..."
 ---
 ```
 
-The reading list page appears at `/research/resources/{slug}` and is linked from the corresponding research page via a **Reading List** button.
+### FAQ (`src/content/faq/`)
+
+FAQs are managed via markdown files in the `faq` collection.
+
+```yaml
+---
+category: "General"      # Group name
+icon: "💡"               # Category emoji
+order: 1                 # Display order
+items:
+  - question: "How do I X?"
+    answer: "Full answer supporting **markdown**."
+    externalLink: ""     # Optional direct link
+  - question: "Link to service"
+    answer: ""
+    externalLink: "https://..."
+---
+```
+
+### Lab Gallery (`src/content/gallery/`)
+
+Showcases photos from lab events.
+
+```yaml
+---
+title: "Lab Social 2024"
+description: "Brief summary of the event."
+date: 2024-03-20
+coverImage: "/images/gallery/lab-social-2024/social_1.png"
+images:
+  - "/images/gallery/lab-social-2024/social_1.png"
+  - "/images/gallery/lab-social-2024/social_2.png"
+location: "Tempe, AZ"
+---
+
+Optional detailed description of the event.
+```
 
 ### Publications (`src/data/publications.bib`)
 
-Publications are managed in a single **BibTeX** file. The site parses this at build time and powers the searchable `/publications` page, as well as the related publications lists on individual member/research pages.
+Managed in a BibTeX file. Key fields:
+- `research` — Comma-separated tags matching research titles.
+- `category` — Conference, Article, Patent, etc.
+- `website` / `code` — Optional deep links.
+- `url` — Paper/Slides links. Format: `http://link.com/p.pdf, pdf http://link.com/s.ppt, slides`.
 
-Key custom BibTeX fields:
-- `research` — Comma-separated research area tags (must match research page titles for filtering).
-- `category` — Display type (Conference, Article, Proceedings, Patent, Masters Thesis, PhD Thesis, etc.).
-- `website` — (Optional) A direct link to the project or publisher website (renders as a "Website" button).
-- `code` — (Optional) A direct link to the source code repository, e.g., GitHub (renders as a "Code" button).
-- `url` — (Optional) Space/comma separated pairs of links to papers and slide decks. Format: `https://link.com/file.pdf, pdf https://link.com/slides.ppt, slides`.
-
-**Example Entry:**
-```bibtex
-@inproceedings{Example2024,
-  author   = {Jane Doe and John Smith},
-  title    = {A Novel Approach to Embedded Systems},
-  booktitle= {Proceedings of the International Conference on Cyber-Physical Systems},
-  year     = {2024},
-  research = {Cyber-Physical Systems, Intelligent Transportation Systems},
-  category = {Conference},
-  website  = {https://project-website.com},
-  code     = {https://github.com/mpslab-asu/project},
-  url      = {https://example.com/paper.pdf, pdf https://example.com/demo.mp4, video}
+#### Software Tab
+Powered by `src/data/software.json`:
+```json
+{
+  "name": "Project Name",
+  "url": "https://github.com/...",
+  "description": "...",
+  "researchGroup": "AI Compilers",
+  "image": "/images/software/logo.png"
 }
 ```
 
-> **Note:** Thesis entries (`mastersthesis`, `phdthesis`, `bachelorthesis`) are automatically excluded from the "Recent Publications" section on individual research pages.
+### Sponsors (`src/data/sponsors.json`)
 
-The publications page also includes a **Software** tab, powered by `src/data/software.json`. Each entry has a `name`, `url`, `description`, `researchGroup`, and `image`.
-
-The publications page supports URL-based filtering:
-- `/publications?q=search+term` — Pre-fills the search box
-- `/publications?tag=Research+Area+Name` — Pre-selects the tag filter
-- `/publications#software` — Opens the Software tab directly
+Displayed on the homepage. Scraped using `scrape_sponsors.py`.
+```json
+{
+  "name": "Agency Name",
+  "logo": "/images/sponsors/logo.png",
+  "url": "https://..."
+}
+```
 
 ---
 
 ## Scrapers
 
-The project includes Python scrapers to import legacy content. All scripts should be run inside a virtual environment:
-
-```bash
-python3 -m venv venv
-source venv/bin/activate
-pip install requests beautifulsoup4 python-dotenv
-```
-
 | Script | Purpose | Output |
 |--------|---------|--------|
-| `scrape_news.py` | Scrape news & awards from the legacy site | `src/content/news/*.md` |
-| `scrape_software.py` | Scrape software releases | `src/data/software.json` + `public/images/software/` |
-| `scrape_research.py` | Scrape extended research areas | `src/content/research/*.md` + `public/images/research/` |
+| `scrape_news.py` | News & awards | `src/content/news/` |
+| `scrape_faq.py` | Legacy FAQ import | `src/data/faq.json` (deprecated, see `src/content/faq/`) |
+| `scrape_software.py` | Software releases | `src/data/software.json` |
+| `scrape_research.py` | Research areas | `src/content/research/` |
+| `scrape_sponsors.py` | Sponsor logos & links | `src/data/sponsors.json` |
 
 ---
 
-## Theming
+## Theming & UI
 
-The site supports **light and dark modes** via CSS custom properties defined in `_theme-light.scss` and `_theme-dark.scss`. The `ThemeToggle` React component handles switching and persists the preference.
-
----
-
-## Custom Plugins
-
-### `rehype-figure-caption`
-
-A custom rehype plugin (`src/plugins/rehype-figure-caption.mjs`) that converts markdown images followed by caption text into semantic `<figure>` + `<figcaption>` HTML. Just write:
-
-```markdown
-![Alt text](/path/to/image.png)
-Caption text on the very next line (no blank line).
-```
-
-This renders as a styled figure with a centered, italic caption below the image.
+- **Light/Dark Mode**: Persisted theme switch via `ThemeToggle`.
+- **Interactive Gallery**: Immersive lightbox experience powered by `ImageLightbox.tsx` (React).
+- **Markdown Rendering**: Answers in FAQ use `marked`. Research pages use Astro dynamic rendering.
