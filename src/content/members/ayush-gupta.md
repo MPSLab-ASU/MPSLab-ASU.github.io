@@ -7,6 +7,7 @@ linkedin: "https://www.linkedin.com/in/ayush-gupta-90237a218/"
 resume: "/docs/resumes/ayush-gupta.pdf"
 order: 4
 image: "/images/members/ayush-gupta.jpg"
+researchInterests: ["AI-driven Multi-Level Compilers"]
 ---
 
 I am an undergraduate student in Computer Science with a minor inBusiness, where I have developed a strong foundation in machinelearning, computer vision, and their applications to real-worldproblems. My early research explored applying ML techniques tohealthcare, including EMG-based gesture recognition and signalclassification.

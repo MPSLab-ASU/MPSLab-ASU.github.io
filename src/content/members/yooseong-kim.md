@@ -6,7 +6,7 @@ website: "http://www.linkedin.com/in/ykim122"
 order: 5
 image: "/images/members/yooseong-kim.jpg"
 isAlumni: true
-alumniType: "Ph.D. Graduates"
+alumniType: "Ph.D. Graduate"
 currentPosition: "Software Engineer at Mercedes-Benz Research & Development North America, Sunnyvale, California"
 graduated: "Spring 2017"
 ---

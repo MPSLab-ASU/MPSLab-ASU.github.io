@@ -6,7 +6,7 @@ website: "https://www.linkedin.com/in/reileyjeyapaul"
 order: 5
 image: "/images/members/reiley-jeyapaul.jpg"
 isAlumni: true
-alumniType: "Ph.D. Graduates"
+alumniType: "Ph.D. Graduate"
 currentPosition: "Senior Research Engineer at ARM Research, Austin, Texas"
 graduated: "Spring 2012"
 ---

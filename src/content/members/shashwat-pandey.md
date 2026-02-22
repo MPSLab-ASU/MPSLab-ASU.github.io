@@ -7,11 +7,8 @@ linkedin: "https://www.linkedin.com/in/shashwat023/"
 resume: "/docs/resumes/shashwat-pandey.pdf"
 order: 3
 image: "/images/members/shashwat-pandey.jpg"
+researchInterests: ["AI-driven Multi-Level Compilers"]
 ---
-
-LinkedIn
-
-GitHub
 
 I’m an MS Computer Engineering student interested in compilers, large language models (LLMs), and computer vision.
 

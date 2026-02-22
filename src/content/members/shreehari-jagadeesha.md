@@ -6,7 +6,7 @@ website: "https://www.linkedin.com/in/shreehari-j/"
 order: 5
 image: "/images/members/shreehari-jagadeesha.jpg"
 isAlumni: true
-alumniType: "Master’s Graduates"
+alumniType: "Master’s Graduate"
 graduated: "Fall 2023"
 ---
 

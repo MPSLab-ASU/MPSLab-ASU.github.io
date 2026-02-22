@@ -6,7 +6,7 @@ website: "https://ecl.unist.ac.kr/~jlee/"
 order: 5
 image: "/images/members/jongeun-lee.jpg"
 isAlumni: true
-alumniType: "Post-Doctoral Researchers"
+alumniType: "Post-Doctoral Researcher"
 currentPosition: "Full Professor and Dean of Academic Information Affairs, UNIST, Ulsan, South Korea"
 graduated: "Spring 2009"
 ---

@@ -6,7 +6,7 @@ website: "https://orcid.org/0009-0005-6936-3285"
 order: 5
 image: "/images/members/francis-mendoza.jpg"
 isAlumni: true
-alumniType: "Master’s Graduates"
+alumniType: "Master’s Graduate"
 graduated: "Fall 2024"
 ---
 

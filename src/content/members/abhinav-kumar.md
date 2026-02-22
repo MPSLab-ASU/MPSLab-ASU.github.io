@@ -6,7 +6,7 @@ website: "https://www.linkedin.com/in/abhinav-kumar-96504a75/"
 order: 5
 image: "/images/members/abhinav-kumar.jpeg"
 isAlumni: true
-alumniType: "Master’s Graduates"
+alumniType: "Master’s Graduate"
 graduated: "Fall 2024"
 ---
 

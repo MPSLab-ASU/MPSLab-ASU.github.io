@@ -4,7 +4,7 @@ const members = defineCollection({
     type: 'content',
     schema: z.object({
         name: z.string(),
-        role: z.enum(['Faculty', 'Ph.D.', 'Masters', 'Undergraduate', 'Alumni', 'Postdoc', 'Visiting Student', 'Visiting Faculty']),
+        role: z.enum(['Principle Investigator', 'Ph.D.', 'Masters', 'Undergraduate', 'Alumni', 'Postdoc', 'Visiting Student', 'Visiting Faculty']),
         photoUrl: z.string().optional(),
         joinDate: z.string(),
         email: z.string().optional(),
