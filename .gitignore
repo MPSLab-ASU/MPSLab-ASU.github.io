@@ -51,6 +51,6 @@ Icon
 tmp/
 temp/
 
-scrape_bibtex*
+*scrape*
 
 venv/
