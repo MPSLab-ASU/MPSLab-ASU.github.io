@@ -19,6 +19,7 @@
     "bibtex-parse-js": "^0.0.24",
     "fuse.js": "^7.1.0",
     "lucide-react": "^0.575.0",
+    "marked": "^17.0.3",
     "react": "^19.2.4",
     "react-dom": "^19.2.4",
     "sass": "^1.97.3",

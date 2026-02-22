@@ -60,4 +60,18 @@ const resources = defineCollection({
     }),
 });
 
-export const collections = { members, news, research, resources };
+const faq = defineCollection({
+    type: 'content',
+    schema: z.object({
+        category: z.string(),
+        icon: z.string().optional(),
+        order: z.number().optional(),
+        items: z.array(z.object({
+            question: z.string(),
+            answer: z.string().optional(),
+            externalLink: z.string().optional(),
+        })),
+    }),
+});
+
+export const collections = { members, news, research, resources, faq };
