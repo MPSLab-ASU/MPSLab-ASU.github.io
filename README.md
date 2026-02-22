@@ -50,11 +50,14 @@ src/
 │   ├── contact.astro            # Contact page
 │   ├── members/[...slug].astro  # Individual member profiles
 │   ├── research/index.astro     # Research overview
-│   └── research/[...slug].astro # Individual research pages
+│   ├── research/[...slug].astro # Individual research pages
+│   ├── teaching.astro           # Teaching homepage (list of courses)
+│   └── teaching/                # Individual course pages (e.g. mla.astro)
 └── plugins/
     └── rehype-figure-caption.mjs  # Image caption plugin
 public/
 ├── images/              # Member photos, research, gallery assets, sponsor logos
+├── assets/              # PDFs, manuals, and syllabi for teaching/software
 └── docs/                # Resumes, documents
 ```
 
@@ -211,6 +214,16 @@ location: "Tempe, AZ"
 
 Optional detailed description of the event.
 ```
+
+### Teaching Courses (`src/pages/teaching/`)
+
+Teaching courses are maintained as distinct Astro pages rather than a content collection, to allow completely custom layouts and styling per course syllabus. 
+
+To add a new course:
+1. Create a new `.astro` file inside `src/pages/teaching/` (e.g. `cse101.astro`).
+2. Use the standard layout component: `<Layout title="Course Title"> ... </Layout>`.
+3. Add the course link to the master list inside `src/pages/teaching.astro`.
+4. Any course documents (e.g., syllabi PDF files) should be uploaded to `public/assets/teaching/` and linked via `/assets/teaching/filename.pdf`.
 
 ### Publications (`src/data/publications.bib`)
 
