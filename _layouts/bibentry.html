@@ -1,0 +1,18 @@
+<div class="pub">
+  <div class="title">{{ entry.title }}</div>
+  <div class="meta">
+    {{ entry.author }}
+    {% if entry.booktitle %} · {{ entry.booktitle }}{% endif %}
+    {% if entry.journal %} · {{ entry.journal }}{% endif %}
+    · {{ entry.year }}
+  </div>
+  <div class="chips">
+    {% if entry.type %}<span class="chip">{{ entry.type | upcase }}</span>{% endif %}
+    <span class="chip">Cited {{ entry.citation_key }}</span>
+    {% if entry.url %}
+      <a class="chip" href="{{ entry.url }}">PDF</a>
+    {% endif %}
+    <a class="chip" href="{{ entry.key | prepend:'/publications/' | relative_url }}">Details</a>
+    <a class="chip" href="https://scholar.google.com/scholar?q={{ entry.title | uri_escape }}" target="_blank" rel="noopener">Google Scholar</a>
+  </div>
+</div>
