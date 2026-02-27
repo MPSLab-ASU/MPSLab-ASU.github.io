@@ -43,6 +43,7 @@ const research = defineCollection({
         image: z.string().optional(),
         icon: z.string().optional(),
         order: z.number().optional(),
+        readingList: z.string().url().optional(),
     }),
 });
 
