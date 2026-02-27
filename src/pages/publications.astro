@@ -1,0 +1,137 @@
+---
+import { getCollection } from "astro:content";
+import fs from "node:fs";
+import path from "node:path";
+import Footer from "../components/astro/Footer.astro";
+import Navbar from "../components/astro/Navbar.astro";
+import PublicationSearch from "../components/react/PublicationSearch";
+import SoftwareCard from "../components/react/SoftwareCard";
+import Layout from "../layouts/Layout.astro";
+
+// Build-time BibTeX parsing
+const bibPath = path.join(process.cwd(), "src/data/publications.bib");
+const bibContent = fs.readFileSync(bibPath, "utf-8");
+
+// @ts-ignore - bibtex-parse-js doesn't have proper types
+const bibtexParse = await import("bibtex-parse-js");
+const parsedBib = bibtexParse.toJSON(bibContent);
+
+// Load Software JSON
+const swPath = path.join(process.cwd(), "src/data/software.json");
+const softwareProjects = JSON.parse(fs.readFileSync(swPath, "utf-8"));
+
+const membersCollection = await getCollection("members");
+const validAuthors = membersCollection.map((m) => m.data.name);
+
+const researchCollection = await getCollection("research");
+const validTags = researchCollection.map((r) => r.data.title);
+---
+
+<Layout title="Publications & Software">
+  <Navbar slot="header" />
+
+  <section class="py-16 md:py-24">
+    <div class="section-container">
+      <div class="text-center mb-12">
+        <h1 class="text-3xl md:text-4xl font-bold text-text mb-4">
+          Publications & Software
+        </h1>
+        <p class="text-text-secondary max-w-2xl mx-auto mb-8">
+          Browse our complete collection of research publications and
+          open-source software releases. Use the tabs below to switch between
+          them.
+        </p>
+
+        <!-- Tabs Navigation -->
+        <div class="flex items-center justify-center gap-4">
+          <button
+            id="btn-publications"
+            class="px-6 py-2.5 rounded-full transition-all font-medium bg-primary text-white shadow-md border border-transparent"
+          >
+            Publications
+          </button>
+          <button
+            id="btn-software"
+            class="px-6 py-2.5 rounded-full transition-all font-medium text-text-secondary hover:bg-bg-alt hover:text-text border border-transparent hover:border-border"
+          >
+            Software
+          </button>
+        </div>
+      </div>
+
+      <!-- Tab Content: Publications -->
+      <div id="tab-publications" class="tab-content block max-w-4xl mx-auto">
+        <PublicationSearch
+          papers={parsedBib}
+          validAuthors={validAuthors}
+          validTags={validTags}
+          client:load
+        />
+      </div>
+    </div>
+
+    <!-- Tab Content: Software -->
+    <div id="tab-software" class="tab-content hidden max-w-5xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {
+          softwareProjects.map((project: any) => (
+            <SoftwareCard project={project} />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<Footer slot="footer" />
+
+<script>
+  function setupTabs() {
+    const tabs = ["publications", "software"];
+
+    tabs.forEach((tab) => {
+      const btn = document.getElementById(`btn-${tab}`);
+      if (btn) {
+        btn.addEventListener("click", () => {
+          // Hide all content
+          document.querySelectorAll(".tab-content").forEach((el) => {
+            el.classList.remove("block");
+            el.classList.add("hidden");
+          });
+
+          // Reset all buttons
+          tabs.forEach((t) => {
+            const b = document.getElementById(`btn-${t}`);
+            if (b) {
+              b.className =
+                "px-6 py-2.5 rounded-full transition-all font-medium text-text-secondary hover:bg-bg-alt hover:text-text border border-transparent hover:border-border";
+            }
+          });
+
+          // Show selected content
+          const content = document.getElementById(`tab-${tab}`);
+          if (content) {
+            content.classList.remove("hidden");
+            content.classList.add("block");
+          }
+
+          // Style selected button
+          btn.className =
+            "px-6 py-2.5 rounded-full transition-all font-medium bg-primary text-white shadow-md border border-transparent";
+        });
+      }
+    });
+
+    // Navigate to hash directly on load
+    if (window.location.hash === "#software") {
+      const swBtn = document.getElementById("btn-software");
+      if (swBtn) swBtn.click();
+    }
+  }
+
+  // Setup on initial load
+  setupTabs();
+
+  // Re-setup after Astro page transitions
+  document.addEventListener("astro:page-load", setupTabs);
+</script>

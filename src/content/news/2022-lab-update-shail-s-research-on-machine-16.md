@@ -1,0 +1,7 @@
+---
+date: "2022"
+type: "General"
+description: "<a href=\"https://sites.google.com/view/shail/\" rel=\"noreferrer noopener\" target=\"_blank\">Shail</a>‘s research on <a href=\"/research/ml-accelerators\">Machine Learning Accelerators</a> is featured in the <span class=\"aw5Odc\"><a class=\"XqQF9c\" href=\"https://www.google.com/url?q=https%3A%2F%2Fwww.nxtbook.com%2Fnxtbooks%2Fieee%2Fbridge_issue2_2022%2Findex.php%23%2Fp%2F32&amp;sa=D&amp;sntz=1&amp;usg=AOvVaw0yT5_NWDA4BASoQYeemjKe\" rel=\"noopener\" target=\"_blank\">IEEE Bridge – Graduate Research Spotlight</a></span> (in volume 118, issue 2) and highlighted by IEEE Eta Kappa Nu on various<a href=\"https://www.linkedin.com/feed/update/urn:li:activity:6941728358183419904\" rel=\"noopener\" target=\"_blank\"> social media</a>."
+---
+
+<a href=\"https://sites.google.com/view/shail/\" rel=\"noreferrer noopener\" target=\"_blank\">Shail</a>‘s research on <a href=\"/research/ml-accelerators\">Machine Learning Accelerators</a> is featured in the <span class=\"aw5Odc\"><a class=\"XqQF9c\" href=\"https://www.google.com/url?q=https%3A%2F%2Fwww.nxtbook.com%2Fnxtbooks%2Fieee%2Fbridge_issue2_2022%2Findex.php%23%2Fp%2F32&amp;sa=D&amp;sntz=1&amp;usg=AOvVaw0yT5_NWDA4BASoQYeemjKe\" rel=\"noopener\" target=\"_blank\">IEEE Bridge – Graduate Research Spotlight</a></span> (in volume 118, issue 2) and highlighted by IEEE Eta Kappa Nu on various<a href=\"https://www.linkedin.com/feed/update/urn:li:activity:6941728358183419904\" rel=\"noopener\" target=\"_blank\"> social media</a>.

@@ -1,0 +1,57 @@
+[
+    {
+        "name": "NSF",
+        "logo": "/images/sponsors/logo-nsf.jpg",
+        "url": ""
+    },
+    {
+        "name": "Intel",
+        "logo": "/images/sponsors/intlogo.jpg",
+        "url": ""
+    },
+    {
+        "name": "Semiconductor Research Corporation",
+        "logo": "/images/sponsors/semiconductor-research-corporation-wikipedia.png",
+        "url": ""
+    },
+    {
+        "name": "NVIDIA",
+        "logo": "/images/sponsors/nvidia-logo.jpg",
+        "url": ""
+    },
+    {
+        "name": "NIST",
+        "logo": "/images/sponsors/nist.png",
+        "url": "http://www.nist.gov/"
+    },
+    {
+        "name": "Department of Energy",
+        "logo": "/images/sponsors/new-doe-logo-color-web.jpg",
+        "url": "http://www.energy.gov/"
+    },
+    {
+        "name": "Raytheon",
+        "logo": "/images/sponsors/rtn-logo.gif",
+        "url": ""
+    },
+    {
+        "name": "Science Foundation Arizona",
+        "logo": "/images/sponsors/logosfaz.gif",
+        "url": ""
+    },
+    {
+        "name": "Microsoft Research",
+        "logo": "/images/sponsors/logo-msr.png",
+        "url": ""
+    },
+    {
+        "name": "SignHear",
+        "logo": "/images/sponsors/signhear-logo.png",
+        "url": ""
+    },
+    {
+        "name": "Semiconductor Design Center",
+        "logo": "/images/sponsors/sdc-color.gif",
+        "url": ""
+    }
+]

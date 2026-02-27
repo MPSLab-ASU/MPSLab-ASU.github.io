@@ -1,0 +1,130 @@
+---
+import Footer from "../../components/astro/Footer.astro";
+import Navbar from "../../components/astro/Navbar.astro";
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="CSE 494/598: Quantum Computation">
+    <Navbar slot="header" />
+
+    <section class="py-16 md:py-24">
+        <div class="section-container max-w-4xl mx-auto">
+            <div class="mb-8">
+                <h1 class="text-3xl md:text-4xl font-bold text-text mb-4">
+                    CSE 494/598: Quantum Computation
+                </h1>
+            </div>
+
+            <article class="prose prose-lg max-w-none text-text-secondary">
+                <h3>Overview</h3>
+                <p>
+                    Quantum computing is not merely a novel computational
+                    paradigm—it represents an opportunity to exploit the
+                    counterintuitive principles of quantum mechanics for
+                    real-time problem solving. This course focuses on the
+                    cutting-edge field of Quantum Machine Learning (QML) with an
+                    emphasis on the mathematical and coding aspects.
+                </p>
+
+                <h3 class="mt-8">Syllabus</h3>
+                <p>
+                    <a
+                        href="/assets/teaching/Spring2025-Syllabus.pdf"
+                        target="_blank"
+                        rel="noopener noreferrer">Spring 2025 Syllabus (PDF)</a
+                    >
+                </p>
+
+                <h3 class="mt-8">Prerequisites</h3>
+                <ul>
+                    <li>
+                        <strong>Linear Algebra:</strong> A strong foundation in linear
+                        algebra, including vectors, matrices, determinants, eigenvalues,
+                        and eigenvectors, is essential.
+                    </li>
+                    <li>
+                        <strong>Probability and Statistics:</strong> Familiarity with
+                        probability theory, statistical distributions, and basic statistical
+                        inference is necessary.
+                    </li>
+                    <li>
+                        <strong>Programming:</strong> Proficiency in a programming
+                        language like Python is recommended, as it is widely used
+                        in quantum computing and machine learning.
+                    </li>
+                    <li>
+                        <strong>Classical Machine Learning:</strong> A foundational
+                        understanding of classical machine learning algorithms and
+                        techniques (e.g., linear regression, logistic regression,
+                        neural networks) would be beneficial.
+                    </li>
+                    <li>
+                        <strong>Basic Complex Analysis:</strong> Familiarity with
+                        complex numbers and their properties will be valuable.
+                    </li>
+                </ul>
+
+                <h3 class="mt-8">Main Topics</h3>
+                <h4>Quantum Computation</h4>
+                <ol>
+                    <li>Single Qubit Systems</li>
+                    <li>Multi-Qubit Systems</li>
+                    <li>Entanglement</li>
+                    <li>Measurement</li>
+                    <li>Quantum Algorithms</li>
+                </ol>
+
+                <h4>Machine Learning</h4>
+                <ol>
+                    <li>Intro to Vector Spaces</li>
+                    <li>Kernel Machine Learning</li>
+                    <li>Feature Maps</li>
+                    <li>Gradients and Optimization</li>
+                </ol>
+
+                <h4>Quantum Machine Learning</h4>
+                <ol>
+                    <li>Parameterized Quantum Circuits</li>
+                    <li>Data Re-Uploading Models</li>
+                    <li>Quantum Kernel Machine Learning</li>
+                </ol>
+
+                <h3 class="mt-8">Learning Outcomes</h3>
+                <p>
+                    Upon completion of this course, students will be able to –
+                </p>
+                <ul>
+                    <li>
+                        Explain the main physics experiments that helped develop
+                        quantum physics and understand the postulates of quantum
+                        computing.
+                    </li>
+                    <li>
+                        Demonstrate the evolution of quantum states in
+                        single-bit and multi-bit quantum circuits.
+                    </li>
+                    <li>
+                        Demonstrate understanding and operation of the main
+                        quantum computing algorithms.
+                    </li>
+                    <li>
+                        Explain the main sources of noise in quantum computation
+                        and why NISQ devices exist.
+                    </li>
+                    <li>
+                        Explain the main methods of classical data encoding into
+                        quantum circuits.
+                    </li>
+                    <li>
+                        Demonstrate understanding of main quantum machine
+                        learning algorithms, including variational quantum
+                        circuits, data re-uploading, quantum kernels, and
+                        quantum generative models.
+                    </li>
+                </ul>
+            </article>
+        </div>
+    </section>
+
+    <Footer slot="footer" />
+</Layout>

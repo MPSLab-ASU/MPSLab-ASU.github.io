@@ -1,0 +1,168 @@
+---
+import { getCollection } from "astro:content";
+import Footer from "../../components/astro/Footer.astro";
+import Navbar from "../../components/astro/Navbar.astro";
+import NewsSidebar from "../../components/astro/NewsSidebar.astro";
+import Layout from "../../layouts/Layout.astro";
+
+// Fetch all news and filter only awards, then sort by date descending
+const allNews = await getCollection("news");
+const awards = allNews
+    .filter((item) => item.data.type === "Award")
+    .sort(
+        (a, b) =>
+            new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
+    );
+
+// Group awards by year
+const groupedAwards = awards.reduce(
+    (acc, item) => {
+        const dateStr = String(item.data.date);
+        const year = dateStr.includes("-")
+            ? dateStr.substring(0, 4)
+            : new Date(item.data.date).toISOString().substring(0, 4);
+
+        if (!acc[year]) {
+            acc[year] = [];
+        }
+        acc[year].push(item);
+        return acc;
+    },
+    {} as Record<string, typeof awards>,
+);
+
+const sortedYears = Object.keys(groupedAwards).sort(
+    (a, b) => parseInt(b) - parseInt(a),
+);
+
+const currentPath = Astro.url.pathname;
+---
+
+<Layout title="Awards - MPS Lab">
+    <Navbar slot="header" />
+
+    <div class="bg-hero text-hero-text py-16 md:py-24 relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div
+                class="absolute inset-0"
+                style="background-image: radial-gradient(circle at 75% 25%, rgba(255, 198, 39, 0.3) 0%, transparent 50%);"
+            >
+            </div>
+        </div>
+        <div class="section-container relative z-10">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4">
+                Awards & Recognition
+            </h1>
+            <p class="text-lg text-hero-text/80 max-w-2xl">
+                Celebrating the achievements and excellence of our lab members.
+            </p>
+        </div>
+    </div>
+
+    <section class="py-12 bg-bg flex-grow">
+        <div class="section-container">
+            <div class="flex flex-col md:flex-row gap-8">
+                <NewsSidebar currentPath={currentPath} />
+
+                <div class="flex-1">
+                    <div class="grid grid-cols-1 gap-6">
+                        {
+                            sortedYears.map((year, index) => (
+                                <details
+                                    class="mb-12 last:mb-0 group/details"
+                                    open={index === 0}
+                                >
+                                    <summary class="text-2xl font-bold text-text mb-6 flex items-center justify-between gap-3 cursor-pointer list-none hover:text-secondary transition-colors select-none [&::-webkit-details-marker]:hidden">
+                                        <div class="flex items-center gap-3">
+                                            <span class="w-1 h-8 bg-secondary rounded-full" />
+                                            {year}
+                                        </div>
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            class="w-6 h-6 transition-transform duration-300 group-open/details:-rotate-180"
+                                            viewBox="0 0 20 20"
+                                            fill="currentColor"
+                                        >
+                                            <path
+                                                fill-rule="evenodd"
+                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                                clip-rule="evenodd"
+                                            />
+                                        </svg>
+                                    </summary>
+                                    <div class="grid grid-cols-1 gap-6 pt-2">
+                                        {groupedAwards[year].map((item) => (
+                                            <div class="card p-6 border-l-4 border-l-secondary hover:translate-y-0 hover:shadow-lg transition-all duration-300 group">
+                                                <div class="flex items-center gap-3 mb-3">
+                                                    <span class="badge bg-yellow-100 text-yellow-800 dark:bg-yellow-900/40 dark:text-yellow-300">
+                                                        <svg
+                                                            class="w-4 h-4 mr-1 inline"
+                                                            fill="none"
+                                                            stroke="currentColor"
+                                                            viewBox="0 0 24 24"
+                                                        >
+                                                            <path
+                                                                stroke-linecap="round"
+                                                                stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+                                                            />
+                                                        </svg>
+                                                        Award
+                                                    </span>
+                                                    <time
+                                                        class="text-sm font-medium text-text-secondary"
+                                                        datetime={new Date(
+                                                            item.data.date,
+                                                        ).toISOString()}
+                                                    >
+                                                        {typeof item.data
+                                                            .date ===
+                                                            "string" ||
+                                                        typeof item.data
+                                                            .date === "number"
+                                                            ? item.data.date
+                                                            : new Date(
+                                                                  item.data
+                                                                      .date,
+                                                              ).toLocaleDateString(
+                                                                  "en-US",
+                                                                  {
+                                                                      timeZone:
+                                                                          "UTC",
+                                                                      year: "numeric",
+                                                                  },
+                                                              )}
+                                                    </time>
+                                                </div>
+                                                {item.data.description && (
+                                                    <div
+                                                        class="text-text-secondary leading-relaxed max-w-3xl prose prose-sm dark:prose-invert"
+                                                        set:html={
+                                                            item.data
+                                                                .description
+                                                        }
+                                                    />
+                                                )}
+                                            </div>
+                                        ))}
+                                    </div>
+                                </details>
+                            ))
+                        }
+
+                        {
+                            sortedYears.length === 0 && (
+                                <div class="text-center py-12 text-text-muted">
+                                    <p>No awards found.</p>
+                                </div>
+                            )
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <Footer slot="footer" />
+</Layout>
