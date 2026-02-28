@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page.title | escape }} | {{ site.title }}</title>
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%238c1d40%22/><text x=%2250%22 y=%2258%22 font-size=%2255%22 text-anchor=%22middle%22 fill=%22white%22 font-family=%22Arial%22>M</text></svg>">
+</head>
+<body>
+  <header>
+    <div class="topbar">
+      <div class="brand">
+        <span>⚡</span>
+        <div>
+          <div>MPS Lab @ ASU</div>
+          <small>Making Programming Simple</small>
+        </div>
+      </div>
+      <nav aria-label="Main navigation">
+        <ul>
+          <li><a href="{{ '/' | relative_url }}">Home</a></li>
+          <li><a href="{{ '/members/' | relative_url }}">Members</a></li>
+          <li><a href="{{ '/research/' | relative_url }}">Research</a></li>
+          <li><a href="{{ '/publications/' | relative_url }}">Publications</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="page">
+    {{ content }}
+  </main>
+
+  <footer class="footer">
+    <div>© {{ site.time | date: "%Y" }} MPS Lab, Arizona State University</div>
+    <div class="muted">Advancing dependable and energy-efficient computing</div>
+  </footer>
+</body>
+</html>
