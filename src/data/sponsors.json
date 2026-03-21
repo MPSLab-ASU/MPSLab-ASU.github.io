@@ -53,5 +53,10 @@
         "name": "Semiconductor Design Center",
         "logo": "/images/sponsors/sdc-color.gif",
         "url": ""
+    },
+    {
+        "name": "NASA",
+        "logo": "/images/sponsors/nasa-logo.png",
+        "url": ""
     }
 ]
