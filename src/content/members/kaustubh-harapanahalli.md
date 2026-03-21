@@ -6,6 +6,7 @@ email: kharapan@asu.edu
 github: "https://github.com/kaustubhharapanahalli"
 linkedin: "https://www.linkedin.com/in/kmhalli/"
 portfolio: "https://kaustubhharapanahalli.me/"
+google_scholar: "https://scholar.google.com/citations?user=51Dqq8kAAAAJ&hl=en&oi=ao"
 resume: "/docs/resumes/kaustubh-harapanahalli.pdf"
 researchInterests: ["Intelligent Transportation Systems"]
 order: 2

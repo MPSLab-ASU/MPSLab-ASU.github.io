@@ -292,6 +292,33 @@ const relatedPublications = parsedBib
                                 </div>
                             )
                         }
+                        {
+                            entry.data.google_scholar && (
+                                <div class="flex items-center justify-center sm:justify-start gap-2">
+                                    <svg
+                                        class="w-4 h-4"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M12 24a7 7 0 1 1 0-14 7 7 0 0 1 0 14zm0-24L0 9.5l4.838 3.94A8 8 0 0 1 12 9a8 8 0 0 1 7.162 4.44L24 9.5z"
+                                        />
+                                    </svg>
+                                    <a
+                                        href={entry.data.google_scholar}
+                                        target="_blank"
+                                        rel="noopener"
+                                        class="hover:text-primary transition-colors"
+                                    >
+                                        Google Scholar ↗
+                                    </a>
+                                </div>
+                            )
+                        }
                     </div>
 
                     {
