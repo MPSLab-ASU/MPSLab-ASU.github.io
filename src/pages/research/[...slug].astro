@@ -1,0 +1,260 @@
+---
+import { getCollection } from "astro:content";
+import {
+  Battery,
+  Binary,
+  BookOpen,
+  Brain,
+  Car,
+  CircuitBoard,
+  Clock,
+  Cpu,
+  GitBranch,
+  Grid3X3,
+  MessageSquare,
+  Monitor,
+  Server,
+  Shield,
+  Thermometer,
+  Wifi,
+  Zap,
+} from "lucide-react";
+import fs from "node:fs";
+import path from "node:path";
+import Footer from "../../components/astro/Footer.astro";
+import MemberGrid from "../../components/astro/MemberGrid.astro";
+import Navbar from "../../components/astro/Navbar.astro";
+import type { Publication } from "../../components/react/PublicationCard";
+import Layout from "../../layouts/Layout.astro";
+
+export async function getStaticPaths() {
+  const researchEntries = await getCollection("research");
+  return researchEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+const IconMap: Record<string, any> = {
+  Cpu,
+  Car,
+  BookOpen,
+  Brain,
+  Shield,
+  Zap,
+  Monitor,
+  Wifi,
+  Server,
+  GitBranch,
+  Grid3X3,
+  Thermometer,
+  CircuitBoard,
+  Binary,
+  Clock,
+  MessageSquare,
+  Battery,
+};
+const IconComponent = entry.data.icon ? IconMap[entry.data.icon] : Zap;
+
+// Build-time BibTeX parsing
+const bibPath = path.join(process.cwd(), "src/data/publications.bib");
+const bibContent = fs.readFileSync(bibPath, "utf-8");
+
+// @ts-ignore - bibtex-parse-js doesn't have proper types
+const bibtexParse = await import("bibtex-parse-js");
+const parsedBib: Publication[] = bibtexParse.toJSON(bibContent);
+
+// Filter for related publications based on the research title matching a keyword
+// Exclude thesis documents (mastersthesis, phdthesis, bachelorthesis)
+const thesisTypes = ["mastersthesis", "phdthesis", "bachelorthesis"];
+const relatedPublications = parsedBib
+  .filter(
+    (pub) =>
+      pub.entryTags.research &&
+      pub.entryTags.research
+        .toLowerCase()
+        .includes(entry.data.title.toLowerCase()) &&
+      !thesisTypes.includes(pub.entryType?.toLowerCase() ?? ""),
+  )
+  .sort((a, b) => {
+    // Sort by descending year
+    const yearA = a.entryTags.year ? parseInt(a.entryTags.year) : 0;
+    const yearB = b.entryTags.year ? parseInt(b.entryTags.year) : 0;
+    return yearB - yearA;
+  })
+  .slice(0, 5); // Take top 5
+
+// Check if resources exist for this research area
+const allResources = await getCollection("resources");
+const resourceEntry = allResources.find(
+  (r) => r.slug === entry.slug || r.data.researchArea === entry.data.title,
+);
+const readingListUrl = resourceEntry?.data.readingListUrl;
+const hasResourceFile = fs.existsSync(
+  path.join(process.cwd(), "src/content/resources", `${entry.slug}.md`),
+);
+const hasResources = Boolean(resourceEntry) || hasResourceFile;
+const readingListHref = readingListUrl ?? `/research/resources/${entry.slug}`;
+const isExternalReadingList = Boolean(readingListUrl);
+---
+
+<Layout title={entry.data.title}>
+  <Navbar slot="header" />
+
+  <section class="py-16 md:py-24">
+    <div class="section-container max-w-4xl">
+      <!-- Back Link -->
+      <a
+        href="/research"
+        class="inline-flex items-center text-sm text-text-muted hover:text-primary transition-colors mb-8"
+      >
+        <svg
+          class="w-4 h-4 mr-1"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+        </svg>
+        Back to All Research
+      </a>
+
+      <!-- Header -->
+      <header
+        class="mb-12 border-b border-border pb-8 text-center sm:text-left"
+      >
+        <div
+          class="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-2xl mb-6 sm:float-right sm:ml-6 sm:mb-0"
+        >
+          <IconComponent className="w-8 h-8 text-primary" />
+        </div>
+        <div
+          class="flex items-center gap-3 mb-4 justify-center sm:justify-start"
+        >
+          <span
+            class:list={[
+              "badge",
+              entry.data.status === "Active"
+                ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300"
+                : "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300",
+            ]}
+          >
+            {entry.data.status} Research
+          </span>
+        </div>
+        <h1
+          class="text-3xl md:text-5xl font-bold text-text mb-6 tracking-tight leading-tight"
+        >
+          {entry.data.title}
+        </h1>
+        <p class="text-lg text-text-secondary leading-relaxed">
+          {entry.data.description}
+        </p>
+        {
+          entry.data.image && (
+            <div class="mt-8 rounded-xl overflow-hidden shadow-lg border border-border">
+              <img
+                src={entry.data.image}
+                alt={entry.data.title}
+                class="w-full h-auto object-cover"
+              />
+            </div>
+          )
+        }
+      </header>
+
+      <!-- Quick Links -->
+      {
+        hasResources && (
+          <div class="mb-10 flex flex-wrap gap-3">
+            <a
+              href={readingListHref}
+              target={isExternalReadingList ? "_blank" : undefined}
+              rel={isExternalReadingList ? "noopener noreferrer" : undefined}
+              class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 font-medium text-sm transition-all"
+            >
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                />
+              </svg>
+              Reading List
+            </a>
+          </div>
+        )
+      }
+
+      <!-- Content -->
+      <article
+        class="prose prose-lg dark:prose-invert prose-headings:font-heading prose-headings:font-semibold prose-a:text-primary hover:prose-a:text-primary-hover max-w-none"
+      >
+        <Content />
+      </article>
+
+      <div class="mt-16 pt-12 border-t border-border">
+        <h2 class="text-2xl font-bold text-text mb-8">Researchers</h2>
+        <MemberGrid researchFilter={entry.data.title} compact={true} />
+      </div>
+
+      {
+        relatedPublications.length > 0 && (
+          <div class="mt-16 pt-12 border-t border-border">
+            <h2 class="text-2xl font-bold text-text mb-8">
+              Recent Publications
+            </h2>
+            <ul class="space-y-3 list-disc list-inside text-text-secondary">
+              {relatedPublications.map((pub) => (
+                <li>
+                  <a
+                    href={`/publications?q=${encodeURIComponent(pub.entryTags.title || "")}`}
+                    class="hover:text-primary transition-colors hover:underline"
+                  >
+                    {pub.entryTags.title || pub.citationKey}
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <div class="mt-8">
+              <a
+                href={`/publications?tag=${encodeURIComponent(entry.data.title)}`}
+                class="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg border border-primary text-primary hover:bg-primary hover:text-white font-medium text-sm transition-all"
+              >
+                View All Publications
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
+                </svg>
+              </a>
+            </div>
+          </div>
+        )
+      }
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>

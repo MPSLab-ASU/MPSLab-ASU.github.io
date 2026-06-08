@@ -1,0 +1,84 @@
+---
+interface Props {
+  pathname: string;
+}
+
+const { pathname } = Astro.props;
+
+const segmentLabelMap: Record<string, string> = {
+  news: "Updates",
+  teaching: "Teaching",
+  members: "People",
+  research: "Research",
+  resources: "Resources",
+  gallery: "Gallery",
+};
+
+const titleCase = (value: string) =>
+  value
+    .split(" ")
+    .filter(Boolean)
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
+
+const formatSegment = (segment: string) => {
+  const decoded = decodeURIComponent(segment);
+  const mapped = segmentLabelMap[decoded.toLowerCase()];
+  if (mapped) return mapped;
+
+  const cseMatch = decoded.match(/^cse(\d{3})$/i);
+  if (cseMatch) return `CSE ${cseMatch[1]}`;
+
+  return titleCase(decoded.replace(/[-_]+/g, " "));
+};
+
+const normalizedPath = pathname.replace(/\/$/, "") || "/";
+const segments = normalizedPath.split("/").filter(Boolean);
+
+const crumbs = [
+  { href: "/", label: "Home" },
+  ...segments.map((segment, index) => ({
+    href: `/${segments.slice(0, index + 1).join("/")}`,
+    label: formatSegment(segment),
+  })),
+];
+
+const parentCrumb = crumbs.length > 1 ? crumbs[crumbs.length - 2] : null;
+---
+
+<div class="border-b border-border/60 bg-bg-alt/60">
+  <div class="section-container py-3 md:py-4">
+    <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+      {
+        parentCrumb && (
+          <a
+            href={parentCrumb.href}
+            class="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
+          >
+            <span aria-hidden="true">←</span>
+            Back to {parentCrumb.label}
+          </a>
+        )
+      }
+
+      <nav aria-label="Breadcrumb" class="text-sm text-text-secondary">
+        <ol class="flex flex-wrap items-center gap-2">
+          {crumbs.map((crumb, index) => (
+            <>
+              {index > 0 && <li aria-hidden="true" class="text-text-muted">/</li>}
+              <li>
+                {index === crumbs.length - 1 ? (
+                  <span class="font-medium text-text" aria-current="page">{crumb.label}</span>
+                ) : (
+                  <a href={crumb.href} class="hover:text-primary hover:underline">
+                    {crumb.label}
+                  </a>
+                )}
+              </li>
+            </>
+          ))}
+        </ol>
+      </nav>
+    </div>
+  </div>
+</div>

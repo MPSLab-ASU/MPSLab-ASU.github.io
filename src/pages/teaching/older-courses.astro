@@ -1,0 +1,79 @@
+---
+import Footer from "../../components/astro/Footer.astro";
+import Navbar from "../../components/astro/Navbar.astro";
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="Older Courses">
+    <Navbar slot="header" />
+
+    <section class="py-16 md:py-24">
+        <div class="section-container max-w-4xl mx-auto">
+            <div class="mb-12">
+                <h1 class="text-3xl md:text-4xl font-bold text-text mb-4">
+                    Older Courses
+                </h1>
+            </div>
+
+            <div class="bg-bg-alt rounded-lg p-8 border border-border">
+                <ul class="space-y-4 prose prose-lg">
+                    <li>
+                        <a
+                            href="https://web.archive.org/web/20230408211935/https://www.public.asu.edu/~ashriva6/teaching/ARC/"
+                            class="text-primary hover:underline"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >CSE 591: Advances in Reliable Computing</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="https://web.archive.org/web/20230408212311/https://www.public.asu.edu/~ashriva6/teaching/CO/"
+                            class="text-primary hover:underline"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >CSE/EEE 230: Computer Organization and Assembly
+                            Language Programming</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="https://web.archive.org/web/20230408211842/https://www.public.asu.edu/~ashriva6/teaching/PEC/"
+                            class="text-primary hover:underline"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >CSE 591: Low-Power and Parallel Computing</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="https://web.archive.org/web/20230408212653/https://www.public.asu.edu/~ashriva6/teaching/ADS/"
+                            class="text-primary hover:underline"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >CSE 310: Data Structures and Algorithms</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="/members/adam-awale/"
+                            class="text-primary hover:underline"
+                            >ASU 101: The ASU Experience</a
+                        >
+                    </li>
+                    <li>
+                        <a
+                            href="https://web.archive.org/web/20230408212037/https://www.public.asu.edu/~ashriva6/teaching/MP/"
+                            class="text-primary hover:underline"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            >Professional Course: Multi-core Programming</a
+                        >
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <Footer slot="footer" />
+</Layout>

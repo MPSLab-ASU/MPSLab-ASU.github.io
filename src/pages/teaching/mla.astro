@@ -1,0 +1,251 @@
+---
+import Footer from "../../components/astro/Footer.astro";
+import Navbar from "../../components/astro/Navbar.astro";
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="CSE/CEN 598: Machine Learning Accelerator Design">
+    <Navbar slot="header" />
+
+    <section class="py-16 md:py-24">
+        <div class="section-container max-w-4xl mx-auto">
+            <div class="mb-8">
+                <h1 class="text-3xl md:text-4xl font-bold text-text mb-4">
+                    CSE/CEN 598: Machine Learning Accelerator Design
+                </h1>
+            </div>
+
+            <article class="prose prose-lg max-w-none text-text-secondary">
+                <h3>Overview</h3>
+                <p>
+                    Remarkable success of machine learning (ML) algorithms have
+                    led to deployment of industrial ML accelerators throughout
+                    cloud, mobile, edge, and wearables, and from computer vision
+                    and speech processing to recommendations and graph learning.
+                    This course is intended to provide students with a solid
+                    understanding of such accelerator system designs, including
+                    implications of the various hardware and software components
+                    on various costs such as latency, energy, area, throughput,
+                    power, storage, and inference accuracy for ML tasks. The
+                    course will start off with accelerator architectures for
+                    computer vision (convolutional and feed-forward neural
+                    networks), culminating into cutting-edge advances such as
+                    accelerator systems for federated, on-device, and graph
+                    learning and industrial case studies. The course will also
+                    cover various important topics in the ML accelerator system
+                    design such as execution cost modeling, mapping and hardware
+                    exploration, compilers and ISAs for ML accelerators,
+                    multi-chip/multi-workload designs, accelerator-aware neural
+                    architecture search, and reliability and security of ML
+                    accelerators.
+                </p>
+
+                <h3 class="mt-8">Learning Outcomes</h3>
+                <p>
+                    This course will help students gain a solid understanding of
+                    the fundamentals of designing machine learning accelerators
+                    and relevant cutting-edge topics. After doing this course,
+                    students will be able to understand:
+                </p>
+                <ul>
+                    <li>
+                        The role and importance of machine learning
+                        accelerators.
+                    </li>
+                    <li>
+                        Implementation of machine learning hardware, including
+                        various computational, NoC (network-on-chip) and memory
+                        configurations.
+                    </li>
+                    <li>
+                        Libraries and frameworks for designing and exploring
+                        machine learning accelerators.
+                    </li>
+                    <li>
+                        The efficiency challenges brought by large and deep
+                        models and the need for tensor compression.
+                    </li>
+                    <li>
+                        Architectural implications of compression techniques and
+                        impact on inference accuracy.
+                    </li>
+                    <li>
+                        Characterization of accelerators under various
+                        deployment scenarios (cloud vs. edge).
+                    </li>
+                    <li>
+                        Workings of accelerators for training of the machine
+                        learning models.
+                    </li>
+                    <li>
+                        Differentiate workings of accelerators for different
+                        domains such as computer vision, language processing,
+                        graph learning, and recommendation systems.
+                    </li>
+                    <li>
+                        The need for reconfigurability in architectural
+                        components for supporting various workloads and range of
+                        specializations, and case studies that enable it.
+                    </li>
+                    <li>
+                        The programming challenges brought forth by machine
+                        learning accelerators, especially with algorithmic and
+                        hardware specializations, like sparsity and
+                        mixed-precision computations.
+                    </li>
+                    <li>
+                        The need for accelerator-aware neural architecture
+                        search.
+                    </li>
+                    <li>
+                        Various runtime optimizations for efficient inference on
+                        accelerators.
+                    </li>
+                    <li>
+                        Recent accelerator systems developed by industry and
+                        their trade-offs.
+                    </li>
+                </ul>
+
+                <h3 class="mt-8">Prerequisites</h3>
+                <p>
+                    A background in Computer Architecture (CSE 420 or CSE 520)
+                    and Machine Learning (e.g., courses like CSE 571, CSE 574,
+                    CSE 575, CSE 576, EEE 598/591: Machine/Deep Learning) will
+                    be advantageous.
+                </p>
+
+                <h3 class="mt-8">Assessment</h3>
+                <p>
+                    Students will be evaluated based on their participation in
+                    class discussions and presentation, quality of paper review,
+                    and a topical survey paper. Grade Components:
+                </p>
+                <ul>
+                    <li>Class participation – 20%</li>
+                    <li>Paper critiques and presentations – 30%</li>
+                    <li>Topical survey paper – 50%</li>
+                </ul>
+
+                <h4 class="mt-4">Class Participation</h4>
+                <p>
+                    In each class, preselected students will present the paper.
+                    Later, students will discuss the paper in groups, followed
+                    by a full-class discussion, and a short lecture to introduce
+                    the topic of the next class.
+                </p>
+
+                <h4 class="mt-4">Paper Review</h4>
+                <p>
+                    Each week, 2–3 papers will be assigned for review. Each
+                    student will write a summary, strengths and weaknesses of
+                    the paper, and point out some potential future research
+                    direction.
+                </p>
+
+                <h4 class="mt-4">Topical Survey Paper</h4>
+                <p>
+                    Students will work on ML-accelerator related survey in
+                    groups of 1-3 students. Each group will prepare a survey
+                    paper and slides to present their work.
+                </p>
+
+                <h3 class="mt-8">Tentative Schedule</h3>
+                <ul>
+                    <li>
+                        <strong>Week 1 topic:</strong> Overview of Machine Learning
+                        and Deep Learning Models
+                    </li>
+                    <li>
+                        <strong>Week 2 topic:</strong> Introduction to DNN accelerators
+                        (CNNs, GEMMs/MLPs) and their mappings (dataflow orchestration).
+                        NOCs and memory designs for DNN accelerators.
+                    </li>
+                    <li>
+                        <strong>Week 3 topic:</strong> Accelerators for NLP (RNN,
+                        LSTM, and Transformers) and Neuromorphic architectures
+                    </li>
+                    <li>
+                        <strong>Week 4 topic:</strong> Design Libraries, Programming
+                        Languages, and Compilers for Generating Accelerators, Execution
+                        Cost Modeling, Mapping Optimizations, and Hardware/Software
+                        Design Space Exploration
+                    </li>
+                    <li>
+                        <strong>Week 5 topic:</strong> Compilers for ML Accelerator,
+                        Machine Code Generation; Automated cost model generation with
+                        machine/deep learning.
+                    </li>
+                    <li>
+                        <strong>Week 6 topic:</strong> Accelerators for Training;
+                        Quantization (precision, value similarity)
+                    </li>
+                    <li>
+                        <strong>Week 7 topic:</strong> Sparse ML Accelerators (unstructured
+                        sparsity, structured sparsity and model/accelerator codesign)
+                    </li>
+                    <li>
+                        <strong>Week 8 topic:</strong> Accelerator-aware Neural-architecture
+                        Search and Accelerator/Model Codesigns
+                    </li>
+                    <li>
+                        <strong>Week 9 topic:</strong> Accelerator Design for Mutliple
+                        workloads, Multi-chip Accelerator Designs
+                    </li>
+                    <li>
+                        <strong>Week 10 topic:</strong> ML Accelerators for Near-data
+                        Processing and In-memory Computations, Emerging Technologies
+                        such as Photonics.
+                    </li>
+                    <li>
+                        <strong>Week 11 topic:</strong> Accelerators for Recommendation
+                        Systems and Graph Learning
+                    </li>
+                    <li>
+                        <strong>Week 12 topic:</strong> Full-Stack System Infrastructures
+                        and Workload Characterizations for Various Deployment Scenarios
+                    </li>
+                    <li>
+                        <strong>Week 13 topic:</strong> Federated and On-device Learning
+                        on ML Accelerators; Runtime Optimizations
+                    </li>
+                    <li>
+                        <strong>Week 14 topic:</strong> Industry Case Studies (Established
+                        Startups)
+                    </li>
+                    <li>
+                        <strong>Week 15 topic:</strong> More Industry Case Studies
+                    </li>
+                    <li>
+                        <strong>Week 16 topic:</strong> Reliability and Security of
+                        ML Accelerators
+                    </li>
+                </ul>
+
+                <h3 class="mt-8">Reference Books</h3>
+                <ul>
+                    <li>
+                        <em
+                            >Efficient processing of deep neural networks
+                            (Synthesis Lectures on Computer Architecture)</em
+                        > Authors: Vivienne Sze, Yu-Hsin Chen, Tien-Ju Yang, and Joel
+                        S. Emer. Publisher: Morgan and Claypool ISBN: 978-1-68-173831-4
+                    </li>
+                    <li>
+                        <em
+                            >Deep Learning Systems: Algorithms, Compilers, and
+                            Processors for Large-Scale Production (Synthesis
+                            Lectures on Computer Architecture)</em
+                        > Authors: Andres Rodriguez Publisher: Morgan and Claypool
+                        ISBN: 978-1-68-173966-3 EBook: <a
+                            href="https://deeplearningsystems.ai/"
+                            target="_blank"
+                            rel="noopener noreferrer">deeplearningsystems.ai</a>
+                    </li>
+                </ul>
+            </article>
+        </div>
+    </section>
+
+    <Footer slot="footer" />
+</Layout>

@@ -1,0 +1,79 @@
+[
+    {
+        "name": "DSP-MLIR",
+        "url": "https://github.com/MPSLab-ASU/DSP_MLIR",
+        "description": "Digital Signal Processing Compiler in MLIR",
+        "researchGroup": "MLIR",
+        "image": "/images/software/dsp-mlir.png"
+    },
+    {
+        "name": "nZDC",
+        "url": "https://github.com/MPSLab-ASU/nZDC-Compiler",
+        "description": "LLVM based compiler for near zero silent data corruption.",
+        "researchGroup": "MLIR",
+        "image": "/images/software/nzdc.png"
+    },
+    {
+        "name": "LLVM-r",
+        "url": "https://github.com/MPSLab-ASU/LLVM-r",
+        "description": "Resilience-aware LLVM based compiler with instruction-based duplication for error protection.",
+        "researchGroup": "MLIR",
+        "image": "/images/software/llvm-r.png"
+    },
+    {
+        "name": "Expert",
+        "url": "https://github.com/MPSLab-ASU/EXPERT---Redundant-MultiThreding",
+        "description": "Error detection support with redundant multi-threading.",
+        "researchGroup": "MLIR",
+        "image": "/images/software/expert.png"
+    },
+    {
+        "name": "GemV",
+        "url": "https://github.com/MPSLab-ASU/gemV",
+        "description": "Micro-architecture vulnerability estimation tool (based on gem5 simulator). For a brief summary of error resilience tools, please visit this page .",
+        "researchGroup": "MLIR",
+        "image": "/images/software/gemv.png"
+    },
+    {
+        "name": "dMazeRunner",
+        "url": "https://github.com/MPSLab-ASU/dMazeRunner",
+        "description": "Dataflow optimization infrastructure for coarse-grain programmable accelerators.",
+        "researchGroup": "Machine Learning Accelerators",
+        "image": "/images/software/dmazerunner.png"
+    },
+    {
+        "name": "DiRAC",
+        "url": "https://github.com/MPSLab-ASU/DiRAC",
+        "description": "Architecture template and cycle-level microarchitecture simulator for dataflow accelerators.",
+        "researchGroup": "Machine Learning Accelerators",
+        "image": "/images/software/dirac.png"
+    },
+    {
+        "name": "CCF",
+        "url": "https://github.com/MPSLab-ASU/ccf",
+        "description": "CGRA compilation and simulation framework.",
+        "researchGroup": "Accelerated Computing",
+        "image": "/images/software/ccf.png"
+    },
+    {
+        "name": "SMM toolchain",
+        "url": "https://github.com/cmlasu/smm_frameworks",
+        "description": "Toolchain for application execution on SMM architectures.",
+        "researchGroup": "Software Managed Manycores",
+        "image": "/images/software/smm-toolchain.png"
+    },
+    {
+        "name": "TMA",
+        "url": "https://github.com/cmlasu/tma",
+        "description": "Timestamp based monitoring tool for CPS applications.",
+        "researchGroup": "Cyber-Physical & IoT Systems",
+        "image": "/images/software/tma.png"
+    },
+    {
+        "name": "Jobbed",
+        "url": "https://github.com/MPSLab-ASU/Jobbed",
+        "description": "RTOS for the Raspberry Pi 2B",
+        "researchGroup": "Cyber-Physical & IoT Systems",
+        "image": "/images/software/jobbed.png"
+    }
+]
