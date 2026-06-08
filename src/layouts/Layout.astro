@@ -36,14 +36,11 @@ const shouldShowBreadcrumbs =
     />
     <link rel="apple-touch-icon" href="/images/asu/mps-favicon.png" />
     <title>{title} | MPS Lab</title>
-    <!-- Anti-flicker: read theme before paint -->
+    <!-- Anti-flicker: read theme before paint; default is light -->
     <script is:inline>
       (function () {
         const theme = localStorage.getItem("theme");
-        if (
-          theme === "dark" ||
-          (!theme && window.matchMedia("(prefers-color-scheme: dark)").matches)
-        ) {
+        if (theme === "dark") {
           document.documentElement.classList.add("dark");
         }
       })();
