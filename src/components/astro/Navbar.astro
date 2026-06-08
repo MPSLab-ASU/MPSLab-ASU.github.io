@@ -38,7 +38,10 @@ const navLinks = [
         label: "Alumni Master's Graduates",
       },
       { href: "/people?view=current#phd-students", label: "Ph.D. Students" },
-      { href: "/people?view=current#masters-students", label: "Master's Students" },
+      {
+        href: "/people?view=current#masters-students",
+        label: "Master's Students",
+      },
       {
         href: "/people?view=current#undergraduate-students",
         label: "Undergraduate Students",
@@ -75,22 +78,39 @@ const isActivePath = (href: string) =>
 <nav
   class="bg-nav-bg text-nav-text sticky top-0 z-50 shadow-lg backdrop-blur-sm"
 >
-  <div class="section-container">
-    <div class="flex items-center justify-between h-16">
+  <div class="w-full px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 md:h-20">
       <!-- Logo / Lab Name -->
-      <a href="/" class="flex items-center space-x-3 group">
-        <div
-          class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center font-bold text-white text-lg group-hover:scale-105 transition-transform"
+      <div class="flex items-center gap-3">
+        <a
+          href="https://www.asu.edu/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="group"
+          aria-label="Arizona State University"
         >
-          M
-        </div>
-        <div>
-          <span class="font-bold text-lg tracking-tight">MPS Lab</span>
-          <span class="hidden sm:inline text-text-muted text-sm ml-2"
-            >@ ASU</span
+          <img
+            src="/images/asu/asu-logo-color.png"
+            alt="Arizona State University logo"
+            class="h-10 md:h-12 w-auto object-contain group-hover:scale-[1.02] transition-transform"
+            loading="eager"
+            decoding="async"
+          />
+        </a>
+        <div class="leading-tight">
+          <a href="/" class="font-bold text-base md:text-lg tracking-tight hover:text-white transition-colors">
+            MPS Lab at ASU
+          </a>
+          <a
+            href="https://engineering.asu.edu/"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hidden md:block text-xs text-text-muted hover:text-white transition-colors"
           >
+            Ira A. Fulton School of Engineering
+          </a>
         </div>
-      </a>
+      </div>
 
       <!-- Desktop Navigation -->
       <div class="hidden md:flex items-center space-x-1">
@@ -113,7 +133,7 @@ const isActivePath = (href: string) =>
                       viewBox="0 0 24 24"
                       aria-hidden="true"
                     >
-                      <path d={link.iconPath}></path>
+                      <path d={link.iconPath} />
                     </svg>
                   )}
                   {link.label}
@@ -136,7 +156,7 @@ const isActivePath = (href: string) =>
                       stroke-linejoin="round"
                       stroke-width="2"
                       d="M19 9l-7 7-7-7"
-                    ></path>
+                    />
                   </svg>
                 </a>
 
@@ -207,7 +227,7 @@ const isActivePath = (href: string) =>
                     viewBox="0 0 24 24"
                     aria-hidden="true"
                   >
-                    <path d={link.iconPath}></path>
+                    <path d={link.iconPath} />
                   </svg>
                 )}
                 {link.label}

@@ -7,16 +7,9 @@ const currentYear = new Date().getFullYear();
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
       <!-- Lab Info -->
       <div>
-        <div class="flex items-center space-x-3 mb-4">
-          <div
-            class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center font-bold text-white text-lg"
-          >
-            M
-          </div>
-          <div>
-            <h3 class="font-bold text-lg">MPS Lab</h3>
-            <p class="text-sm text-nav-text/60">Making Programming Simple</p>
-          </div>
+        <div class="mb-4">
+          <h3 class="font-bold text-lg">MPS Lab</h3>
+          <p class="text-sm text-nav-text/60">Making Programming Simple</p>
         </div>
         <p class="text-sm text-nav-text/70 leading-relaxed">
           School of Computing & Augmented Intelligence<br />
@@ -121,10 +114,40 @@ const currentYear = new Date().getFullYear();
       </div>
     </div>
 
-    <div class="border-t border-white/10 mt-8 pt-6 text-center">
-      <p class="text-xs text-nav-text/50">
-        © {currentYear} MPS Lab, Arizona State University. All rights reserved.
-      </p>
+    <div class="border-t border-white/10 mt-8 pt-4">
+      <div class="flex items-center justify-between gap-4">
+        <a
+          href="https://www.asu.edu/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Arizona State University"
+        >
+          <img
+            src="/images/asu/asu-logo-white.png"
+            alt="Arizona State University"
+            class="h-8 w-auto object-contain"
+            loading="lazy"
+            decoding="async"
+          />
+        </a>
+        <p class="text-xs text-nav-text/50 text-center flex-1">
+          © {currentYear} MPS Lab, Arizona State University. All rights reserved.
+        </p>
+        <a
+          href="https://engineering.asu.edu/"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Ira A. Fulton Schools of Engineering"
+        >
+          <img
+            src="/images/asu/fulton-logo-white.png"
+            alt="Ira A. Fulton Schools of Engineering"
+            class="h-8 w-auto object-contain"
+            loading="lazy"
+            decoding="async"
+          />
+        </a>
+      </div>
     </div>
   </div>
 </footer>
