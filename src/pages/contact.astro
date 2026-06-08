@@ -53,6 +53,16 @@ import Layout from "../layouts/Layout.astro";
               <p>660 S. Mill Ave</p>
               <p>Tempe, AZ 85281</p>
             </div>
+            <div class="mt-5 rounded-lg overflow-hidden border border-border">
+              <iframe
+                title="MPS Lab Location"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d416.2472352137792!2d-111.94136859898566!3d33.423821000000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x872b09cdca978c55%3A0x7ea578c9e10706b7!2sCompiler%20Microarchitecture%20Lab!5e0!3m2!1sen!2sus!4v1780893384985!5m2!1sen!2sus"
+                class="w-full h-64"
+                style="border:0;"
+                allowfullscreen
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
           </div>
 
           <div class="card p-6">
@@ -79,45 +89,36 @@ import Layout from "../layouts/Layout.astro";
           </div>
         </div>
 
-        <!-- Contact Form / Google Form Placeholder -->
+        <!-- Contact Form -->
         <div>
           <div class="card p-6">
             <h2 class="font-semibold text-lg text-text mb-4">Send a Message</h2>
             <p class="text-sm text-text-secondary mb-6">
               Use the form below to reach out to us. We typically respond within
-              2–3 business days.
+              2–3 business days. Resume and Transcripts are not required at this
+              stage, but feel free to include.
             </p>
-            <!-- Google Form iframe placeholder -->
-            <div
-              class="aspect-video w-full max-w-2xl mx-auto rounded-lg overflow-hidden bg-bg-alt border border-border flex items-center justify-center"
-            >
-              <div class="text-center p-8">
-                <svg
-                  class="w-12 h-12 mx-auto text-text-muted mb-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="1.5"
-                    d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                  ></path>
-                </svg>
-                <p class="text-text-muted text-sm">
-                  Google Form will be embedded here.
-                </p>
-                <p class="text-text-muted text-xs mt-2">
-                  For now, please email us directly at
-                  <a
-                    href="mailto:aviral.shrivastava@asu.edu"
-                    class="text-primary hover:underline"
-                    >aviral.shrivastava@asu.edu</a
-                  >
-                </p>
-              </div>
+            <div class="w-full rounded-lg overflow-hidden border border-border">
+              <iframe
+                title="MPS Lab Contact Form"
+                src="https://docs.google.com/forms/d/e/1FAIpQLSecfLtkUW_mCoX9SYtiR6whK_inYu8SG2rErIFJIhRd_kNnmw/viewform?embedded=true"
+                class="w-full h-[1400px] md:h-[1280px] lg:h-[500px]"
+                loading="lazy"
+              >
+                Loading…
+              </iframe>
             </div>
+            <p class="text-xs text-text-muted mt-3">
+              If the form still appears cropped, open it directly:
+              <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSecfLtkUW_mCoX9SYtiR6whK_inYu8SG2rErIFJIhRd_kNnmw/viewform"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-primary hover:underline"
+              >
+                Open Google Form ↗
+              </a>
+            </p>
           </div>
         </div>
       </div>

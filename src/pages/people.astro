@@ -194,7 +194,10 @@ import Layout from "../layouts/Layout.astro";
             </div>
 
             <!-- Undergraduates -->
-            <div id="alumni-undergraduate-researchers" class="mb-16 scroll-mt-28">
+            <div
+              id="alumni-undergraduate-researchers"
+              class="mb-16 scroll-mt-28"
+            >
               <h2
                 class="text-2xl font-bold text-text mb-6 flex items-center gap-3"
               >
@@ -252,7 +255,7 @@ import Layout from "../layouts/Layout.astro";
     const activeClass =
       "text-left px-4 py-3 rounded-xl transition-all font-medium bg-primary text-white shadow-md";
 
-    const activateTab = (tab) => {
+    const activateTab = (tab: string) => {
       document.querySelectorAll(".tab-content").forEach((el) => {
         el.classList.remove("block");
         el.classList.add("hidden");
@@ -291,7 +294,11 @@ import Layout from "../layouts/Layout.astro";
         activateTab(requestedView);
       }
 
-      if (["phd-students", "masters-students", "undergraduate-students"].includes(hash)) {
+      if (
+        ["phd-students", "masters-students", "undergraduate-students"].includes(
+          hash,
+        )
+      ) {
         activateTab("current");
       }
 

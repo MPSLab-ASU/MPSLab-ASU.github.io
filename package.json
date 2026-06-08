@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro check && astro build",
+    "build": "astro check && astro build && pagefind --site dist",
     "preview": "astro preview",
     "astro": "astro"
   },
@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "@types/node": "^25.3.0",
-    "cheerio": "^1.2.0"
+    "cheerio": "^1.2.0",
+    "pagefind": "^1.5.2"
   }
 }

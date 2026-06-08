@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import GlobalSearch from "../react/GlobalSearch";
 import ThemeToggle from "../react/ThemeToggle";
 interface NavItem {
   href: string;
@@ -175,13 +176,15 @@ const isActivePath = (href: string) =>
             );
           })
         }
-        <div class="ml-3 pl-3 border-l border-border">
+        <div class="ml-3 pl-3 border-l border-border flex items-center gap-1">
+          <GlobalSearch client:only="react" />
           <ThemeToggle client:only="react" />
         </div>
       </div>
 
       <!-- Mobile Menu Button -->
       <div class="md:hidden flex items-center space-x-2">
+        <GlobalSearch client:only="react" />
         <ThemeToggle client:only="react" />
         <button
           id="mobile-menu-btn"
