@@ -55,6 +55,27 @@ import Layout from "../layouts/Layout.astro";
         <div class="flex-grow">
           <!-- Current Members Tab -->
           <div id="tab-current" class="tab-content block">
+            <div class="mb-8 flex flex-wrap gap-3">
+              <a
+                href="#phd-students"
+                class="px-4 py-2 rounded-lg text-sm font-medium bg-bg-alt text-text-secondary hover:bg-primary/10 hover:text-primary transition-colors"
+              >
+                Jump to Ph.D.
+              </a>
+              <a
+                href="#masters-students"
+                class="px-4 py-2 rounded-lg text-sm font-medium bg-bg-alt text-text-secondary hover:bg-primary/10 hover:text-primary transition-colors"
+              >
+                Jump to Master's
+              </a>
+              <a
+                href="#undergraduate-students"
+                class="px-4 py-2 rounded-lg text-sm font-medium bg-bg-alt text-text-secondary hover:bg-primary/10 hover:text-primary transition-colors"
+              >
+                Jump to Undergraduate
+              </a>
+            </div>
+
             <!-- Faculty -->
             <div class="mb-16">
               <h2
@@ -67,7 +88,7 @@ import Layout from "../layouts/Layout.astro";
             </div>
 
             <!-- Current Students -->
-            <div class="mb-16">
+            <div id="phd-students" class="mb-16 scroll-mt-28">
               <h2
                 class="text-2xl font-bold text-text mb-6 flex items-center gap-3"
               >
@@ -77,7 +98,7 @@ import Layout from "../layouts/Layout.astro";
               <MemberGrid roleFilter="Ph.D." />
             </div>
 
-            <div class="mb-16">
+            <div id="masters-students" class="mb-16 scroll-mt-28">
               <h2
                 class="text-2xl font-bold text-text mb-6 flex items-center gap-3"
               >
@@ -87,7 +108,7 @@ import Layout from "../layouts/Layout.astro";
               <MemberGrid roleFilter="Masters" />
             </div>
 
-            <div class="mb-16">
+            <div id="undergraduate-students" class="mb-16 scroll-mt-28">
               <h2
                 class="text-2xl font-bold text-text mb-6 flex items-center gap-3"
               >
@@ -100,8 +121,35 @@ import Layout from "../layouts/Layout.astro";
 
           <!-- Alumni Tab -->
           <div id="tab-alumni" class="tab-content hidden">
+            <div class="mb-8 flex flex-wrap gap-3">
+              <a
+                href="#alumni-postdocs"
+                class="px-4 py-2 rounded-lg text-sm font-medium bg-bg-alt text-text-secondary hover:bg-primary/10 hover:text-primary transition-colors"
+              >
+                Jump to Postdocs
+              </a>
+              <a
+                href="#alumni-phd-graduates"
+                class="px-4 py-2 rounded-lg text-sm font-medium bg-bg-alt text-text-secondary hover:bg-primary/10 hover:text-primary transition-colors"
+              >
+                Jump to Ph.D. Graduates
+              </a>
+              <a
+                href="#alumni-masters-graduates"
+                class="px-4 py-2 rounded-lg text-sm font-medium bg-bg-alt text-text-secondary hover:bg-primary/10 hover:text-primary transition-colors"
+              >
+                Jump to Master's Graduates
+              </a>
+              <a
+                href="#alumni-undergraduate-researchers"
+                class="px-4 py-2 rounded-lg text-sm font-medium bg-bg-alt text-text-secondary hover:bg-primary/10 hover:text-primary transition-colors"
+              >
+                Jump to Undergraduate Researchers
+              </a>
+            </div>
+
             <!-- Post-docs -->
-            <div class="mb-16">
+            <div id="alumni-postdocs" class="mb-16 scroll-mt-28">
               <h2
                 class="text-2xl font-bold text-text mb-6 flex items-center gap-3"
               >
@@ -118,7 +166,7 @@ import Layout from "../layouts/Layout.astro";
             </div>
 
             <!-- Ph.D. -->
-            <div class="mb-16">
+            <div id="alumni-phd-graduates" class="mb-16 scroll-mt-28">
               <h2
                 class="text-2xl font-bold text-text mb-6 flex items-center gap-3"
               >
@@ -132,7 +180,7 @@ import Layout from "../layouts/Layout.astro";
             </div>
 
             <!-- Masters -->
-            <div class="mb-16">
+            <div id="alumni-masters-graduates" class="mb-16 scroll-mt-28">
               <h2
                 class="text-2xl font-bold text-text mb-6 flex items-center gap-3"
               >
@@ -146,7 +194,7 @@ import Layout from "../layouts/Layout.astro";
             </div>
 
             <!-- Undergraduates -->
-            <div class="mb-16">
+            <div id="alumni-undergraduate-researchers" class="mb-16 scroll-mt-28">
               <h2
                 class="text-2xl font-bold text-text mb-6 flex items-center gap-3"
               >
@@ -165,7 +213,7 @@ import Layout from "../layouts/Layout.astro";
 
           <!-- Visiting Students Tab -->
           <div id="tab-visiting-students" class="tab-content hidden">
-            <div>
+            <div id="visiting-students-list" class="scroll-mt-28">
               <h2
                 class="text-2xl font-bold text-text mb-6 flex items-center gap-3"
               >
@@ -178,7 +226,7 @@ import Layout from "../layouts/Layout.astro";
 
           <!-- Visiting Faculty Tab -->
           <div id="tab-visiting-faculty" class="tab-content hidden">
-            <div>
+            <div id="visiting-faculty-list" class="scroll-mt-28">
               <h2
                 class="text-2xl font-bold text-text mb-6 flex items-center gap-3"
               >
@@ -199,39 +247,87 @@ import Layout from "../layouts/Layout.astro";
 <script>
   function setupTabs() {
     const tabs = ["current", "alumni", "visiting-students", "visiting-faculty"];
+    const baseClass =
+      "text-left px-4 py-3 rounded-xl transition-all font-medium text-text-secondary hover:bg-bg-alt hover:text-text";
+    const activeClass =
+      "text-left px-4 py-3 rounded-xl transition-all font-medium bg-primary text-white shadow-md";
+
+    const activateTab = (tab) => {
+      document.querySelectorAll(".tab-content").forEach((el) => {
+        el.classList.remove("block");
+        el.classList.add("hidden");
+      });
+
+      tabs.forEach((t) => {
+        const b = document.getElementById(`btn-${t}`);
+        if (b) b.className = baseClass;
+      });
+
+      const content = document.getElementById(`tab-${tab}`);
+      if (content) {
+        content.classList.remove("hidden");
+        content.classList.add("block");
+      }
+
+      const activeBtn = document.getElementById(`btn-${tab}`);
+      if (activeBtn) activeBtn.className = activeClass;
+    };
+
+    const maybeScrollToHash = () => {
+      const hash = window.location.hash.replace("#", "");
+      if (!hash) return;
+      const target = document.getElementById(hash);
+      if (target) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    };
+
+    const applyStateFromUrl = () => {
+      const params = new URLSearchParams(window.location.search);
+      const requestedView = params.get("view");
+      const hash = window.location.hash.replace("#", "");
+
+      if (requestedView && tabs.includes(requestedView)) {
+        activateTab(requestedView);
+      }
+
+      if (["phd-students", "masters-students", "undergraduate-students"].includes(hash)) {
+        activateTab("current");
+      }
+
+      if (
+        [
+          "alumni-postdocs",
+          "alumni-phd-graduates",
+          "alumni-masters-graduates",
+          "alumni-undergraduate-researchers",
+        ].includes(hash)
+      ) {
+        activateTab("alumni");
+      }
+
+      if (["visiting-students-list"].includes(hash)) {
+        activateTab("visiting-students");
+      }
+
+      if (["visiting-faculty-list"].includes(hash)) {
+        activateTab("visiting-faculty");
+      }
+
+      maybeScrollToHash();
+    };
 
     tabs.forEach((tab) => {
       const btn = document.getElementById(`btn-${tab}`);
       if (btn) {
         btn.addEventListener("click", () => {
-          // Hide all content
-          document.querySelectorAll(".tab-content").forEach((el) => {
-            el.classList.remove("block");
-            el.classList.add("hidden");
-          });
-
-          // Reset all buttons
-          tabs.forEach((t) => {
-            const b = document.getElementById(`btn-${t}`);
-            if (b) {
-              b.className =
-                "text-left px-4 py-3 rounded-xl transition-all font-medium text-text-secondary hover:bg-bg-alt hover:text-text";
-            }
-          });
-
-          // Show selected content
-          const content = document.getElementById(`tab-${tab}`);
-          if (content) {
-            content.classList.remove("hidden");
-            content.classList.add("block");
-          }
-
-          // Style selected button
-          btn.className =
-            "text-left px-4 py-3 rounded-xl transition-all font-medium bg-primary text-white shadow-md";
+          activateTab(tab);
         });
       }
     });
+
+    applyStateFromUrl();
+    window.addEventListener("hashchange", applyStateFromUrl);
   }
 
   // Setup on initial load

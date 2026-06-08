@@ -65,10 +65,25 @@ const currentPath = Astro.url.pathname;
                 <NewsSidebar currentPath={currentPath} />
 
                 <div class="flex-1">
+                    {
+                        sortedYears.length > 1 && (
+                            <div class="mb-6 flex flex-wrap gap-2">
+                                {sortedYears.slice(0, 8).map((year) => (
+                                    <a
+                                        href={`#year-${year}`}
+                                        class="px-3 py-1.5 rounded-lg text-sm font-medium bg-bg-alt text-text-secondary hover:bg-emerald-500/10 hover:text-emerald-500 transition-colors"
+                                    >
+                                        {year}
+                                    </a>
+                                ))}
+                            </div>
+                        )
+                    }
                     <div class="grid grid-cols-1 gap-6">
                         {
                             sortedYears.map((year, index) => (
                                 <details
+                                    id={`year-${year}`}
                                     class="mb-12 last:mb-0 group/details"
                                     open={index === 0}
                                 >

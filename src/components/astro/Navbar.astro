@@ -1,19 +1,82 @@
 ---
 import ThemeToggle from "../react/ThemeToggle";
 
+interface NavItem {
+  href: string;
+  label: string;
+  children?: Array<{ href: string; label: string }>;
+}
+
 const navLinks = [
   { href: "/", label: "Home" },
-  { href: "/research", label: "Research" },
+  {
+    href: "/research",
+    label: "Research",
+    children: [
+      { href: "/research#active-research", label: "Active Research" },
+      { href: "/research#extended-research", label: "Extended Research" },
+    ],
+  },
   { href: "/publications", label: "Publications" },
-  { href: "/teaching", label: "Teaching" },
-  { href: "/people", label: "People" },
-  { href: "/news", label: "News" },
+  {
+    href: "/teaching",
+    label: "Teaching",
+    children: [
+      { href: "/teaching#recent-courses", label: "Recent Courses" },
+      { href: "/teaching/quantum-computation", label: "Quantum Computation" },
+      { href: "/teaching/mla", label: "ML Accelerator Design" },
+      { href: "/teaching/cse420", label: "CSE 420/520" },
+      { href: "/teaching/cse325", label: "CSE 325" },
+      { href: "/teaching/older-courses", label: "Older Courses" },
+    ],
+  },
+  {
+    href: "/people",
+    label: "People",
+    children: [
+      { href: "/people", label: "Current Members" },
+      { href: "/people?view=alumni", label: "Alumni" },
+      {
+        href: "/people?view=alumni#alumni-phd-graduates",
+        label: "Alumni Ph.D. Graduates",
+      },
+      {
+        href: "/people?view=alumni#alumni-masters-graduates",
+        label: "Alumni Master's Graduates",
+      },
+      { href: "/people?view=current#phd-students", label: "Ph.D. Students" },
+      { href: "/people?view=current#masters-students", label: "Master's Students" },
+      {
+        href: "/people?view=current#undergraduate-students",
+        label: "Undergraduate Students",
+      },
+      {
+        href: "/people?view=visiting-students#visiting-students-list",
+        label: "Visiting Students",
+      },
+      {
+        href: "/people?view=visiting-faculty#visiting-faculty-list",
+        label: "Visiting Faculty",
+      },
+    ],
+  },
+  {
+    href: "/news",
+    label: "News",
+    children: [
+      { href: "/news", label: "Lab Updates" },
+      { href: "/news/awards", label: "Awards" },
+      { href: "/news/grants", label: "Grants" },
+    ],
+  },
   { href: "/gallery", label: "Gallery" },
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
-];
+] as NavItem[];
 
 const currentPath = Astro.url.pathname;
+const isActivePath = (href: string) =>
+  currentPath === href || (href !== "/" && currentPath.startsWith(`${href}/`));
 ---
 
 <nav
@@ -39,19 +102,56 @@ const currentPath = Astro.url.pathname;
       <!-- Desktop Navigation -->
       <div class="hidden md:flex items-center space-x-1">
         {
-          navLinks.map((link) => (
-            <a
-              href={link.href}
-              class:list={[
-                "px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200",
-                currentPath === link.href
-                  ? "bg-primary text-white"
-                  : "text-nav-text/80 hover:text-white hover:bg-white/10",
-              ]}
-            >
-              {link.label}
-            </a>
-          ))
+          navLinks.map((link) => {
+            const baseClass = [
+              "px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 inline-flex items-center gap-1",
+              isActivePath(link.href)
+                ? "bg-primary text-white"
+                : "text-nav-text/80 hover:text-white hover:bg-white/10",
+            ];
+
+            if (!link.children) {
+              return (
+                <a href={link.href} class:list={baseClass}>
+                  {link.label}
+                </a>
+              );
+            }
+
+            return (
+              <div class="relative group">
+                <a href={link.href} class:list={baseClass}>
+                  {link.label}
+                  <svg
+                    class="w-3.5 h-3.5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M19 9l-7 7-7-7"
+                    ></path>
+                  </svg>
+                </a>
+
+                <div class="absolute left-0 top-full pt-2 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-150">
+                  <div class="rounded-xl border border-border bg-bg shadow-xl p-2">
+                    {link.children.map((child) => (
+                      <a
+                        href={child.href}
+                        class="block px-3 py-2 rounded-lg text-sm text-text-secondary hover:bg-bg-alt hover:text-text"
+                      >
+                        {child.label}
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            );
+          })
         }
         <div class="ml-3 pl-3 border-l border-white/20">
           <ThemeToggle client:only="react" />
@@ -87,17 +187,32 @@ const currentPath = Astro.url.pathname;
       <div class="space-y-1 pt-2 border-t border-white/10">
         {
           navLinks.map((link) => (
-            <a
-              href={link.href}
-              class:list={[
-                "block px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200",
-                currentPath === link.href
-                  ? "bg-primary text-white"
-                  : "text-nav-text/80 hover:text-white hover:bg-white/10",
-              ]}
-            >
-              {link.label}
-            </a>
+            <div>
+              <a
+                href={link.href}
+                class:list={[
+                  "block px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200",
+                  isActivePath(link.href)
+                    ? "bg-primary text-white"
+                    : "text-nav-text/80 hover:text-white hover:bg-white/10",
+                ]}
+              >
+                {link.label}
+              </a>
+
+              {link.children && (
+                <div class="ml-4 mt-1 space-y-1">
+                  {link.children.map((child) => (
+                    <a
+                      href={child.href}
+                      class="block px-4 py-2 rounded-lg text-sm text-nav-text/70 hover:text-white hover:bg-white/10"
+                    >
+                      {child.label}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
           ))
         }
       </div>

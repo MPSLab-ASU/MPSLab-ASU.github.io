@@ -13,10 +13,24 @@ import Layout from "../layouts/Layout.astro";
                 <h1 class="text-3xl md:text-4xl font-bold text-text mb-4">
                     Teaching
                 </h1>
+                <div class="mt-6 flex flex-wrap gap-3">
+                    <a
+                        href="#recent-courses"
+                        class="px-4 py-2 rounded-lg text-sm font-medium bg-bg-alt text-text-secondary hover:bg-primary/10 hover:text-primary transition-colors"
+                    >
+                        Jump to Recent Courses
+                    </a>
+                    <a
+                        href="#older-courses"
+                        class="px-4 py-2 rounded-lg text-sm font-medium bg-bg-alt text-text-secondary hover:bg-primary/10 hover:text-primary transition-colors"
+                    >
+                        Jump to Older Courses
+                    </a>
+                </div>
             </div>
 
             <div class="space-y-8">
-                <div>
+                <div id="recent-courses" class="scroll-mt-28">
                     <h2 class="text-2xl font-semibold mb-4 text-text">
                         Courses Developed and Taught Recently
                     </h2>
@@ -56,7 +70,7 @@ import Layout from "../layouts/Layout.astro";
                     </ul>
                 </div>
 
-                <div>
+                <div id="older-courses" class="scroll-mt-28">
                     <a
                         href="/teaching/older-courses"
                         class="text-primary hover:underline inline-flex font-semibold text-lg"

@@ -66,10 +66,24 @@ const IconMap: Record<string, any> = {
           computational methods and technologies to simplify programming and
           enhance system performance across diverse domains.
         </p>
+        <div class="mt-8 flex flex-wrap justify-center gap-3">
+          <a
+            href="#active-research"
+            class="px-4 py-2 rounded-lg text-sm font-medium bg-bg-alt text-text-secondary hover:bg-primary/10 hover:text-primary transition-colors"
+          >
+            Jump to Active Research
+          </a>
+          <a
+            href="#extended-research"
+            class="px-4 py-2 rounded-lg text-sm font-medium bg-bg-alt text-text-secondary hover:bg-primary/10 hover:text-primary transition-colors"
+          >
+            Jump to Extended Research
+          </a>
+        </div>
       </div>
 
       <!-- Active Research -->
-      <div class="mb-20">
+      <div id="active-research" class="mb-20 scroll-mt-28">
         <h2 class="text-2xl font-bold text-text mb-8 flex items-center gap-3">
           <span class="w-1 h-8 bg-green-500 rounded-full"></span>
           Active Research
@@ -117,7 +131,7 @@ const IconMap: Record<string, any> = {
       </div>
 
       <!-- Extended Research -->
-      <div>
+      <div id="extended-research" class="scroll-mt-28">
         <h2 class="text-2xl font-bold text-text mb-8 flex items-center gap-3">
           <span class="w-1 h-8 bg-blue-500 rounded-full"></span>
           Extended Research
