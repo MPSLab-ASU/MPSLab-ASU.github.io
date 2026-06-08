@@ -1,4 +1,5 @@
 ---
+import { getCollection } from "astro:content";
 import ThemeToggle from "../react/ThemeToggle";
 interface NavItem {
   href: string;
@@ -12,10 +13,7 @@ const navLinks = [
   {
     href: "/research",
     label: "Research",
-    children: [
-      { href: "/research#active-research", label: "Active Research" },
-      { href: "/research#extended-research", label: "Extended Research" },
-    ],
+    children: [],
   },
   { href: "/publications", label: "Publications" },
   {
@@ -27,25 +25,7 @@ const navLinks = [
     label: "People",
     children: [
       { href: "/people", label: "Current Members" },
-      { href: "/teaching", label: "Prof's Teaching" },
       { href: "/people?view=alumni", label: "Alumni" },
-      {
-        href: "/people?view=alumni#alumni-phd-graduates",
-        label: "Alumni Ph.D. Graduates",
-      },
-      {
-        href: "/people?view=alumni#alumni-masters-graduates",
-        label: "Alumni Master's Graduates",
-      },
-      { href: "/people?view=current#phd-students", label: "Ph.D. Students" },
-      {
-        href: "/people?view=current#masters-students",
-        label: "Master's Students",
-      },
-      {
-        href: "/people?view=current#undergraduate-students",
-        label: "Undergraduate Students",
-      },
       {
         href: "/people?view=visiting-students#visiting-students-list",
         label: "Visiting Students",
@@ -69,6 +49,25 @@ const navLinks = [
   { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
 ] as NavItem[];
+
+const allResearch = await getCollection("research");
+const activeResearch = allResearch
+  .filter((entry) => entry.data.status === "Active")
+  .sort((a, b) => (a.data.order ?? 99) - (b.data.order ?? 99));
+
+const researchNav = navLinks.find((link) => link.href === "/research");
+if (researchNav) {
+  researchNav.children = [
+    ...activeResearch.map((entry) => ({
+      href: `/research/${entry.slug}`,
+      label: entry.data.title,
+    })),
+    {
+      href: "/research#extended-research",
+      label: "Extended Research Areas",
+    },
+  ];
+}
 
 const currentPath = Astro.url.pathname;
 const isActivePath = (href: string) =>
