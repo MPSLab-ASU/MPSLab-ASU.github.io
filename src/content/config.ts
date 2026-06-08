@@ -65,25 +65,42 @@ const research = defineCollection({
 
 const resources = defineCollection({
   type: "content",
-  schema: z.object({
-    researchArea: z.string(),
-    resources: z.array(
-      z.object({
-        title: z.string(),
-        type: z.enum([
-          "Paper",
-          "Book",
-          "Video",
-          "Tutorial",
-          "Tool",
-          "Publication",
-        ]),
-        url: z.string().optional(),
-        authors: z.string().optional(),
-        description: z.string().optional(),
-      }),
-    ),
-  }),
+  schema: z
+    .object({
+      researchArea: z.string(),
+      readingListUrl: z.string().optional(),
+      resources: z
+        .array(
+          z.object({
+            title: z.string(),
+            type: z.enum([
+              "Paper",
+              "Book",
+              "Video",
+              "Tutorial",
+              "Tool",
+              "Publication",
+            ]),
+            url: z.string().optional(),
+            authors: z.string().optional(),
+            description: z.string().optional(),
+          }),
+        )
+        .optional(),
+    })
+    .superRefine((data, ctx) => {
+      const hasReadingListUrl = Boolean(data.readingListUrl);
+      const hasResources = Boolean(data.resources?.length);
+
+      if (hasReadingListUrl === hasResources) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message:
+            "Provide exactly one of readingListUrl or resources (mutually exclusive).",
+          path: ["readingListUrl"],
+        });
+      }
+    }),
 });
 
 const faq = defineCollection({

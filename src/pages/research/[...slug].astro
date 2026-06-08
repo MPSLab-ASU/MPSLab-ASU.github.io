@@ -89,9 +89,16 @@ const relatedPublications = parsedBib
 
 // Check if resources exist for this research area
 const allResources = await getCollection("resources");
-const hasResources = allResources.some(
-  (r) => r.data.researchArea === entry.data.title,
+const resourceEntry = allResources.find(
+  (r) => r.slug === entry.slug || r.data.researchArea === entry.data.title,
 );
+const readingListUrl = resourceEntry?.data.readingListUrl;
+const hasResourceFile = fs.existsSync(
+  path.join(process.cwd(), "src/content/resources", `${entry.slug}.md`),
+);
+const hasResources = Boolean(resourceEntry) || hasResourceFile;
+const readingListHref = readingListUrl ?? `/research/resources/${entry.slug}`;
+const isExternalReadingList = Boolean(readingListUrl);
 ---
 
 <Layout title={entry.data.title}>
@@ -168,7 +175,9 @@ const hasResources = allResources.some(
         hasResources && (
           <div class="mb-10 flex flex-wrap gap-3">
             <a
-              href={`/research/resources/${entry.slug}`}
+              href={readingListHref}
+              target={isExternalReadingList ? "_blank" : undefined}
+              rel={isExternalReadingList ? "noopener noreferrer" : undefined}
               class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 font-medium text-sm transition-all"
             >
               <svg

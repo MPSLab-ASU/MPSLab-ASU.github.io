@@ -18,9 +18,11 @@ const { entry } = Astro.props;
 // Find the matching resources file for this research area
 const allResources = await getCollection("resources");
 const resourceEntry = allResources.find(
-    (r) => r.data.researchArea === entry.data.title,
+    (r) => r.slug === entry.slug || r.data.researchArea === entry.data.title,
 );
+const readingListUrl = resourceEntry?.data.readingListUrl;
 const items = resourceEntry?.data.resources ?? [];
+const showReadingListUrl = Boolean(readingListUrl);
 
 // Group by type
 const resourceTypes = [
@@ -90,10 +92,25 @@ const typeIcons: Record<string, string> = {
                         >{entry.data.title}</strong
                     > — research papers, books, videos, and more.
                 </p>
+                {
+                    showReadingListUrl && (
+                        <div class="mt-6">
+                            <a
+                                href={readingListUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-white font-medium hover:bg-primary-hover transition-colors"
+                            >
+                                Open Google Docs Reading List
+                                <ExternalLink className="w-4 h-4" />
+                            </a>
+                        </div>
+                    )
+                }
             </header>
 
             {
-                grouped.length === 0 ? (
+                grouped.length === 0 && !showReadingListUrl ? (
                     <div class="text-center py-16">
                         <BookOpen className="w-12 h-12 mx-auto text-text-muted opacity-50 mb-4" />
                         <p class="text-text-muted text-lg">
@@ -103,7 +120,7 @@ const typeIcons: Record<string, string> = {
                             Check back soon for curated reading materials.
                         </p>
                     </div>
-                ) : (
+                ) : !showReadingListUrl ? (
                     <div class="space-y-12">
                         {grouped.map((group) => (
                             <div>
@@ -165,7 +182,7 @@ const typeIcons: Record<string, string> = {
                             </div>
                         ))}
                     </div>
-                )
+                ) : null
             }
         </div>
     </section>
