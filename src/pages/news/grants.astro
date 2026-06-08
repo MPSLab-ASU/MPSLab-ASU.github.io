@@ -5,17 +5,17 @@ import Navbar from "../../components/astro/Navbar.astro";
 import NewsSidebar from "../../components/astro/NewsSidebar.astro";
 import Layout from "../../layouts/Layout.astro";
 
-// Fetch all news and filter out awards, then sort by date descending
+// Fetch all news and filter only grants, then sort by date descending
 const allNews = await getCollection("news");
-const labUpdates = allNews
-    .filter((item) => item.data.type !== "Award" && item.data.type !== "Grant")
+const grants = allNews
+    .filter((item) => item.data.type === "Grant")
     .sort(
         (a, b) =>
             new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
     );
 
-// Group updates by year
-const groupedUpdates = labUpdates.reduce(
+// Group grants by year
+const groupedGrants = grants.reduce(
     (acc, item) => {
         const dateStr = String(item.data.date);
         const year = dateStr.includes("-")
@@ -28,45 +28,33 @@ const groupedUpdates = labUpdates.reduce(
         acc[year].push(item);
         return acc;
     },
-    {} as Record<string, typeof labUpdates>,
+    {} as Record<string, typeof grants>,
 );
 
-const sortedYears = Object.keys(groupedUpdates).sort(
+const sortedYears = Object.keys(groupedGrants).sort(
     (a, b) => parseInt(b) - parseInt(a),
 );
-
-const typeColors: Record<string, string> = {
-    Grant:
-        "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300",
-    Publication:
-        "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300",
-    Event: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300",
-    Announcement:
-        "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300",
-    General: "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400",
-};
 
 const currentPath = Astro.url.pathname;
 ---
 
-<Layout title="Lab Updates - MPS Lab">
+<Layout title="Grants - MPS Lab">
     <Navbar slot="header" />
 
     <div class="bg-hero text-hero-text py-16 md:py-24 relative overflow-hidden">
         <div class="absolute inset-0 opacity-10">
             <div
                 class="absolute inset-0"
-                style="background-image: radial-gradient(circle at 75% 25%, rgba(140, 29, 64, 0.3) 0%, transparent 50%);"
+                style="background-image: radial-gradient(circle at 75% 25%, rgba(16, 185, 129, 0.3) 0%, transparent 50%);"
             >
             </div>
         </div>
         <div class="section-container relative z-10">
             <h1 class="text-4xl md:text-5xl font-extrabold mb-4">
-                Lab Updates
+                Grants
             </h1>
             <p class="text-lg text-hero-text/80 max-w-2xl">
-                The latest news, publications, and announcements from the MPS
-                Lab.
+                Funding announcements and grant milestones from MPS Lab.
             </p>
         </div>
     </div>
@@ -84,9 +72,9 @@ const currentPath = Astro.url.pathname;
                                     class="mb-12 last:mb-0 group/details"
                                     open={index === 0}
                                 >
-                                    <summary class="text-2xl font-bold text-text mb-6 flex items-center justify-between gap-3 cursor-pointer list-none hover:text-primary transition-colors select-none [&::-webkit-details-marker]:hidden">
+                                    <summary class="text-2xl font-bold text-text mb-6 flex items-center justify-between gap-3 cursor-pointer list-none hover:text-emerald-500 transition-colors select-none [&::-webkit-details-marker]:hidden">
                                         <div class="flex items-center gap-3">
-                                            <span class="w-1 h-8 bg-primary rounded-full" />
+                                            <span class="w-1 h-8 bg-emerald-500 rounded-full" />
                                             {year}
                                         </div>
                                         <svg
@@ -103,21 +91,11 @@ const currentPath = Astro.url.pathname;
                                         </svg>
                                     </summary>
                                     <div class="grid grid-cols-1 gap-6 pt-2">
-                                        {groupedUpdates[year].map((item) => (
-                                            <div class="card p-6 border-l-4 border-l-primary hover:translate-y-0 hover:shadow-lg transition-all duration-300 group">
+                                        {groupedGrants[year].map((item) => (
+                                            <div class="card p-6 border-l-4 border-l-emerald-500 hover:translate-y-0 hover:shadow-lg transition-all duration-300 group">
                                                 <div class="flex items-center gap-3 mb-3">
-                                                    <span
-                                                        class:list={[
-                                                            "badge",
-                                                            typeColors[
-                                                                item.data.type
-                                                            ] ??
-                                                                typeColors[
-                                                                    "General"
-                                                                ],
-                                                        ]}
-                                                    >
-                                                        {item.data.type}
+                                                    <span class="badge bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300">
+                                                        Grant
                                                     </span>
                                                     <time
                                                         class="text-sm font-medium text-text-secondary"
@@ -140,7 +118,6 @@ const currentPath = Astro.url.pathname;
                                                                       timeZone:
                                                                           "UTC",
                                                                       year: "numeric",
-                                                                      month: "short",
                                                                   },
                                                               )}
                                                     </time>
@@ -164,7 +141,7 @@ const currentPath = Astro.url.pathname;
                         {
                             sortedYears.length === 0 && (
                                 <div class="text-center py-12 text-text-muted">
-                                    <p>No lab updates found.</p>
+                                    <p>No grants found.</p>
                                 </div>
                             )
                         }
