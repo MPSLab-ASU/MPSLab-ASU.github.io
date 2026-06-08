@@ -1,6 +1,7 @@
 ---
 name: "Ayush Gupta"
 role: "Undergraduate"
+google_scholar: "https://scholar.google.com/scholar?q=Ayush%20Gupta"
 joinDate: "2024"
 github: "https://github.com/papapizzeria0608"
 linkedin: "https://www.linkedin.com/in/ayush-gupta-90237a218/"

@@ -1,6 +1,7 @@
 ---
 name: "Fei Hong"
 role: "Alumni"
+google_scholar: "https://scholar.google.com/scholar?q=Fei%20Hong"
 joinDate: "2024"
 linkedin: "https://www.linkedin.com/in/feihong"
 order: 5

@@ -1,6 +1,7 @@
 ---
 name: "Javier Ramirez"
 role: "Undergraduate"
+google_scholar: "https://scholar.google.com/scholar?q=Javier%20Ramirez"
 joinDate: "2024"
 github: "https://github.com/javier-cramirez"
 linkedin: "https://www.linkedin.com/in/javier-c-ramirez/"

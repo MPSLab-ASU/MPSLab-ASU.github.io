@@ -1,6 +1,7 @@
 ---
 name: "Jian Cai"
 role: "Alumni"
+google_scholar: "https://scholar.google.com/scholar?q=Jian%20Cai"
 joinDate: "2024"
 linkedin: "https://www.linkedin.com/in/jian-cai-05721142/"
 order: 5

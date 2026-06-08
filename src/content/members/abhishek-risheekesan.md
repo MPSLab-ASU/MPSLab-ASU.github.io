@@ -1,6 +1,7 @@
 ---
 name: "Abhishek Risheekesan"
 role: "Alumni"
+google_scholar: "https://scholar.google.com/scholar?q=Abhishek%20Risheekesan"
 joinDate: "2024"
 linkedin: "https://www.linkedin.com/in/abhishek-rhisheekesan-54753020"
 order: 5

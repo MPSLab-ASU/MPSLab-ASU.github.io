@@ -1,6 +1,7 @@
 ---
 name: "Megan Kuo"
 role: "Masters"
+google_scholar: "https://scholar.google.com/scholar?q=Megan%20Kuo"
 joinDate: "2024"
 github: "https://github.com/Megan0704-1"
 linkedin: "https://linkedin.com/in/megankuo2001"

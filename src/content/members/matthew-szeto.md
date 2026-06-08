@@ -1,6 +1,7 @@
 ---
 name: "Matthew Szeto"
 role: "Alumni"
+google_scholar: "https://scholar.google.com/scholar?q=Matthew%20Szeto"
 joinDate: "2024"
 linkedin: "https://www.linkedin.com/in/mattaszeto"
 order: 5

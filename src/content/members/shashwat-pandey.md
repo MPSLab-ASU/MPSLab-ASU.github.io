@@ -1,6 +1,7 @@
 ---
 name: "Shashwat Pandey"
 role: "Masters"
+google_scholar: "https://scholar.google.com/scholar?q=Shashwat%20Pandey"
 joinDate: "2024"
 github: "https://github.com/Shashwatpandey4"
 linkedin: "https://www.linkedin.com/in/shashwat023/"

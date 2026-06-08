@@ -1,6 +1,7 @@
 ---
 name: "Ke Bai"
 role: "Alumni"
+google_scholar: "https://scholar.google.com/scholar?q=Ke%20Bai"
 joinDate: "2024"
 linkedin: "https://www.linkedin.com/in/ke-bai-0844b820"
 order: 5

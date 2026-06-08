@@ -1,6 +1,7 @@
 ---
 name: "Dheeraj Lokam"
 role: "Alumni"
+google_scholar: "https://scholar.google.com/scholar?q=Dheeraj%20Lokam"
 joinDate: "2024"
 linkedin: "https://www.linkedin.com/in/dheerajlokam"
 order: 5

@@ -1,6 +1,7 @@
 ---
 name: "Quoc Long Vinh Ta"
 role: "Alumni"
+google_scholar: "https://scholar.google.com/scholar?q=Quoc%20Long%20Vinh%20Ta"
 joinDate: "2024"
 linkedin: "https://www.linkedin.com/in/quoc-long-vinh-ta-b098a71ba"
 order: 5

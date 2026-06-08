@@ -3,6 +3,7 @@ name: "Mahesh Balasubramanian"
 role: "Alumni"
 joinDate: "2024"
 website: "https://sites.google.com/asu.edu/maheshbala/"
+google_scholar: "https://scholar.google.com/scholar?q=Mahesh%20Balasubramanian"
 order: 5
 image: "/images/members/mahesh-balasubramanian.jpg"
 isAlumni: true

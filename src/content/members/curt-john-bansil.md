@@ -1,6 +1,7 @@
 ---
 name: "Curt John Bansil"
 role: "Masters"
+google_scholar: "https://scholar.google.com/scholar?q=Curt%20John%20Bansil"
 joinDate: "2024"
 github: "https://github.com/kurtis-b"
 linkedin: "https://www.linkedin.com/in/curtbansil/"

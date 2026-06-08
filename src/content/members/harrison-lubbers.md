@@ -1,6 +1,7 @@
 ---
 name: "Harrison Lubbers"
 role: "Alumni"
+google_scholar: "https://scholar.google.com/scholar?q=Harrison%20Lubbers"
 joinDate: "2024"
 order: 5
 image: "/images/members/mps.jpg"

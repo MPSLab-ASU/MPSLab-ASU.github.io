@@ -1,6 +1,7 @@
 ---
 name: "Amit Pabalkar"
 role: "Alumni"
+google_scholar: "https://scholar.google.com/scholar?q=Amit%20Pabalkar"
 joinDate: "2024"
 linkedin: "https://www.linkedin.com/in/amit-pabalkar-46007b3"
 order: 5

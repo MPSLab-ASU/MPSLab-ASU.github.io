@@ -1,6 +1,7 @@
 ---
 name: "Mohammadreza Mehrabian"
 role: "Alumni"
+google_scholar: "https://scholar.google.com/scholar?q=Mohammadreza%20Mehrabian"
 joinDate: "2024"
 linkedin: "https://www.linkedin.com/in/mohammadreza-mehrabian"
 order: 5

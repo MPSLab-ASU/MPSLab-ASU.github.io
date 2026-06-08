@@ -3,6 +3,7 @@ name: "Shail Dave"
 role: "Alumni"
 joinDate: "2024"
 website: "https://sites.google.com/view/shail/"
+google_scholar: "https://scholar.google.com/scholar?q=Shail%20Dave"
 order: 5
 image: "/images/members/shail-dave.jpg"
 isAlumni: true

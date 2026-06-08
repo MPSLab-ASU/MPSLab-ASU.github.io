@@ -1,6 +1,7 @@
 ---
 name: "Karthik Tanikella"
 role: "Alumni"
+google_scholar: "https://scholar.google.com/scholar?q=Karthik%20Tanikella"
 joinDate: "2024"
 linkedin: "https://www.linkedin.com/in/karthik-tanikella-7893b866"
 order: 5

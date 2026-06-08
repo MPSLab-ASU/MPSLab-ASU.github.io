@@ -1,6 +1,7 @@
 ---
 name: "Abhinav Kumar"
 role: "Alumni"
+google_scholar: "https://scholar.google.com/scholar?q=Abhinav%20Kumar"
 joinDate: "2024"
 linkedin: "https://www.linkedin.com/in/abhinav-kumar-96504a75/"
 order: 5

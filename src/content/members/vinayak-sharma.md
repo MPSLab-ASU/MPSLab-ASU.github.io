@@ -1,6 +1,7 @@
 ---
 name: "Vinayak Sharma"
 role: "Ph.D."
+google_scholar: "https://scholar.google.com/scholar?q=Vinayak%20Sharma"
 joinDate: "2024"
 order: 2
 image: "/images/members/vinayak-sharma.jpg"

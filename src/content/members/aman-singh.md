@@ -1,6 +1,7 @@
 ---
 name: "Aman Singh"
 role: "Masters"
+google_scholar: "https://scholar.google.com/scholar?q=Aman%20Singh"
 joinDate: "2024"
 github: "https://github.com/amanyagami"
 linkedin: "https://www.linkedin.com/in/amanyagami"

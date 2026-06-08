@@ -1,6 +1,7 @@
 ---
 name: "Rachel Dedinsky"
 role: "Alumni"
+google_scholar: "https://scholar.google.com/scholar?q=Rachel%20Dedinsky"
 joinDate: "2024"
 linkedin: "https://www.linkedin.com/in/rachel-dedinsky"
 order: 5

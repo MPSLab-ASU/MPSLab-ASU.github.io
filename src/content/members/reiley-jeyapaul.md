@@ -1,6 +1,7 @@
 ---
 name: "Reiley Jeyapaul"
 role: "Alumni"
+google_scholar: "https://scholar.google.com/scholar?q=Reiley%20Jeyapaul"
 joinDate: "2024"
 linkedin: "https://www.linkedin.com/in/reileyjeyapaul"
 order: 5

@@ -1,6 +1,7 @@
 ---
 name: "Sai Mylavarapu"
 role: "Alumni"
+google_scholar: "https://scholar.google.com/scholar?q=Sai%20Mylavarapu"
 joinDate: "2024"
 linkedin: "https://www.linkedin.com/in/saikrishnamylavarapu"
 order: 5

@@ -1,6 +1,7 @@
 ---
 name: "Moslem Didehban"
 role: "Alumni"
+google_scholar: "https://scholar.google.com/scholar?q=Moslem%20Didehban"
 joinDate: "2024"
 linkedin: "https://www.linkedin.com/in/moslem-didehban-49546559"
 order: 5

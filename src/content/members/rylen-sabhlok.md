@@ -1,6 +1,7 @@
 ---
 name: "Rylen Sabhlok"
 role: "Undergraduate"
+google_scholar: "https://scholar.google.com/scholar?q=Rylen%20Sabhlok"
 joinDate: "2024"
 github: "https://github.com/Rylen-s"
 linkedin: "https://www.linkedin.com/in/rylen-sabhlok"
