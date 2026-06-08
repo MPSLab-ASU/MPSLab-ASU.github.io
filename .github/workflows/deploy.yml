@@ -1,9 +1,9 @@
-name: Deploy v3 to GitHub Pages
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches:
-      - v3
+      - master
   workflow_dispatch:
 
 permissions:
@@ -19,7 +19,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout v3
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Set up Node.js
