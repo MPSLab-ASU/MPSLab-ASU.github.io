@@ -1,7 +1,7 @@
 ---
 name: "Sanggu Park"
 role: "Alumni"
-google_scholar: "https://scholar.google.com/scholar?q=Sanggu%20Park"
+google_scholar: "https://scholar.google.com/scholar?q=Sanggu+Park"
 joinDate: "2024"
 linkedin: "https://www.linkedin.com/in/sanggu-park-ba501a203"
 order: 5

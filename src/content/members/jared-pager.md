@@ -1,7 +1,7 @@
 ---
 name: "Jared Pager"
 role: "Alumni"
-google_scholar: "https://scholar.google.com/scholar?q=Jared%20Pager"
+google_scholar: "https://scholar.google.com/scholar?q=Jared+Pager"
 joinDate: "2024"
 linkedin: "https://www.linkedin.com/in/jaredpager"
 order: 5

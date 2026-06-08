@@ -1,7 +1,7 @@
 ---
 name: "Hamed Attariani"
 role: "Visiting Faculty"
-google_scholar: "https://scholar.google.com/scholar?q=Hamed%20Attariani"
+google_scholar: "https://scholar.google.com/scholar?q=Hamed+Attariani"
 joinDate: "2024"
 linkedin: "https://www.linkedin.com/in/hamed-attariani/"
 order: 7

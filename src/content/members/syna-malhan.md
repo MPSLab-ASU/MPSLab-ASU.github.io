@@ -1,7 +1,7 @@
 ---
 name: "Syna Malhan"
 role: "Undergraduate"
-google_scholar: "https://scholar.google.com/scholar?q=Syna%20Malhan"
+google_scholar: "https://scholar.google.com/scholar?q=Syna+Malhan"
 joinDate: "2024"
 github: "https://github.com/synamalhan"
 linkedin: "https://www.linkedin.com/in/synamalhan/"

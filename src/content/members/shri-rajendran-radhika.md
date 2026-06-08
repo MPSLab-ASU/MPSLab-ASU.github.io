@@ -1,7 +1,7 @@
 ---
 name: "Shri Rajendran Radhika"
 role: "Alumni"
-google_scholar: "https://scholar.google.com/scholar?q=Shri%20Rajendran%20Radhika"
+google_scholar: "https://scholar.google.com/scholar?q=Shri+Rajendran+Radhika"
 joinDate: "2024"
 linkedin: "https://www.linkedin.com/in/shriharirajendran"
 order: 5

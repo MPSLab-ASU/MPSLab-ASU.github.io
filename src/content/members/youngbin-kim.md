@@ -3,7 +3,7 @@ name: "Youngbin Kim"
 role: "Visiting Student"
 joinDate: "2024"
 website: "http://dclab.yonsei.ac.kr/ybkim/"
-google_scholar: "https://scholar.google.com/scholar?q=Youngbin%20Kim"
+google_scholar: "https://scholar.google.com/scholar?q=Youngbin+Kim"
 order: 6
 image: "/images/members/youngbin-kim.jpg"
 university: "Yonsei University, Seoul, Korea"

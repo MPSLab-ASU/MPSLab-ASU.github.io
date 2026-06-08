@@ -3,7 +3,7 @@ name: "Yohan Ko"
 role: "Visiting Faculty"
 joinDate: "2024"
 website: "https://sites.google.com/view/yohanko/members/professor"
-google_scholar: "https://scholar.google.com/scholar?q=Yohan%20Ko"
+google_scholar: "https://scholar.google.com/scholar?q=Yohan+Ko"
 order: 7
 image: "/images/members/yohan-ko.jpg"
 currentPosition: "Associate Professor, Yonsei University, Seoul, Korea"

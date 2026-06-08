@@ -1,7 +1,7 @@
 ---
 name: "Mohammad Khayatian"
 role: "Alumni"
-google_scholar: "https://scholar.google.com/scholar?q=Mohammad%20Khayatian"
+google_scholar: "https://scholar.google.com/scholar?q=Mohammad+Khayatian"
 joinDate: "2024"
 linkedin: "https://www.linkedin.com/in/mohammad-khayatian-b82347b7"
 order: 5

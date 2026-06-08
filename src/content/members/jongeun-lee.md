@@ -3,7 +3,7 @@ name: "Jongeun Lee"
 role: "Alumni"
 joinDate: "2024"
 website: "https://ecl.unist.ac.kr/~jlee/"
-google_scholar: "https://scholar.google.com/scholar?q=Jongeun%20Lee"
+google_scholar: "https://scholar.google.com/scholar?q=Jongeun+Lee"
 order: 5
 image: "/images/members/jongeun-lee.jpg"
 isAlumni: true

@@ -1,7 +1,7 @@
 ---
 name: "Sai Shashank Peddiraju"
 role: "Alumni"
-google_scholar: "https://scholar.google.com/scholar?q=Sai%20Shashank%20Peddiraju"
+google_scholar: "https://scholar.google.com/scholar?q=Sai+Shashank+Peddiraju"
 joinDate: "2024"
 linkedin: "https://www.linkedin.com/in/sai-shashank-peddiraju"
 order: 5

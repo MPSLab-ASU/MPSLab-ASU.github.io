@@ -1,7 +1,7 @@
 ---
 name: "Harshith Allamsetti"
 role: "Alumni"
-google_scholar: "https://scholar.google.com/scholar?q=Harshith%20Allamsetti"
+google_scholar: "https://scholar.google.com/scholar?q=Harshith+Allamsetti"
 joinDate: "2024"
 linkedin: "https://www.linkedin.com/in/harshithallamsetti"
 order: 5

@@ -1,7 +1,7 @@
 ---
 name: "Di Lu"
 role: "Alumni"
-google_scholar: "https://scholar.google.com/scholar?q=Di%20Lu"
+google_scholar: "https://scholar.google.com/scholar?q=Di+Lu"
 joinDate: "2024"
 linkedin: "https://www.linkedin.com/in/di-lu-6ab79a24"
 order: 5

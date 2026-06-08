@@ -1,7 +1,7 @@
 ---
 name: "Dipal Saluja"
 role: "Alumni"
-google_scholar: "https://scholar.google.com/scholar?q=Dipal%20Saluja"
+google_scholar: "https://scholar.google.com/scholar?q=Dipal+Saluja"
 joinDate: "2024"
 linkedin: "https://www.linkedin.com/in/dipal-saluja-19936227"
 order: 5

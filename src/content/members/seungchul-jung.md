@@ -1,7 +1,7 @@
 ---
 name: "SeungChul Jung"
 role: "Alumni"
-google_scholar: "https://scholar.google.com/scholar?q=SeungChul%20Jung"
+google_scholar: "https://scholar.google.com/scholar?q=SeungChul+Jung"
 joinDate: "2024"
 linkedin: "https://www.linkedin.com/in/seungchuljung"
 order: 5

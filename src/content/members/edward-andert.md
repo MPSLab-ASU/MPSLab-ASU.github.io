@@ -1,7 +1,7 @@
 ---
 name: "Edward  Andert"
 role: "Ph.D."
-google_scholar: "https://scholar.google.com/scholar?q=Edward%20%20Andert"
+google_scholar: "https://scholar.google.com/scholar?q=Edward++Andert"
 joinDate: "2024"
 github: "https://github.com/eandert"
 linkedin: "https://www.linkedin.com/in/eddie-andert-00428056/"

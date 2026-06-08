@@ -1,7 +1,7 @@
 ---
 name: "Bryce Holton"
 role: "Alumni"
-google_scholar: "https://scholar.google.com/scholar?q=Bryce%20Holton"
+google_scholar: "https://scholar.google.com/scholar?q=Bryce+Holton"
 joinDate: "2024"
 linkedin: "https://www.linkedin.com/in/bryce-holton-a7850691"
 order: 5

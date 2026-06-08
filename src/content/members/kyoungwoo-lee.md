@@ -3,7 +3,7 @@ name: "Kyoungwoo Lee"
 role: "Visiting Faculty"
 joinDate: "2024"
 website: "http://dclab.yonsei.ac.kr/kwlee/"
-google_scholar: "https://scholar.google.com/scholar?q=Kyoungwoo%20Lee"
+google_scholar: "https://scholar.google.com/scholar?q=Kyoungwoo+Lee"
 order: 7
 image: "/images/members/kyoungwoo-lee.bmp"
 currentPosition: "Professor and Associate Dean of College of Computing, Yonsei University, Seoul, Korea"

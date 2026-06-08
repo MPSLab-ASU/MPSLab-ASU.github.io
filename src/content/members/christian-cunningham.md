@@ -3,7 +3,7 @@ name: "Christian Cunningham"
 role: "Alumni"
 joinDate: "2024"
 website: "https://christiancunningham.xyz/"
-google_scholar: "https://scholar.google.com/scholar?q=Christian%20Cunningham"
+google_scholar: "https://scholar.google.com/scholar?q=Christian+Cunningham"
 order: 5
 image: "/images/members/christian-cunningham.jpg"
 isAlumni: true

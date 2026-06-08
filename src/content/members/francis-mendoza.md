@@ -3,7 +3,7 @@ name: "Francis Mendoza"
 role: "Alumni"
 joinDate: "2024"
 website: "https://orcid.org/0009-0005-6936-3285"
-google_scholar: "https://scholar.google.com/scholar?q=Francis%20Mendoza"
+google_scholar: "https://scholar.google.com/scholar?q=Francis+Mendoza"
 order: 5
 image: "/images/members/francis-mendoza.jpg"
 isAlumni: true

@@ -1,7 +1,7 @@
 ---
 name: "Saleel Kudchadker"
 role: "Alumni"
-google_scholar: "https://scholar.google.com/scholar?q=Saleel%20Kudchadker"
+google_scholar: "https://scholar.google.com/scholar?q=Saleel+Kudchadker"
 joinDate: "2024"
 linkedin: "https://www.linkedin.com/in/saleel-kudchadker-8b800a7"
 order: 5

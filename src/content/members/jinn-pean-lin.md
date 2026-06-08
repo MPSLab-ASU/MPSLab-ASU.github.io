@@ -1,7 +1,7 @@
 ---
 name: "Jinn-Pean Lin"
 role: "Alumni"
-google_scholar: "https://scholar.google.com/scholar?q=Jinn-Pean%20Lin"
+google_scholar: "https://scholar.google.com/scholar?q=Jinn-Pean+Lin"
 joinDate: "2024"
 linkedin: "https://www.linkedin.com/in/晉平-林-b2377a104/"
 order: 5

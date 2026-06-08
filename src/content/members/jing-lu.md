@@ -1,7 +1,7 @@
 ---
 name: "Jing Lu"
 role: "Alumni"
-google_scholar: "https://scholar.google.com/scholar?q=Jing%20Lu"
+google_scholar: "https://scholar.google.com/scholar?q=Jing+Lu"
 joinDate: "2024"
 linkedin: "https://www.linkedin.com/in/jing-lu-06a86021"
 order: 5

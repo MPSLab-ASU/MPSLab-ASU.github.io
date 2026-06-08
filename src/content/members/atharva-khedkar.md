@@ -2,7 +2,7 @@
 name: "Atharva Khedkar"
 role: "Ph.D."
 email: "atharva.khedkar@asu.edu"
-google_scholar: "https://scholar.google.com/scholar?q=Atharva%20Khedkar"
+google_scholar: "https://scholar.google.com/scholar?q=Atharva+Khedkar"
 joinDate: "2024"
 github: "http://github.com/atharvaKhedkar"
 linkedin: "http://www.linkedin.com/in/atharvakhedkar/"

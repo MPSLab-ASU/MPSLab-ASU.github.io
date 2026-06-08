@@ -1,7 +1,7 @@
 ---
 name: "Rishab Kashyap"
 role: "Masters"
-google_scholar: "https://scholar.google.com/scholar?q=Rishab%20Kashyap"
+google_scholar: "https://scholar.google.com/scholar?q=Rishab+Kashyap"
 joinDate: "2024"
 github: "https://github.com/Rishabkashyap14"
 linkedin: "https://www.linkedin.com/in/rishab-kashyap-4bb577195/"

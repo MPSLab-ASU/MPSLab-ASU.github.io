@@ -1,7 +1,7 @@
 ---
 name: "Tushar Rawat"
 role: "Alumni"
-google_scholar: "https://scholar.google.com/scholar?q=Tushar%20Rawat"
+google_scholar: "https://scholar.google.com/scholar?q=Tushar+Rawat"
 joinDate: "2024"
 linkedin: "https://www.linkedin.com/in/tsrawat"
 order: 5
