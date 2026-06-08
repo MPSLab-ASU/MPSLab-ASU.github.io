@@ -37,7 +37,7 @@
     }
 
     .btn-primary {
-        @apply bg-primary text-white px-6 py-3 rounded-lg font-medium hover:bg-primary-hover transition-all duration-200;
+        @apply bg-bg-alt text-text-secondary border border-border px-6 py-3 rounded-lg font-medium hover:text-primary hover:border-primary transition-colors duration-200;
     }
 
     .badge {

@@ -76,7 +76,7 @@ const isActivePath = (href: string) =>
 ---
 
 <nav
-  class="bg-nav-bg text-nav-text sticky top-0 z-50 shadow-lg backdrop-blur-sm"
+  class="bg-nav-bg text-nav-text sticky top-0 z-50 shadow-lg backdrop-blur-sm border-b border-border"
 >
   <div class="w-full px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16 md:h-20">
@@ -98,14 +98,14 @@ const isActivePath = (href: string) =>
           />
         </a>
         <div class="leading-tight">
-          <a href="/" class="font-bold text-base md:text-lg tracking-tight hover:text-white transition-colors">
+          <a href="/" class="font-bold text-base md:text-lg tracking-tight hover:text-primary transition-colors">
             MPS Lab at ASU
           </a>
           <a
             href="https://engineering.asu.edu/"
             target="_blank"
             rel="noopener noreferrer"
-            class="hidden md:block text-xs text-text-muted hover:text-white transition-colors"
+            class="hidden md:block text-xs text-text-muted hover:text-primary transition-colors"
           >
             Ira A. Fulton School of Engineering
           </a>
@@ -117,10 +117,10 @@ const isActivePath = (href: string) =>
         {
           navLinks.map((link) => {
             const baseClass = [
-              "px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 inline-flex items-center gap-1",
+              "px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 inline-flex items-center gap-1 border-b-2 border-transparent",
               isActivePath(link.href)
-                ? "bg-primary text-white"
-                : "text-nav-text/80 hover:text-white hover:bg-white/10",
+                ? "text-primary border-primary"
+                : "text-nav-text/75 hover:text-primary hover:border-primary/60",
             ];
 
             if (!link.children) {
@@ -165,7 +165,7 @@ const isActivePath = (href: string) =>
                     {link.children.map((child) => (
                       <a
                         href={child.href}
-                        class="block px-3 py-2 rounded-lg text-sm text-text-secondary hover:bg-bg-alt hover:text-text"
+                        class="block px-3 py-2 rounded-lg text-sm text-text-secondary hover:text-primary"
                       >
                         {child.label}
                       </a>
@@ -176,7 +176,7 @@ const isActivePath = (href: string) =>
             );
           })
         }
-        <div class="ml-3 pl-3 border-l border-white/20">
+        <div class="ml-3 pl-3 border-l border-border">
           <ThemeToggle client:only="react" />
         </div>
       </div>
@@ -186,7 +186,7 @@ const isActivePath = (href: string) =>
         <ThemeToggle client:only="react" />
         <button
           id="mobile-menu-btn"
-          class="p-2 rounded-lg hover:bg-white/10 transition-colors"
+          class="p-2 rounded-lg hover:bg-bg-alt transition-colors"
           aria-label="Toggle menu"
         >
           <svg
@@ -207,17 +207,17 @@ const isActivePath = (href: string) =>
 
     <!-- Mobile Navigation -->
     <div id="mobile-menu" class="md:hidden hidden pb-4">
-      <div class="space-y-1 pt-2 border-t border-white/10">
+      <div class="space-y-1 pt-2 border-t border-border">
         {
           navLinks.map((link) => (
             <div>
               <a
                 href={link.href}
                 class:list={[
-                  "block px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200",
+                  "block px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 border-l-2 border-transparent",
                   isActivePath(link.href)
-                    ? "bg-primary text-white"
-                    : "text-nav-text/80 hover:text-white hover:bg-white/10",
+                    ? "text-primary border-primary"
+                    : "text-nav-text/75 hover:text-primary hover:border-primary/60",
                 ]}
               >
                 {link.iconPath && (
@@ -238,7 +238,7 @@ const isActivePath = (href: string) =>
                   {link.children.map((child) => (
                     <a
                       href={child.href}
-                      class="block px-4 py-2 rounded-lg text-sm text-nav-text/70 hover:text-white hover:bg-white/10"
+                      class="block px-4 py-2 rounded-lg text-sm text-nav-text/70 hover:text-primary"
                     >
                       {child.label}
                     </a>
