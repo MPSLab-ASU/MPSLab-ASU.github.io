@@ -65,7 +65,7 @@ const currentPath = Astro.url.pathname;
                 Lab Updates
             </h1>
             <p class="text-lg text-hero-text/80 max-w-2xl">
-                The latest news, publications, and announcements from the MPS
+                The latest updates, publications, and announcements from the MPS
                 Lab.
             </p>
         </div>
@@ -79,7 +79,11 @@ const currentPath = Astro.url.pathname;
                 <div class="flex-1">
                     {
                         sortedYears.length > 1 && (
-                            <div class="mb-6 flex flex-wrap gap-2">
+                            <div class="mb-6">
+                                <p class="text-xs font-semibold uppercase tracking-wider text-text-muted mb-2">
+                                    Jump to Year
+                                </p>
+                                <div class="flex flex-wrap gap-2">
                                 {sortedYears.slice(0, 8).map((year) => (
                                     <a
                                         href={`#year-${year}`}
@@ -88,6 +92,7 @@ const currentPath = Astro.url.pathname;
                                         {year}
                                     </a>
                                 ))}
+                                </div>
                             </div>
                         )
                     }
