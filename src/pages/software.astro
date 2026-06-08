@@ -1,0 +1,38 @@
+---
+import fs from "node:fs";
+import path from "node:path";
+import Footer from "../components/astro/Footer.astro";
+import Navbar from "../components/astro/Navbar.astro";
+import SoftwareCard from "../components/react/SoftwareCard";
+import Layout from "../layouts/Layout.astro";
+
+const swPath = path.join(process.cwd(), "src/data/software.json");
+const softwareProjects = JSON.parse(fs.readFileSync(swPath, "utf-8"));
+---
+
+<Layout title="Software">
+  <Navbar slot="header" />
+
+  <section class="py-16 md:py-24">
+    <div class="section-container max-w-5xl mx-auto">
+      <div class="text-center mb-12">
+        <h1 class="text-3xl md:text-4xl font-bold text-text mb-4">
+          Open Source Software
+        </h1>
+        <p class="text-text-secondary max-w-2xl mx-auto">
+          Explore software projects and toolchains developed by MPS Lab.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {
+          softwareProjects.map((project: any) => (
+            <SoftwareCard project={project} />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>

@@ -1,10 +1,10 @@
 ---
 import ThemeToggle from "../react/ThemeToggle";
-
 interface NavItem {
   href: string;
   label: string;
   children?: Array<{ href: string; label: string }>;
+  iconPath?: string;
 }
 
 const navLinks = [
@@ -19,22 +19,15 @@ const navLinks = [
   },
   { href: "/publications", label: "Publications" },
   {
-    href: "/teaching",
-    label: "Teaching",
-    children: [
-      { href: "/teaching#recent-courses", label: "Recent Courses" },
-      { href: "/teaching/quantum-computation", label: "Quantum Computation" },
-      { href: "/teaching/mla", label: "ML Accelerator Design" },
-      { href: "/teaching/cse420", label: "CSE 420/520" },
-      { href: "/teaching/cse325", label: "CSE 325" },
-      { href: "/teaching/older-courses", label: "Older Courses" },
-    ],
+    href: "/software",
+    label: "Software",
   },
   {
     href: "/people",
     label: "People",
     children: [
       { href: "/people", label: "Current Members" },
+      { href: "/teaching", label: "Prof's Teaching" },
       { href: "/people?view=alumni", label: "Alumni" },
       {
         href: "/people?view=alumni#alumni-phd-graduates",
@@ -113,6 +106,16 @@ const isActivePath = (href: string) =>
             if (!link.children) {
               return (
                 <a href={link.href} class:list={baseClass}>
+                  {link.iconPath && (
+                    <svg
+                      class="w-4 h-4"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path d={link.iconPath}></path>
+                    </svg>
+                  )}
                   {link.label}
                 </a>
               );
@@ -197,6 +200,16 @@ const isActivePath = (href: string) =>
                     : "text-nav-text/80 hover:text-white hover:bg-white/10",
                 ]}
               >
+                {link.iconPath && (
+                  <svg
+                    class="w-4 h-4"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path d={link.iconPath}></path>
+                  </svg>
+                )}
                 {link.label}
               </a>
 

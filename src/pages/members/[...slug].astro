@@ -362,6 +362,38 @@ const relatedPublications = parsedBib
                 </div>
             </header>
 
+            {
+                entry.data.role === "Principle Investigator" && (
+                    <section class="mb-10 p-5 rounded-xl border border-border bg-bg-alt/60">
+                        <h2 class="text-lg font-semibold text-text mb-2">
+                            Teaching
+                        </h2>
+                        <p class="text-text-secondary mb-4">
+                            Courses taught by Prof. Aviral Shrivastava.
+                        </p>
+                        <a
+                            href="/teaching"
+                            class="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-white font-medium hover:bg-primary-hover transition-colors"
+                        >
+                            View Teaching
+                            <svg
+                                class="w-4 h-4"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                                ></path>
+                            </svg>
+                        </a>
+                    </section>
+                )
+            }
+
             <!-- Content -->
             <article
                 class="prose prose-lg dark:prose-invert prose-headings:font-heading prose-headings:font-semibold prose-img:rounded-xl prose-a:text-primary hover:prose-a:text-primary-hover max-w-none"
