@@ -3,6 +3,50 @@ import Footer from "../components/astro/Footer.astro";
 import MemberGrid from "../components/astro/MemberGrid.astro";
 import Navbar from "../components/astro/Navbar.astro";
 import Layout from "../layouts/Layout.astro";
+import { getCollection } from "astro:content";
+
+const members = await getCollection("members");
+
+const byFolderPrefix = (prefix: string) =>
+  members.filter(
+    (member) => member.slug === prefix || member.slug.startsWith(`${prefix}/`),
+  );
+
+const hasFolderMembers = (prefix: string) => byFolderPrefix(prefix).length > 0;
+
+const hasAlumniType = (types: string[]) =>
+  byFolderPrefix("alumni").some((member) => {
+    const alumniType = member.data.alumniType;
+    if (!alumniType) return false;
+    const memberTypes = Array.isArray(alumniType) ? alumniType : [alumniType];
+    return memberTypes.some((t) => types.includes(t));
+  });
+
+const hasPI = hasFolderMembers("pi");
+const hasCurrentPhD = hasFolderMembers("current/phd");
+const hasCurrentMasters = hasFolderMembers("current/masters");
+const hasCurrentUndergrad = hasFolderMembers("current/undergraduate");
+const hasCurrentAny =
+  hasPI || hasCurrentPhD || hasCurrentMasters || hasCurrentUndergrad;
+
+const hasAlumniPostdocs = hasAlumniType([
+  "Post-Doctoral Researchers",
+  "Post-Doctoral Researcher",
+]);
+const hasAlumniPhD = hasAlumniType(["Ph.D. Graduates", "Ph.D. Graduate"]);
+const hasAlumniMasters = hasAlumniType([
+  "Master’s Graduates",
+  "Master’s Graduate",
+]);
+const hasAlumniUndergrad = hasAlumniType([
+  "Undergraduate Researchers",
+  "Undergraduate Researcher",
+]);
+const hasAlumniAny =
+  hasAlumniPostdocs || hasAlumniPhD || hasAlumniMasters || hasAlumniUndergrad;
+
+const hasVisitingStudents = hasFolderMembers("visiting/students");
+const hasVisitingFaculty = hasFolderMembers("visiting/faculty");
 ---
 
 <Layout title="People">
@@ -24,30 +68,46 @@ import Layout from "../layouts/Layout.astro";
         <!-- Sidebar -->
         <aside class="w-full relative">
           <div class="sticky top-24 flex flex-col gap-2 w-full pr-4 md:pr-0">
-            <button
-              id="btn-current"
-              class="text-left px-4 py-3 rounded-xl transition-all font-medium bg-primary text-white shadow-md"
-            >
-              Current Members
-            </button>
-            <button
-              id="btn-alumni"
-              class="text-left px-4 py-3 rounded-xl transition-all font-medium text-text-secondary hover:bg-bg-alt hover:text-text"
-            >
-              Alumni
-            </button>
-            <button
-              id="btn-visiting-students"
-              class="text-left px-4 py-3 rounded-xl transition-all font-medium text-text-secondary hover:bg-bg-alt hover:text-text"
-            >
-              Visiting Students
-            </button>
-            <button
-              id="btn-visiting-faculty"
-              class="text-left px-4 py-3 rounded-xl transition-all font-medium text-text-secondary hover:bg-bg-alt hover:text-text"
-            >
-              Visiting Faculty
-            </button>
+            {
+              hasCurrentAny && (
+                <button
+                  id="btn-current"
+                  class="text-left px-4 py-3 rounded-xl transition-all font-medium bg-primary text-white shadow-md"
+                >
+                  Current Members
+                </button>
+              )
+            }
+            {
+              hasAlumniAny && (
+                <button
+                  id="btn-alumni"
+                  class="text-left px-4 py-3 rounded-xl transition-all font-medium text-text-secondary hover:bg-bg-alt hover:text-text"
+                >
+                  Alumni
+                </button>
+              )
+            }
+            {
+              hasVisitingStudents && (
+                <button
+                  id="btn-visiting-students"
+                  class="text-left px-4 py-3 rounded-xl transition-all font-medium text-text-secondary hover:bg-bg-alt hover:text-text"
+                >
+                  Visiting Students
+                </button>
+              )
+            }
+            {
+              hasVisitingFaculty && (
+                <button
+                  id="btn-visiting-faculty"
+                  class="text-left px-4 py-3 rounded-xl transition-all font-medium text-text-secondary hover:bg-bg-alt hover:text-text"
+                >
+                  Visiting Faculty
+                </button>
+              )
+            }
           </div>
         </aside>
 
@@ -55,190 +115,235 @@ import Layout from "../layouts/Layout.astro";
         <div class="flex-grow">
           <!-- Current Members Tab -->
           <div id="tab-current" class="tab-content block">
-            <div class="mb-8 flex flex-wrap gap-3">
-              <a
-                href="#phd-students"
-                class="px-4 py-2 rounded-lg text-sm font-medium bg-bg-alt text-text-secondary hover:bg-primary/10 hover:text-primary transition-colors"
-              >
-                Jump to Ph.D.
-              </a>
-              <a
-                href="#masters-students"
-                class="px-4 py-2 rounded-lg text-sm font-medium bg-bg-alt text-text-secondary hover:bg-primary/10 hover:text-primary transition-colors"
-              >
-                Jump to Master's
-              </a>
-              <a
-                href="#undergraduate-students"
-                class="px-4 py-2 rounded-lg text-sm font-medium bg-bg-alt text-text-secondary hover:bg-primary/10 hover:text-primary transition-colors"
-              >
-                Jump to Undergraduate
-              </a>
-            </div>
+            {
+              (hasCurrentPhD || hasCurrentMasters || hasCurrentUndergrad) && (
+                <div class="mb-8 flex flex-wrap gap-3">
+                  {hasCurrentPhD && (
+                    <a
+                      href="#phd-students"
+                      class="px-4 py-2 rounded-lg text-sm font-medium bg-bg-alt text-text-secondary hover:bg-primary/10 hover:text-primary transition-colors"
+                    >
+                      Jump to Ph.D.
+                    </a>
+                  )}
+                  {hasCurrentMasters && (
+                    <a
+                      href="#masters-students"
+                      class="px-4 py-2 rounded-lg text-sm font-medium bg-bg-alt text-text-secondary hover:bg-primary/10 hover:text-primary transition-colors"
+                    >
+                      Jump to Master's
+                    </a>
+                  )}
+                  {hasCurrentUndergrad && (
+                    <a
+                      href="#undergraduate-students"
+                      class="px-4 py-2 rounded-lg text-sm font-medium bg-bg-alt text-text-secondary hover:bg-primary/10 hover:text-primary transition-colors"
+                    >
+                      Jump to Undergraduate
+                    </a>
+                  )}
+                </div>
+              )
+            }
 
             <!-- Faculty -->
-            <div class="mb-16">
-              <h2
-                class="text-2xl font-bold text-text mb-6 flex items-center gap-3"
-              >
-                <span class="w-1 h-8 bg-primary rounded-full"></span>
-                Principle Investigator
-              </h2>
-              <MemberGrid folderPrefix="pi" />
-            </div>
+            {
+              hasPI && (
+                <div class="mb-16">
+                  <h2 class="text-2xl font-bold text-text mb-6 flex items-center gap-3">
+                    <span class="w-1 h-8 bg-primary rounded-full" />
+                    Principle Investigator
+                  </h2>
+                  <MemberGrid folderPrefix="pi" />
+                </div>
+              )
+            }
 
             <!-- Current Students -->
-            <div id="phd-students" class="mb-16 scroll-mt-28">
-              <h2
-                class="text-2xl font-bold text-text mb-6 flex items-center gap-3"
-              >
-                <span class="w-1 h-8 bg-accent rounded-full"></span>
-                Ph.D. Students
-              </h2>
-              <MemberGrid folderPrefix="current/phd" />
-            </div>
+            {
+              hasCurrentPhD && (
+                <div id="phd-students" class="mb-16 scroll-mt-28">
+                  <h2 class="text-2xl font-bold text-text mb-6 flex items-center gap-3">
+                    <span class="w-1 h-8 bg-accent rounded-full" />
+                    Ph.D. Students
+                  </h2>
+                  <MemberGrid folderPrefix="current/phd" />
+                </div>
+              )
+            }
 
-            <div id="masters-students" class="mb-16 scroll-mt-28">
-              <h2
-                class="text-2xl font-bold text-text mb-6 flex items-center gap-3"
-              >
-                <span class="w-1 h-8 bg-green-500 rounded-full"></span>
-                Master's Students
-              </h2>
-              <MemberGrid folderPrefix="current/masters" />
-            </div>
+            {
+              hasCurrentMasters && (
+                <div id="masters-students" class="mb-16 scroll-mt-28">
+                  <h2 class="text-2xl font-bold text-text mb-6 flex items-center gap-3">
+                    <span class="w-1 h-8 bg-green-500 rounded-full" />
+                    Master's Students
+                  </h2>
+                  <MemberGrid folderPrefix="current/masters" />
+                </div>
+              )
+            }
 
-            <div id="undergraduate-students" class="mb-16 scroll-mt-28">
-              <h2
-                class="text-2xl font-bold text-text mb-6 flex items-center gap-3"
-              >
-                <span class="w-1 h-8 bg-purple-500 rounded-full"></span>
-                Undergraduate Students
-              </h2>
-              <MemberGrid folderPrefix="current/undergraduate" />
-            </div>
+            {
+              hasCurrentUndergrad && (
+                <div id="undergraduate-students" class="mb-16 scroll-mt-28">
+                  <h2 class="text-2xl font-bold text-text mb-6 flex items-center gap-3">
+                    <span class="w-1 h-8 bg-purple-500 rounded-full" />
+                    Undergraduate Students
+                  </h2>
+                  <MemberGrid folderPrefix="current/undergraduate" />
+                </div>
+              )
+            }
           </div>
 
           <!-- Alumni Tab -->
           <div id="tab-alumni" class="tab-content hidden">
-            <div class="mb-8 flex flex-wrap gap-3">
-              <a
-                href="#alumni-postdocs"
-                class="px-4 py-2 rounded-lg text-sm font-medium bg-bg-alt text-text-secondary hover:bg-primary/10 hover:text-primary transition-colors"
-              >
-                Jump to Postdocs
-              </a>
-              <a
-                href="#alumni-phd-graduates"
-                class="px-4 py-2 rounded-lg text-sm font-medium bg-bg-alt text-text-secondary hover:bg-primary/10 hover:text-primary transition-colors"
-              >
-                Jump to Ph.D. Graduates
-              </a>
-              <a
-                href="#alumni-masters-graduates"
-                class="px-4 py-2 rounded-lg text-sm font-medium bg-bg-alt text-text-secondary hover:bg-primary/10 hover:text-primary transition-colors"
-              >
-                Jump to Master's Graduates
-              </a>
-              <a
-                href="#alumni-undergraduate-researchers"
-                class="px-4 py-2 rounded-lg text-sm font-medium bg-bg-alt text-text-secondary hover:bg-primary/10 hover:text-primary transition-colors"
-              >
-                Jump to Undergraduate Researchers
-              </a>
-            </div>
+            {
+              hasAlumniAny && (
+                <div class="mb-8 flex flex-wrap gap-3">
+                  {hasAlumniPostdocs && (
+                    <a
+                      href="#alumni-postdocs"
+                      class="px-4 py-2 rounded-lg text-sm font-medium bg-bg-alt text-text-secondary hover:bg-primary/10 hover:text-primary transition-colors"
+                    >
+                      Jump to Postdocs
+                    </a>
+                  )}
+                  {hasAlumniPhD && (
+                    <a
+                      href="#alumni-phd-graduates"
+                      class="px-4 py-2 rounded-lg text-sm font-medium bg-bg-alt text-text-secondary hover:bg-primary/10 hover:text-primary transition-colors"
+                    >
+                      Jump to Ph.D. Graduates
+                    </a>
+                  )}
+                  {hasAlumniMasters && (
+                    <a
+                      href="#alumni-masters-graduates"
+                      class="px-4 py-2 rounded-lg text-sm font-medium bg-bg-alt text-text-secondary hover:bg-primary/10 hover:text-primary transition-colors"
+                    >
+                      Jump to Master's Graduates
+                    </a>
+                  )}
+                  {hasAlumniUndergrad && (
+                    <a
+                      href="#alumni-undergraduate-researchers"
+                      class="px-4 py-2 rounded-lg text-sm font-medium bg-bg-alt text-text-secondary hover:bg-primary/10 hover:text-primary transition-colors"
+                    >
+                      Jump to Undergraduate Researchers
+                    </a>
+                  )}
+                </div>
+              )
+            }
 
             <!-- Post-docs -->
-            <div id="alumni-postdocs" class="mb-16 scroll-mt-28">
-              <h2
-                class="text-2xl font-bold text-text mb-6 flex items-center gap-3"
-              >
-                <span class="w-1 h-8 bg-purple-500 rounded-full"></span>
-                Post-Doctoral Researchers
-              </h2>
-              <MemberGrid
-                folderPrefix="alumni"
-                alumniTypeFilter={[
-                  "Post-Doctoral Researchers",
-                  "Post-Doctoral Researcher",
-                ]}
-              />
-            </div>
+            {
+              hasAlumniPostdocs && (
+                <div id="alumni-postdocs" class="mb-16 scroll-mt-28">
+                  <h2 class="text-2xl font-bold text-text mb-6 flex items-center gap-3">
+                    <span class="w-1 h-8 bg-purple-500 rounded-full" />
+                    Post-Doctoral Researchers
+                  </h2>
+                  <MemberGrid
+                    folderPrefix="alumni"
+                    alumniTypeFilter={[
+                      "Post-Doctoral Researchers",
+                      "Post-Doctoral Researcher",
+                    ]}
+                  />
+                </div>
+              )
+            }
 
             <!-- Ph.D. -->
-            <div id="alumni-phd-graduates" class="mb-16 scroll-mt-28">
-              <h2
-                class="text-2xl font-bold text-text mb-6 flex items-center gap-3"
-              >
-                <span class="w-1 h-8 bg-blue-500 rounded-full"></span>
-                Ph.D. Graduates
-              </h2>
-              <MemberGrid
-                folderPrefix="alumni"
-                alumniTypeFilter={["Ph.D. Graduates", "Ph.D. Graduate"]}
-              />
-            </div>
+            {
+              hasAlumniPhD && (
+                <div id="alumni-phd-graduates" class="mb-16 scroll-mt-28">
+                  <h2 class="text-2xl font-bold text-text mb-6 flex items-center gap-3">
+                    <span class="w-1 h-8 bg-blue-500 rounded-full" />
+                    Ph.D. Graduates
+                  </h2>
+                  <MemberGrid
+                    folderPrefix="alumni"
+                    alumniTypeFilter={["Ph.D. Graduates", "Ph.D. Graduate"]}
+                  />
+                </div>
+              )
+            }
 
             <!-- Masters -->
-            <div id="alumni-masters-graduates" class="mb-16 scroll-mt-28">
-              <h2
-                class="text-2xl font-bold text-text mb-6 flex items-center gap-3"
-              >
-                <span class="w-1 h-8 bg-green-500 rounded-full"></span>
-                Master's Graduates
-              </h2>
-              <MemberGrid
-                folderPrefix="alumni"
-                alumniTypeFilter={["Master’s Graduates", "Master’s Graduate"]}
-              />
-            </div>
+            {
+              hasAlumniMasters && (
+                <div id="alumni-masters-graduates" class="mb-16 scroll-mt-28">
+                  <h2 class="text-2xl font-bold text-text mb-6 flex items-center gap-3">
+                    <span class="w-1 h-8 bg-green-500 rounded-full" />
+                    Master's Graduates
+                  </h2>
+                  <MemberGrid
+                    folderPrefix="alumni"
+                    alumniTypeFilter={[
+                      "Master’s Graduates",
+                      "Master’s Graduate",
+                    ]}
+                  />
+                </div>
+              )
+            }
 
             <!-- Undergraduates -->
-            <div
-              id="alumni-undergraduate-researchers"
-              class="mb-16 scroll-mt-28"
-            >
-              <h2
-                class="text-2xl font-bold text-text mb-6 flex items-center gap-3"
-              >
-                <span class="w-1 h-8 bg-text-muted rounded-full"></span>
-                Undergraduate Researchers
-              </h2>
-              <MemberGrid
-                folderPrefix="alumni"
-                alumniTypeFilter={[
-                  "Undergraduate Researchers",
-                  "Undergraduate Researcher",
-                ]}
-              />
-            </div>
+            {
+              hasAlumniUndergrad && (
+                <div
+                  id="alumni-undergraduate-researchers"
+                  class="mb-16 scroll-mt-28"
+                >
+                  <h2 class="text-2xl font-bold text-text mb-6 flex items-center gap-3">
+                    <span class="w-1 h-8 bg-text-muted rounded-full" />
+                    Undergraduate Researchers
+                  </h2>
+                  <MemberGrid
+                    folderPrefix="alumni"
+                    alumniTypeFilter={[
+                      "Undergraduate Researchers",
+                      "Undergraduate Researcher",
+                    ]}
+                  />
+                </div>
+              )
+            }
           </div>
 
           <!-- Visiting Students Tab -->
-          <div id="tab-visiting-students" class="tab-content hidden">
-            <div id="visiting-students-list" class="scroll-mt-28">
-              <h2
-                class="text-2xl font-bold text-text mb-6 flex items-center gap-3"
-              >
-                <span class="w-1 h-8 bg-blue-500 rounded-full"></span>
-                Visiting Students
-              </h2>
-              <MemberGrid folderPrefix="visiting/students" />
-            </div>
-          </div>
+          {
+            hasVisitingStudents && (
+              <div id="tab-visiting-students" class="tab-content hidden">
+                <div id="visiting-students-list" class="scroll-mt-28">
+                  <h2 class="text-2xl font-bold text-text mb-6 flex items-center gap-3">
+                    <span class="w-1 h-8 bg-blue-500 rounded-full" />
+                    Visiting Students
+                  </h2>
+                  <MemberGrid folderPrefix="visiting/students" />
+                </div>
+              </div>
+            )
+          }
 
           <!-- Visiting Faculty Tab -->
-          <div id="tab-visiting-faculty" class="tab-content hidden">
-            <div id="visiting-faculty-list" class="scroll-mt-28">
-              <h2
-                class="text-2xl font-bold text-text mb-6 flex items-center gap-3"
-              >
-                <span class="w-1 h-8 bg-orange-500 rounded-full"></span>
-                Visiting Faculty
-              </h2>
-              <MemberGrid folderPrefix="visiting/faculty" />
-            </div>
-          </div>
+          {
+            hasVisitingFaculty && (
+              <div id="tab-visiting-faculty" class="tab-content hidden">
+                <div id="visiting-faculty-list" class="scroll-mt-28">
+                  <h2 class="text-2xl font-bold text-text mb-6 flex items-center gap-3">
+                    <span class="w-1 h-8 bg-orange-500 rounded-full" />
+                    Visiting Faculty
+                  </h2>
+                  <MemberGrid folderPrefix="visiting/faculty" />
+                </div>
+              </div>
+            )
+          }
         </div>
       </div>
     </div>
@@ -249,7 +354,16 @@ import Layout from "../layouts/Layout.astro";
 
 <script>
   function setupTabs() {
-    const tabs = ["current", "alumni", "visiting-students", "visiting-faculty"];
+    const tabs = [
+      "current",
+      "alumni",
+      "visiting-students",
+      "visiting-faculty",
+    ].filter(
+      (tab) =>
+        Boolean(document.getElementById(`btn-${tab}`)) &&
+        Boolean(document.getElementById(`tab-${tab}`)),
+    );
     const baseClass =
       "text-left px-4 py-3 rounded-xl transition-all font-medium text-text-secondary hover:bg-bg-alt hover:text-text";
     const activeClass =
@@ -290,8 +404,12 @@ import Layout from "../layouts/Layout.astro";
       const requestedView = params.get("view");
       const hash = window.location.hash.replace("#", "");
 
+      if (tabs.length === 0) return;
+
       if (requestedView && tabs.includes(requestedView)) {
         activateTab(requestedView);
+      } else if (!document.querySelector(".tab-content.block")) {
+        activateTab(tabs[0]);
       }
 
       if (
