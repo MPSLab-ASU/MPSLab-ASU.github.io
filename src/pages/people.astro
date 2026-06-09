@@ -84,7 +84,7 @@ import Layout from "../layouts/Layout.astro";
                 <span class="w-1 h-8 bg-primary rounded-full"></span>
                 Principle Investigator
               </h2>
-              <MemberGrid roleFilter="Principle Investigator" />
+              <MemberGrid folderPrefix="pi" />
             </div>
 
             <!-- Current Students -->
@@ -95,7 +95,7 @@ import Layout from "../layouts/Layout.astro";
                 <span class="w-1 h-8 bg-accent rounded-full"></span>
                 Ph.D. Students
               </h2>
-              <MemberGrid roleFilter="Ph.D." />
+              <MemberGrid folderPrefix="current/phd" />
             </div>
 
             <div id="masters-students" class="mb-16 scroll-mt-28">
@@ -105,7 +105,7 @@ import Layout from "../layouts/Layout.astro";
                 <span class="w-1 h-8 bg-green-500 rounded-full"></span>
                 Master's Students
               </h2>
-              <MemberGrid roleFilter="Masters" />
+              <MemberGrid folderPrefix="current/masters" />
             </div>
 
             <div id="undergraduate-students" class="mb-16 scroll-mt-28">
@@ -115,7 +115,7 @@ import Layout from "../layouts/Layout.astro";
                 <span class="w-1 h-8 bg-purple-500 rounded-full"></span>
                 Undergraduate Students
               </h2>
-              <MemberGrid roleFilter="Undergraduate" />
+              <MemberGrid folderPrefix="current/undergraduate" />
             </div>
           </div>
 
@@ -157,7 +157,7 @@ import Layout from "../layouts/Layout.astro";
                 Post-Doctoral Researchers
               </h2>
               <MemberGrid
-                roleFilter="Alumni"
+                folderPrefix="alumni"
                 alumniTypeFilter={[
                   "Post-Doctoral Researchers",
                   "Post-Doctoral Researcher",
@@ -174,7 +174,7 @@ import Layout from "../layouts/Layout.astro";
                 Ph.D. Graduates
               </h2>
               <MemberGrid
-                roleFilter="Alumni"
+                folderPrefix="alumni"
                 alumniTypeFilter={["Ph.D. Graduates", "Ph.D. Graduate"]}
               />
             </div>
@@ -188,7 +188,7 @@ import Layout from "../layouts/Layout.astro";
                 Master's Graduates
               </h2>
               <MemberGrid
-                roleFilter="Alumni"
+                folderPrefix="alumni"
                 alumniTypeFilter={["Master’s Graduates", "Master’s Graduate"]}
               />
             </div>
@@ -205,7 +205,7 @@ import Layout from "../layouts/Layout.astro";
                 Undergraduate Researchers
               </h2>
               <MemberGrid
-                roleFilter="Alumni"
+                folderPrefix="alumni"
                 alumniTypeFilter={[
                   "Undergraduate Researchers",
                   "Undergraduate Researcher",
@@ -223,7 +223,7 @@ import Layout from "../layouts/Layout.astro";
                 <span class="w-1 h-8 bg-blue-500 rounded-full"></span>
                 Visiting Students
               </h2>
-              <MemberGrid roleFilter="Visiting Student" />
+              <MemberGrid folderPrefix="visiting/students" />
             </div>
           </div>
 
@@ -236,7 +236,7 @@ import Layout from "../layouts/Layout.astro";
                 <span class="w-1 h-8 bg-orange-500 rounded-full"></span>
                 Visiting Faculty
               </h2>
-              <MemberGrid roleFilter="Visiting Faculty" />
+              <MemberGrid folderPrefix="visiting/faculty" />
             </div>
           </div>
         </div>

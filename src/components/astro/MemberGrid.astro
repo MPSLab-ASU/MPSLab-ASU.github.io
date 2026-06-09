@@ -5,12 +5,32 @@ interface Props {
   roleFilter?: string;
   researchFilter?: string;
   alumniTypeFilter?: string | string[];
+  folderPrefix?: string | string[];
   compact?: boolean;
 }
 
-const { roleFilter, researchFilter, alumniTypeFilter, compact = false } = Astro.props;
+const {
+  roleFilter,
+  researchFilter,
+  alumniTypeFilter,
+  folderPrefix,
+  compact = false,
+} = Astro.props;
+
+const normalizedFolderPrefixes = folderPrefix
+  ? (Array.isArray(folderPrefix) ? folderPrefix : [folderPrefix]).map((prefix) =>
+      prefix.replace(/^\/+|\/+$/g, ''),
+    )
+  : [];
 
 let allMembers = await getCollection('members');
+
+if (normalizedFolderPrefixes.length > 0) {
+  allMembers = allMembers.filter((member) =>
+    normalizedFolderPrefixes.some((prefix) => member.slug.startsWith(`${prefix}/`) || member.slug === prefix),
+  );
+}
+
 if (roleFilter === 'Alumni') {
   allMembers = allMembers.filter(m => m.data.role === 'Alumni' || m.data.isAlumni === true);
 } else if (roleFilter) {
@@ -61,7 +81,9 @@ const getGraduationValue = (gradStr: string | string[] | undefined): number => {
   return maxValue;
 }
 
-if (roleFilter === 'Alumni' || alumniTypeFilter) {
+const isAlumniFolder = normalizedFolderPrefixes.some((prefix) => prefix === 'alumni' || prefix.startsWith('alumni/'));
+
+if (roleFilter === 'Alumni' || alumniTypeFilter || isAlumniFolder) {
   // Sort by graduation (newest to oldest), fallback to order
   allMembers.sort((a, b) => {
     const valA = getGraduationValue(a.data.graduated);
@@ -88,22 +110,26 @@ const roleColors: Record<string, string> = {
 
 {allMembers.length > 0 && compact && (
   <ul class="space-y-3 list-disc list-inside text-text-secondary">
-    {allMembers.map((member) => (
-      <li>
-        <a href={`/members/${member.slug}`} class="hover:text-primary transition-colors hover:underline text-lg">
-          {member.data.name}
-        </a>
-      </li>
-    ))}
+    {allMembers.map((member) => {
+      const memberSlug = member.slug.split('/').pop() ?? member.slug;
+      return (
+        <li>
+          <a href={`/members/${memberSlug}`} class="hover:text-primary transition-colors hover:underline text-lg">
+            {member.data.name}
+          </a>
+        </li>
+      );
+    })}
   </ul>
 )}
 
 {allMembers.length > 0 && !compact && (
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
   {allMembers.map(async (member) => {
+    const memberSlug = member.slug.split('/').pop() ?? member.slug;
     const { Content } = await member.render();
     return (
-      <a href={`/members/${member.slug}`} class="card p-6 block group hover:-translate-y-1 transition-transform">
+      <a href={`/members/${memberSlug}`} class="card p-6 block group hover:-translate-y-1 transition-transform">
         {member.data.image || member.data.photoUrl ? (
           <img src={member.data.image || member.data.photoUrl} alt={member.data.name} class="w-20 h-20 mx-auto mb-4 rounded-full object-cover shadow-sm bg-white dark:bg-transparent border-2 border-black dark:border-white" />
         ) : (

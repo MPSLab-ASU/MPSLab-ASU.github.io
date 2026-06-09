@@ -79,7 +79,7 @@ const isActivePath = (href: string) =>
   class="bg-nav-bg text-nav-text sticky top-0 z-50 shadow-lg backdrop-blur-sm border-b border-border"
 >
   <div class="w-full px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16 md:h-20">
+    <div class="flex items-center justify-between h-16 xl:h-20">
       <!-- Logo / Lab Name -->
       <div class="flex items-center gap-3">
         <a
@@ -92,20 +92,23 @@ const isActivePath = (href: string) =>
           <img
             src="/images/asu/asu-logo-color.png"
             alt="Arizona State University logo"
-            class="h-10 md:h-12 w-auto object-contain group-hover:scale-[1.02] transition-transform"
+            class="h-10 xl:h-12 w-auto object-contain group-hover:scale-[1.02] transition-transform"
             loading="eager"
             decoding="async"
           />
         </a>
         <div class="leading-tight">
-          <a href="/" class="font-bold text-base md:text-lg tracking-tight hover:text-primary transition-colors">
+          <a
+            href="/"
+            class="font-bold text-base xl:text-lg tracking-tight hover:text-primary transition-colors"
+          >
             MPS Lab at ASU
           </a>
           <a
             href="https://engineering.asu.edu/"
             target="_blank"
             rel="noopener noreferrer"
-            class="hidden md:block text-xs text-text-muted hover:text-primary transition-colors"
+            class="hidden xl:block text-xs text-text-muted hover:text-primary transition-colors"
           >
             Ira A. Fulton School of Engineering
           </a>
@@ -113,7 +116,7 @@ const isActivePath = (href: string) =>
       </div>
 
       <!-- Desktop Navigation -->
-      <div class="hidden md:flex items-center space-x-1">
+      <div class="hidden xl:flex items-center space-x-1">
         {
           navLinks.map((link) => {
             const baseClass = [
@@ -183,13 +186,15 @@ const isActivePath = (href: string) =>
       </div>
 
       <!-- Mobile Menu Button -->
-      <div class="md:hidden flex items-center space-x-2">
+      <div class="xl:hidden flex items-center space-x-2">
         <GlobalSearch client:only="react" />
         <ThemeToggle client:only="react" />
         <button
           id="mobile-menu-btn"
           class="p-2 rounded-lg hover:bg-bg-alt transition-colors"
           aria-label="Toggle menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
         >
           <svg
             class="w-6 h-6"
@@ -208,44 +213,81 @@ const isActivePath = (href: string) =>
     </div>
 
     <!-- Mobile Navigation -->
-    <div id="mobile-menu" class="md:hidden hidden pb-4">
+    <div
+      id="mobile-menu"
+      class="xl:hidden hidden pb-4 max-h-[calc(100vh-5rem)] overflow-y-auto"
+    >
       <div class="space-y-1 pt-2 border-t border-border">
         {
           navLinks.map((link) => (
             <div>
-              <a
-                href={link.href}
-                class:list={[
-                  "block px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 border-l-2 border-transparent",
-                  isActivePath(link.href)
-                    ? "text-primary border-primary"
-                    : "text-nav-text/75 hover:text-primary hover:border-primary/60",
-                ]}
-              >
-                {link.iconPath && (
-                  <svg
-                    class="w-4 h-4"
-                    fill="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path d={link.iconPath} />
-                  </svg>
-                )}
-                {link.label}
-              </a>
+              {!link.children && (
+                <a
+                  href={link.href}
+                  class:list={[
+                    "block px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 border-l-2 border-transparent",
+                    isActivePath(link.href)
+                      ? "text-primary border-primary"
+                      : "text-nav-text/75 hover:text-primary hover:border-primary/60",
+                  ]}
+                >
+                  {link.iconPath && (
+                    <svg
+                      class="w-4 h-4"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path d={link.iconPath} />
+                    </svg>
+                  )}
+                  {link.label}
+                </a>
+              )}
 
               {link.children && (
-                <div class="ml-4 mt-1 space-y-1">
-                  {link.children.map((child) => (
+                <details class="group">
+                  <summary
+                    class:list={[
+                      "list-none cursor-pointer flex items-center justify-between px-4 py-2 rounded-lg text-sm font-medium transition-colors duration-200 border-l-2 border-transparent",
+                      isActivePath(link.href)
+                        ? "text-primary border-primary"
+                        : "text-nav-text/75 hover:text-primary hover:border-primary/60",
+                    ]}
+                  >
+                    <span>{link.label}</span>
+                    <svg
+                      class="w-4 h-4 transition-transform group-open:rotate-180"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </summary>
+                  <div class="ml-4 mt-1 space-y-1">
                     <a
-                      href={child.href}
+                      href={link.href}
                       class="block px-4 py-2 rounded-lg text-sm text-nav-text/70 hover:text-primary"
                     >
-                      {child.label}
+                      {link.label} Overview
                     </a>
-                  ))}
-                </div>
+                    {link.children.map((child) => (
+                      <a
+                        href={child.href}
+                        class="block px-4 py-2 rounded-lg text-sm text-nav-text/70 hover:text-primary"
+                      >
+                        {child.label}
+                      </a>
+                    ))}
+                  </div>
+                </details>
               )}
             </div>
           ))
@@ -260,5 +302,7 @@ const isActivePath = (href: string) =>
   const menu = document.getElementById("mobile-menu");
   btn?.addEventListener("click", () => {
     menu?.classList.toggle("hidden");
+    const isExpanded = btn.getAttribute("aria-expanded") === "true";
+    btn.setAttribute("aria-expanded", String(!isExpanded));
   });
 </script>

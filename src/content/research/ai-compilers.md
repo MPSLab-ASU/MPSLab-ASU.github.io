@@ -3,7 +3,7 @@ title: "AI-driven Multi-Level Compilers"
 status: "Active"
 description: "Leveraging machine learning techniques to optimize compiler designs, creating intelligent intermediate representations for emerging and heterogeneous architectures."
 icon: "BookOpen"
-order: 3
+order: 2
 ---
 
 ## Vision

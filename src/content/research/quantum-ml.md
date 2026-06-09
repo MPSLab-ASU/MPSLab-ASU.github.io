@@ -3,7 +3,7 @@ title: "Quantum Machine Learning"
 status: "Active"
 description: "Pioneering the next generation of artificial intelligence by exploring the intersection of quantum computing and advanced machine learning models."
 icon: "Brain"
-order: 4
+order: 3
 ---
 
 ## Vision
