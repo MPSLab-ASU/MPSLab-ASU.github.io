@@ -18,6 +18,7 @@ export interface Publication {
   entryTags: {
     author?: string;
     title?: string;
+    displayTitle?: string;
     booktitle?: string;
     journal?: string;
     year?: string;
@@ -126,7 +127,7 @@ export default function PublicationCard({
     <div className="p-5 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-card)] hover:shadow-md transition-all duration-200 group flex flex-col h-full">
       <div className="flex-1 min-w-0 mb-4">
         <h3 className="font-semibold text-[var(--color-text)] group-hover:text-[var(--color-primary)] transition-colors leading-snug">
-          {pub.entryTags.title || pub.citationKey}
+          {pub.entryTags.displayTitle || pub.entryTags.title || pub.citationKey}
         </h3>
         <p className="text-sm text-[var(--color-text-secondary)] mt-1">
           {pub.entryTags.author?.replace(/ and /gi, "; ")}

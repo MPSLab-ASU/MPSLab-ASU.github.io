@@ -212,6 +212,7 @@ export default function PublicationSearch({
     () =>
       new Fuse(papers, {
         keys: [
+          { name: "entryTags.displayTitle", weight: 0.45 },
           { name: "entryTags.title", weight: 0.4 },
           { name: "entryTags.author", weight: 0.3 },
           { name: "entryTags.research", weight: 0.2 },

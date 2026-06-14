@@ -6,6 +6,7 @@ import Footer from "../../components/astro/Footer.astro";
 import Navbar from "../../components/astro/Navbar.astro";
 import type { Publication } from "../../components/react/PublicationCard";
 import Layout from "../../layouts/Layout.astro";
+import { withDisplayTitles } from "../../utils/bibtex";
 
 export async function getStaticPaths() {
   const memberEntries = await getCollection("members");
@@ -37,7 +38,7 @@ try {
   const bibContent = fs.readFileSync(bibPath, "utf-8");
   // @ts-ignore - bibtex-parse-js doesn't have proper types
   const bibtexParse = await import("bibtex-parse-js");
-  parsedBib = bibtexParse.toJSON(bibContent);
+  parsedBib = withDisplayTitles(bibtexParse.toJSON(bibContent));
 } catch (e) {
   console.error("Error parsing bibtex:", e);
 }
@@ -395,10 +396,12 @@ const relatedPublications = parsedBib
               {relatedPublications.map((pub) => (
                 <li>
                   <a
-                    href={`/publications?q=${encodeURIComponent(pub.entryTags.title || "")}`}
+                    href={`/publications?q=${encodeURIComponent(pub.entryTags.displayTitle || pub.entryTags.title || "")}`}
                     class="hover:text-primary transition-colors hover:underline"
                   >
-                    {pub.entryTags.title || pub.citationKey}
+                    {pub.entryTags.displayTitle ||
+                      pub.entryTags.title ||
+                      pub.citationKey}
                   </a>
                 </li>
               ))}
