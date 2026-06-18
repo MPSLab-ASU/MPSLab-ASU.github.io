@@ -33,15 +33,25 @@ function SearchableFilterField({
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const onMouseDown = (event: MouseEvent) => {
-      if (!containerRef.current?.contains(event.target as Node)) {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
 
-    document.addEventListener("mousedown", onMouseDown);
-    return () => document.removeEventListener("mousedown", onMouseDown);
-  }, []);
+    if (isOpen) {
+      setTimeout(() => {
+        document.addEventListener("mousedown", handleClickOutside);
+      }, 0);
+
+      return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+      };
+    }
+  }, [isOpen]);
 
   const visibleOptions = useMemo(() => {
     const q = inputValue.trim().toLowerCase();
@@ -49,75 +59,79 @@ function SearchableFilterField({
     return options.filter((opt) => opt.toLowerCase().includes(q));
   }, [options, inputValue]);
 
-  return (
-    <div className="relative" ref={containerRef}>
-      <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[var(--color-text-muted)] pointer-events-none" />
-      <input
-        type="text"
-        value={inputValue}
-        onFocus={() => setIsOpen(true)}
-        onChange={(e) => {
-          const next = e.target.value;
-          onInputChange(next);
-          onValueChange(next);
-          setIsOpen(true);
-        }}
-        placeholder={placeholder}
-        className="w-full pl-9 pr-9 py-2.5 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-card)] text-[var(--color-text)] text-sm outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
-      />
-      <button
-        type="button"
-        onClick={() => setIsOpen((prev) => !prev)}
-        className="absolute right-2 top-1/2 -translate-y-1/2 text-[var(--color-text-muted)] hover:text-[var(--color-text)]"
-        aria-label={`Toggle ${allLabel} options`}
-      >
-        <ChevronDown
-          className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
-        />
-      </button>
+  const handleSelectOption = (selectedValue: string) => {
+    onInputChange(selectedValue);
+    onValueChange(selectedValue);
+    setIsOpen(false);
+  };
 
-      {isOpen && (
-        <div className="absolute z-30 mt-2 w-full overflow-hidden rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-card)] shadow-lg">
+  const handleClearFilter = () => {
+    onInputChange("");
+    onValueChange("");
+    setIsOpen(false);
+  };
+
+  return (
+    <div className="relative w-full" ref={containerRef}>
+      <div className="relative">
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-[var(--color-text-muted)] pointer-events-none" />
+        <input
+          type="text"
+          value={inputValue}
+          onFocus={() => setIsOpen(true)}
+          onChange={(e) => {
+            onInputChange(e.target.value);
+            setIsOpen(true);
+          }}
+          placeholder={placeholder}
+          className="w-full pl-9 pr-9 py-2.5 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-card)] text-[var(--color-text)] text-sm outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
+        />
+        <button
+          type="button"
+          onClick={() => setIsOpen(!isOpen)}
+          className="absolute right-2 top-1/2 -translate-y-1/2 text-[var(--color-text-muted)] hover:text-[var(--color-text)] p-1"
+          aria-label={`Toggle ${allLabel} options`}
+        >
+          <ChevronDown
+            className={`w-4 h-4 transition-transform ${isOpen ? "rotate-180" : ""}`}
+          />
+        </button>
+      </div>
+
+      {isOpen && options.length > 0 && (
+        <div className="absolute left-0 right-0 top-full mt-1 z-50 overflow-hidden rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-card)] shadow-xl">
           <button
             type="button"
-            onClick={() => {
-              onInputChange("");
-              onValueChange("");
-              setIsOpen(false);
-            }}
-            className={`w-full text-left px-3 py-2 text-sm transition-colors ${
+            onClick={handleClearFilter}
+            className={`w-full text-left px-3 py-2 text-sm transition-colors border-b border-[var(--color-border)] ${
               value === ""
-                ? "bg-[var(--color-primary)]/15 text-[var(--color-primary)]"
+                ? "bg-[var(--color-primary)]/15 text-[var(--color-primary)] font-medium"
                 : "text-[var(--color-text-secondary)] hover:bg-[var(--color-bg-alt)]"
             }`}
           >
             {allLabel}
           </button>
 
-          <div className="max-h-52 overflow-y-auto border-t border-[var(--color-border)]">
+          <div className="max-h-48 overflow-y-auto">
             {visibleOptions.length > 0 ? (
               visibleOptions.map((option) => (
                 <button
                   key={option}
                   type="button"
-                  onClick={() => {
-                    onInputChange(option);
-                    onValueChange(option);
-                    setIsOpen(false);
-                  }}
-                  className={`w-full text-left px-3 py-2 text-sm transition-colors ${
+                  onClick={() => handleSelectOption(option)}
+                  className={`w-full text-left px-3 py-2 text-sm transition-colors hover:bg-[var(--color-bg-alt)] ${
                     value === option
-                      ? "bg-[var(--color-primary)]/15 text-[var(--color-primary)]"
-                      : "text-[var(--color-text)] hover:bg-[var(--color-bg-alt)]"
+                      ? "bg-[var(--color-primary)]/15 text-[var(--color-primary)] font-medium"
+                      : "text-[var(--color-text)]"
                   }`}
                 >
                   {option}
                 </button>
               ))
             ) : (
-              <p className="px-3 py-2 text-sm text-[var(--color-text-muted)]">
-                No matches
-              </p>
+              <div className="px-3 py-2 text-sm text-[var(--color-text-muted)]">
+                No matches found
+              </div>
             )}
           </div>
         </div>
@@ -212,6 +226,7 @@ export default function PublicationSearch({
     () =>
       new Fuse(papers, {
         keys: [
+          { name: "entryTags.displayTitle", weight: 0.45 },
           { name: "entryTags.title", weight: 0.4 },
           { name: "entryTags.author", weight: 0.3 },
           { name: "entryTags.research", weight: 0.2 },

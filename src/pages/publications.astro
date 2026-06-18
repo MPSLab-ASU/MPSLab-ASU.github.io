@@ -4,8 +4,10 @@ import fs from "node:fs";
 import path from "node:path";
 import Footer from "../components/astro/Footer.astro";
 import Navbar from "../components/astro/Navbar.astro";
+import type { Publication } from "../components/react/PublicationCard";
 import PublicationSearch from "../components/react/PublicationSearch";
 import Layout from "../layouts/Layout.astro";
+import { withDisplayTitles } from "../utils/bibtex";
 
 // Build-time BibTeX parsing
 const bibPath = path.join(process.cwd(), "src/data/publications.bib");
@@ -13,7 +15,9 @@ const bibContent = fs.readFileSync(bibPath, "utf-8");
 
 // @ts-ignore - bibtex-parse-js doesn't have proper types
 const bibtexParse = await import("bibtex-parse-js");
-const parsedBib = bibtexParse.toJSON(bibContent);
+const parsedBib: Publication[] = withDisplayTitles(
+  bibtexParse.toJSON(bibContent),
+);
 
 const membersCollection = await getCollection("members");
 const validAuthors = membersCollection.map((m) => m.data.name);

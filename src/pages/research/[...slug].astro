@@ -26,6 +26,7 @@ import MemberGrid from "../../components/astro/MemberGrid.astro";
 import Navbar from "../../components/astro/Navbar.astro";
 import type { Publication } from "../../components/react/PublicationCard";
 import Layout from "../../layouts/Layout.astro";
+import { withDisplayTitles } from "../../utils/bibtex";
 
 export async function getStaticPaths() {
   const researchEntries = await getCollection("research");
@@ -65,7 +66,9 @@ const bibContent = fs.readFileSync(bibPath, "utf-8");
 
 // @ts-ignore - bibtex-parse-js doesn't have proper types
 const bibtexParse = await import("bibtex-parse-js");
-const parsedBib: Publication[] = bibtexParse.toJSON(bibContent);
+const parsedBib: Publication[] = withDisplayTitles(
+  bibtexParse.toJSON(bibContent),
+);
 
 // Filter for related publications based on the research title matching a keyword
 // Exclude thesis documents (mastersthesis, phdthesis, bachelorthesis)
@@ -106,26 +109,6 @@ const isExternalReadingList = Boolean(readingListUrl);
 
   <section class="py-16 md:py-24">
     <div class="section-container max-w-4xl">
-      <!-- Back Link -->
-      <a
-        href="/research"
-        class="inline-flex items-center text-sm text-text-muted hover:text-primary transition-colors mb-8"
-      >
-        <svg
-          class="w-4 h-4 mr-1"
-          fill="none"
-          stroke="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-        </svg>
-        Back to All Research
-      </a>
-
       <!-- Header -->
       <header
         class="mb-12 border-b border-border pb-8 text-center sm:text-left"
@@ -221,10 +204,12 @@ const isExternalReadingList = Boolean(readingListUrl);
               {relatedPublications.map((pub) => (
                 <li>
                   <a
-                    href={`/publications?q=${encodeURIComponent(pub.entryTags.title || "")}`}
+                    href={`/publications?q=${encodeURIComponent(pub.entryTags.displayTitle || pub.entryTags.title || "")}`}
                     class="hover:text-primary transition-colors hover:underline"
                   >
-                    {pub.entryTags.title || pub.citationKey}
+                    {pub.entryTags.displayTitle ||
+                      pub.entryTags.title ||
+                      pub.citationKey}
                   </a>
                 </li>
               ))}

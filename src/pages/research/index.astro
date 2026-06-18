@@ -90,37 +90,46 @@ const IconMap: Record<string, any> = {
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
           {
-            activeResearch.map((area, i) => {
-              const IconComponent = area.data.icon
-                ? IconMap[area.data.icon]
-                : Zap;
+            activeResearch.map((area) => {
               return (
                 <a href={`/research/${area.slug}`} class="block group">
-                  <div class="card p-8 h-full flex flex-col hover:-translate-y-2 transition-transform duration-300">
-                    <div class="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
-                      <IconComponent className="w-7 h-7 text-primary" />
-                    </div>
-                    <h3 class="font-bold text-xl text-text mb-3 group-hover:text-primary transition-colors">
-                      {area.data.title}
-                    </h3>
-                    <p class="text-text-secondary leading-relaxed flex-1">
-                      {area.data.description}
-                    </p>
-                    <div class="mt-6 font-medium text-primary inline-flex items-center gap-2 group-hover:gap-3 transition-all">
-                      Read more{" "}
-                      <svg
-                        class="w-4 h-4"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  <div class="card h-full overflow-hidden hover:-translate-y-2 transition-transform duration-300">
+                    {area.data.image && (
+                      <div class="relative h-64 overflow-hidden bg-white p-4">
+                        <img
+                          src={area.data.image}
+                          alt={area.data.title}
+                          class="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
+                          loading="lazy"
                         />
-                      </svg>
+                        <div class="absolute left-6 top-6 inline-flex items-center rounded-full border border-white/15 bg-black/30 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.22em] text-white/85 backdrop-blur-sm">
+                          Active Research
+                        </div>
+                      </div>
+                    )}
+                    <div class="p-8 flex flex-col h-full">
+                      <h3 class="font-bold text-xl text-text mb-3 group-hover:text-primary transition-colors">
+                        {area.data.title}
+                      </h3>
+                      <p class="text-text-secondary leading-relaxed flex-1">
+                        {area.data.description}
+                      </p>
+                      <div class="mt-6 font-medium text-primary inline-flex items-center gap-2 group-hover:gap-3 transition-all">
+                        Read more{" "}
+                        <svg
+                          class="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M17 8l4 4m0 0l-4 4m4-4H3"
+                          />
+                        </svg>
+                      </div>
                     </div>
                   </div>
                 </a>
@@ -138,7 +147,7 @@ const IconMap: Record<string, any> = {
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {
-            extendedResearch.map((area, i) => {
+            extendedResearch.map((area) => {
               const IconComponent = area.data.icon
                 ? IconMap[area.data.icon]
                 : Shield;
