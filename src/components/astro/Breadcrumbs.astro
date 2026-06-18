@@ -60,10 +60,11 @@ const parentCrumb = crumbs.length > 1 ? crumbs[crumbs.length - 2] : null;
         parentCrumb && (
           <a
             href={parentCrumb.href}
+            data-back-link
             class="inline-flex items-center gap-2 text-sm font-medium text-primary hover:underline"
           >
             <span aria-hidden="true">←</span>
-            Back to {parentCrumb.label}
+            <span data-back-link-label>Back to {parentCrumb.label}</span>
           </a>
         )
       }
@@ -100,3 +101,39 @@ const parentCrumb = crumbs.length > 1 ? crumbs[crumbs.length - 2] : null;
     </div>
   </div>
 </div>
+
+<script is:inline>
+  (() => {
+    const backLink = document.querySelector("[data-back-link]");
+    if (!backLink) return;
+
+    const label = backLink.querySelector("[data-back-link-label]");
+
+    let shouldUseHistoryBack = false;
+    if (window.history.length > 1) {
+      if (!document.referrer) {
+        shouldUseHistoryBack = true;
+      } else {
+        try {
+          const referrer = new URL(document.referrer);
+          shouldUseHistoryBack =
+            referrer.origin === window.location.origin &&
+            referrer.pathname !== window.location.pathname;
+        } catch {
+          shouldUseHistoryBack = false;
+        }
+      }
+    }
+
+    if (!shouldUseHistoryBack) return;
+
+    backLink.addEventListener("click", (event) => {
+      event.preventDefault();
+      window.history.back();
+    });
+
+    if (label) {
+      label.textContent = "Back";
+    }
+  })();
+</script>

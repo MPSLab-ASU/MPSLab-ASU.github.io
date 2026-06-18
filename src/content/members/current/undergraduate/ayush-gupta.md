@@ -1,8 +1,7 @@
 ---
 name: "Ayush Gupta"
 role: "Undergraduate"
-google_scholar: "https://scholar.google.com/scholar?q=Ayush+Gupta"
-joinDate: "2024"
+joinDate: "2025"
 github: "https://github.com/papapizzeria0608"
 linkedin: "https://www.linkedin.com/in/ayush-gupta-90237a218/"
 resume: "/docs/resumes/ayush-gupta.pdf"

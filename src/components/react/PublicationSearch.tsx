@@ -285,6 +285,29 @@ export default function PublicationSearch({
     setTagSearch(value);
   };
 
+  const paginationControls =
+    totalPages > 1 ? (
+      <div className="flex justify-center items-center gap-4">
+        <button
+          onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+          disabled={currentPage === 1}
+          className="px-4 py-2 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-card)] text-[var(--color-text)] hover:bg-[var(--color-bg-alt)] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        >
+          Previous
+        </button>
+        <span className="text-sm text-[var(--color-text-muted)] font-medium">
+          Page {currentPage} of {totalPages}
+        </span>
+        <button
+          onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+          disabled={currentPage === totalPages}
+          className="px-4 py-2 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-card)] text-[var(--color-text)] hover:bg-[var(--color-bg-alt)] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+        >
+          Next
+        </button>
+      </div>
+    ) : null;
+
   return (
     <div className="space-y-6">
       {/* Search */}
@@ -373,11 +396,13 @@ export default function PublicationSearch({
         {filtered.length} publications
       </p>
 
+      {paginationControls}
+
       {/* Publication List */}
       <div className="space-y-4">
-        {paginatedResults.map((pub) => (
+        {paginatedResults.map((pub, index) => (
           <PublicationCard
-            key={pub.citationKey}
+            key={`${pub.citationKey}-${startIndex + index}`}
             pub={pub}
             validTags={validTags}
             onTypeClick={handleTypeFilterChange}
@@ -386,27 +411,7 @@ export default function PublicationSearch({
         ))}
       </div>
 
-      {totalPages > 1 && (
-        <div className="flex justify-center items-center gap-4 pt-6">
-          <button
-            onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-            disabled={currentPage === 1}
-            className="px-4 py-2 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-card)] text-[var(--color-text)] hover:bg-[var(--color-bg-alt)] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-          >
-            Previous
-          </button>
-          <span className="text-sm text-[var(--color-text-muted)] font-medium">
-            Page {currentPage} of {totalPages}
-          </span>
-          <button
-            onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
-            disabled={currentPage === totalPages}
-            className="px-4 py-2 rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-card)] text-[var(--color-text)] hover:bg-[var(--color-bg-alt)] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-          >
-            Next
-          </button>
-        </div>
-      )}
+      {totalPages > 1 && <div className="pt-2">{paginationControls}</div>}
 
       {filtered.length === 0 && (
         <div className="text-center py-12">

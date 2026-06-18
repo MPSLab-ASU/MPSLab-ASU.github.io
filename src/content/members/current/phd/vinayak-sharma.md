@@ -1,15 +1,17 @@
 ---
 name: "Vinayak Sharma"
 role: "Ph.D."
-google_scholar: "https://scholar.google.com/scholar?q=Vinayak+Sharma"
-joinDate: "2024"
+email: "vinayak.sharma@asu.edu"
+google_scholar: "https://scholar.google.com/citations?user=r763skMAAAAJ&hl=en&oi=ao"
+joinDate: "2022"
 order: 2
 image: "/images/members/vinayak-sharma.jpg"
 isAlumni: true
 alumniType: "Master’s Graduates"
 graduated: "Masters, Spring 2024"
-github: "https://github.com/ryo-ma/github-profile-trophy"
+github: "https://github.com/vinayak19th"
 linkedin: "https://www.linkedin.com/in/vinayak19th/"
+portfolio: "https://vinayak19th.github.io/"
 resume: "/docs/resumes/vinayak-sharma.pdf"
 researchInterests: ["Quantum Machine Learning"]
 ---

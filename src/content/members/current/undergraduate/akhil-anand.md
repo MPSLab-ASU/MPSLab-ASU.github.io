@@ -1,8 +1,8 @@
 ---
 name: "Akhil Anand"
 role: "Undergraduate"
-google_scholar: "https://scholar.google.com/citations?user=HTfEll0AAAAJ"
-joinDate: "2024"
+portfolio: "https://www.kel404.com/"
+joinDate: "2025"
 github: "https://github.com/kel404x"
 linkedin: "https://www.linkedin.com/in/akhil-a-576b56288/"
 resume: "/docs/resumes/akhilanand.pdf"
