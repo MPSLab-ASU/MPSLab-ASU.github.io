@@ -2,6 +2,7 @@
 title: "Intelligent Transportation Systems"
 status: "Active"
 description: "Developing robust software, perception pipelines, and safety-critical architectures for next-generation intelligent and autonomous vehicles."
+image: "/images/research/active/intelligent-transportation-systems.png"
 icon: "Car"
 order: 1
 ---

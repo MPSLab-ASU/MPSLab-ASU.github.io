@@ -47,6 +47,11 @@ Icon
 .env.*
 !.env.example
 
+# Image conversion
+# HEIC files should be converted to JPG using scripts/convert-heic-to-jpg.sh
+*.heic
+*.HEIC
+
 # Temporary files
 tmp/
 temp/
