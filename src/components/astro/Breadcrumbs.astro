@@ -35,10 +35,15 @@ const formatSegment = (segment: string) => {
 const normalizedPath = pathname.replace(/\/$/, "") || "/";
 const segments = normalizedPath.split("/").filter(Boolean);
 
+// Map segment to actual route (e.g., "members" → "/people")
+const routeMap: Record<string, string> = {
+  members: "/people",
+};
+
 const crumbs = [
   { href: "/", label: "Home" },
   ...segments.map((segment, index) => ({
-    href: `/${segments.slice(0, index + 1).join("/")}`,
+    href: routeMap[segment] || `/${segments.slice(0, index + 1).join("/")}`,
     label: formatSegment(segment),
   })),
 ];
@@ -48,7 +53,9 @@ const parentCrumb = crumbs.length > 1 ? crumbs[crumbs.length - 2] : null;
 
 <div class="border-b border-border/60 bg-bg-alt/60">
   <div class="section-container py-3 md:py-4">
-    <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+    <div
+      class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between"
+    >
       {
         parentCrumb && (
           <a
@@ -63,20 +70,31 @@ const parentCrumb = crumbs.length > 1 ? crumbs[crumbs.length - 2] : null;
 
       <nav aria-label="Breadcrumb" class="text-sm text-text-secondary">
         <ol class="flex flex-wrap items-center gap-2">
-          {crumbs.map((crumb, index) => (
-            <>
-              {index > 0 && <li aria-hidden="true" class="text-text-muted">/</li>}
-              <li>
-                {index === crumbs.length - 1 ? (
-                  <span class="font-medium text-text" aria-current="page">{crumb.label}</span>
-                ) : (
-                  <a href={crumb.href} class="hover:text-primary hover:underline">
-                    {crumb.label}
-                  </a>
+          {
+            crumbs.map((crumb, index) => (
+              <>
+                {index > 0 && (
+                  <li aria-hidden="true" class="text-text-muted">
+                    /
+                  </li>
                 )}
-              </li>
-            </>
-          ))}
+                <li>
+                  {index === crumbs.length - 1 ? (
+                    <span class="font-medium text-text" aria-current="page">
+                      {crumb.label}
+                    </span>
+                  ) : (
+                    <a
+                      href={crumb.href}
+                      class="hover:text-primary hover:underline"
+                    >
+                      {crumb.label}
+                    </a>
+                  )}
+                </li>
+              </>
+            ))
+          }
         </ol>
       </nav>
     </div>
