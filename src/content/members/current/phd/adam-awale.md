@@ -1,8 +1,7 @@
 ---
 name: "Adam Awale"
 role: "Ph.D."
-google_scholar: "https://scholar.google.com/scholar?q=Adam+Awale"
-joinDate: "2024"
+joinDate: "2022"
 github: "https://github.com/awaleadam"
 linkedin: "https://www.linkedin.com/in/adam-awale/"
 resume: "/docs/resumes/adam-awale.pdf"

@@ -47,6 +47,11 @@ const shouldShowBreadcrumbs =
     </script>
   </head>
   <body class="min-h-screen flex flex-col">
+    <div class="site-bg" aria-hidden="true">
+      <span class="site-bg__blob site-bg__blob--1"></span>
+      <span class="site-bg__blob site-bg__blob--2"></span>
+      <span class="site-bg__blob site-bg__blob--3"></span>
+    </div>
     <slot name="header" />
     {shouldShowBreadcrumbs && <Breadcrumbs pathname={Astro.url.pathname} />}
     <main class="flex-1">

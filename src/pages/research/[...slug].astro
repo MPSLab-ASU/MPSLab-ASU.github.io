@@ -102,6 +102,20 @@ const hasResourceFile = fs.existsSync(
 const hasResources = Boolean(resourceEntry) || hasResourceFile;
 const readingListHref = readingListUrl ?? `/research/resources/${entry.slug}`;
 const isExternalReadingList = Boolean(readingListUrl);
+
+const allMembers = await getCollection("members");
+const researchFilterLower = entry.data.title.toLowerCase();
+// Active status is based on current role/folder, not historical prior-degree metadata.
+const hasActiveResearchers = allMembers.some(
+  (member) =>
+    member.data.role !== "Alumni" &&
+    !member.slug.startsWith("alumni/") &&
+    Boolean(
+      member.data.researchInterests?.some(
+        (interest) => interest.toLowerCase() === researchFilterLower,
+      ),
+    ),
+);
 ---
 
 <Layout title={entry.data.title}>
@@ -142,11 +156,11 @@ const isExternalReadingList = Boolean(readingListUrl);
         </p>
         {
           entry.data.image && (
-            <div class="mt-8 rounded-xl overflow-hidden shadow-lg border border-border">
+            <div class="mt-8 rounded-xl overflow-hidden shadow-lg border border-border flex justify-center items-center">
               <img
                 src={entry.data.image}
                 alt={entry.data.title}
-                class="w-full h-auto object-cover"
+                class="h-auto object-cover max-w-2xl max-h-96"
               />
             </div>
           )
@@ -189,10 +203,18 @@ const isExternalReadingList = Boolean(readingListUrl);
         <Content />
       </article>
 
-      <div class="mt-16 pt-12 border-t border-border">
-        <h2 class="text-2xl font-bold text-text mb-8">Researchers</h2>
-        <MemberGrid researchFilter={entry.data.title} compact={true} />
-      </div>
+      {
+        hasActiveResearchers && (
+          <div class="mt-16 pt-12 border-t border-border">
+            <h2 class="text-2xl font-bold text-text mb-8">Researchers</h2>
+            <MemberGrid
+              researchFilter={entry.data.title}
+              activeOnly={true}
+              compact={true}
+            />
+          </div>
+        )
+      }
 
       {
         relatedPublications.length > 0 && (

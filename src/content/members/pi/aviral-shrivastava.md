@@ -3,8 +3,9 @@ name: "Aviral Shrivastava"
 role: "Principle Investigator"
 joinDate: "2006"
 email: "aviral.shrivastava@asu.edu"
-google_scholar: "https://scholar.google.com/scholar?q=Aviral+Shrivastava"
+google_scholar: "https://scholar.google.com/citations?user=zlzK-v0AAAAJ&hl=en&oi=ao"
 resume: "/docs/resumes/aviral-shrivastava.pdf"
+linkedin: "https://www.linkedin.com/in/aviral/"
 researchInterests:
   [
     "Machine Learning Acceleration",

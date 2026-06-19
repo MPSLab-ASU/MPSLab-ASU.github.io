@@ -2,47 +2,47 @@
     {
         "name": "NSF",
         "logo": "/images/sponsors/logo-nsf.jpg",
-        "url": ""
+        "url": "https://www.nsf.gov/"
     },
     {
         "name": "Intel",
         "logo": "/images/sponsors/intlogo.jpg",
-        "url": ""
+        "url": "https://www.intel.com/"
     },
     {
         "name": "Semiconductor Research Corporation",
         "logo": "/images/sponsors/semiconductor-research-corporation-wikipedia.png",
-        "url": ""
+        "url": "https://www.src.org/"
     },
     {
         "name": "NVIDIA",
         "logo": "/images/sponsors/nvidia-logo.jpg",
-        "url": ""
+        "url": "https://www.nvidia.com/"
     },
     {
         "name": "NIST",
         "logo": "/images/sponsors/nist.png",
-        "url": "http://www.nist.gov/"
+        "url": "https://www.nist.gov/"
     },
     {
         "name": "Department of Energy",
         "logo": "/images/sponsors/new-doe-logo-color-web.jpg",
-        "url": "http://www.energy.gov/"
+        "url": "https://www.energy.gov/"
     },
     {
         "name": "Raytheon",
         "logo": "/images/sponsors/rtn-logo.gif",
-        "url": ""
+        "url": "https://www.rtx.com/"
     },
     {
         "name": "Science Foundation Arizona",
         "logo": "/images/sponsors/logosfaz.gif",
-        "url": ""
+        "url": "https://www.sciencefoundationarizona.org/"
     },
     {
         "name": "Microsoft Research",
         "logo": "/images/sponsors/logo-msr.png",
-        "url": ""
+        "url": "https://www.microsoft.com/en-us/research/"
     },
     {
         "name": "SignHear",
@@ -57,6 +57,6 @@
     {
         "name": "NASA",
         "logo": "/images/sponsors/nasa-logo.png",
-        "url": ""
+        "url": "https://www.nasa.gov/"
     }
 ]

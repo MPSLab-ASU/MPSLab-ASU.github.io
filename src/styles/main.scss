@@ -8,9 +8,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 @layer base {
+    html {
+        @apply bg-bg;
+        transition: background-color 0.3s ease;
+    }
+
     body {
-        @apply bg-bg text-text font-sans antialiased;
-        transition: background-color 0.3s ease, color 0.3s ease;
+        @apply text-text font-sans antialiased;
+        background-color: transparent;
+        transition: color 0.3s ease;
     }
 
     h1,
@@ -108,5 +114,83 @@
                 @apply text-sm text-text-muted text-center mt-3 italic px-4;
             }
         }
+    }
+}
+
+// Subtle animated background blobs using the MPS Lab logo color palette.
+// Rendered as a fixed layer behind all content (body is transparent).
+.site-bg {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.site-bg__blob {
+    position: absolute;
+    width: 48vmax;
+    height: 48vmax;
+    border-radius: 50%;
+    filter: blur(90px);
+    opacity: 0.6;
+    will-change: transform;
+    transition: background 0.3s ease;
+}
+
+.site-bg__blob--1 {
+    top: -12vmax;
+    left: -10vmax;
+    background: radial-gradient(circle at center, var(--blob-navy) 0%, transparent 68%);
+    animation: blob-drift-1 32s ease-in-out infinite alternate;
+}
+
+.site-bg__blob--2 {
+    right: -12vmax;
+    bottom: -14vmax;
+    background: radial-gradient(circle at center, var(--blob-green) 0%, transparent 68%);
+    animation: blob-drift-2 38s ease-in-out infinite alternate;
+}
+
+.site-bg__blob--3 {
+    top: 28%;
+    left: 42%;
+    background: radial-gradient(circle at center, var(--blob-maroon) 0%, transparent 68%);
+    animation: blob-drift-3 44s ease-in-out infinite alternate;
+}
+
+@keyframes blob-drift-1 {
+    0% {
+        transform: translate(0, 0) scale(1);
+    }
+
+    100% {
+        transform: translate(8vmax, 6vmax) scale(1.15);
+    }
+}
+
+@keyframes blob-drift-2 {
+    0% {
+        transform: translate(0, 0) scale(1.1);
+    }
+
+    100% {
+        transform: translate(-7vmax, -5vmax) scale(0.95);
+    }
+}
+
+@keyframes blob-drift-3 {
+    0% {
+        transform: translate(-50%, -20%) scale(0.9);
+    }
+
+    100% {
+        transform: translate(-40%, 12%) scale(1.2);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .site-bg__blob {
+        animation: none !important;
     }
 }
