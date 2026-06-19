@@ -2,7 +2,6 @@
 title: "ML for Science"
 status: "Active"
 description: "Applying machine learning techniques to advance scientific discovery and understanding across various domains."
-image: "/images/research/active/ml-for-science.png"
 icon: "Cpu"
 order: 4
 ---

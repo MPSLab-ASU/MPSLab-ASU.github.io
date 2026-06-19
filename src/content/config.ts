@@ -81,6 +81,7 @@ const resources = defineCollection({
               "Tool",
               "Publication",
             ]),
+            researchField: z.string().optional(),
             url: z.string().optional(),
             authors: z.string().optional(),
             description: z.string().optional(),

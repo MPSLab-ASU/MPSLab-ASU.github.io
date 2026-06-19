@@ -29,6 +29,17 @@ const formatSegment = (segment: string) => {
   const cseMatch = decoded.match(/^cse(\d{3})$/i);
   if (cseMatch) return `CSE ${cseMatch[1]}`;
 
+  const acronymMap: Record<string, string> = {
+    ai: "AI",
+    ml: "ML",
+    gpu: "GPU",
+    iot: "IoT",
+    llm: "LLM",
+    cps: "CPS",
+  };
+  const lowerSegment = decoded.toLowerCase();
+  if (acronymMap[lowerSegment]) return acronymMap[lowerSegment];
+
   return titleCase(decoded.replace(/[-_]+/g, " "));
 };
 

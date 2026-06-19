@@ -23,6 +23,22 @@ const resourceEntry = allResources.find(
 const readingListUrl = resourceEntry?.data.readingListUrl;
 const items = resourceEntry?.data.resources ?? [];
 const showReadingListUrl = Boolean(readingListUrl);
+const hasResearchFieldGrouping = items.some((resource) =>
+  Boolean(resource.researchField),
+);
+
+const groupedByResearchField = hasResearchFieldGrouping
+  ? Object.entries(
+      items.reduce<Record<string, typeof items>>((acc, resource) => {
+        const field = resource.researchField?.trim() || "General";
+        if (!acc[field]) {
+          acc[field] = [];
+        }
+        acc[field].push(resource);
+        return acc;
+      }, {}),
+    ).sort(([fieldA], [fieldB]) => fieldA.localeCompare(fieldB))
+  : [];
 
 // Group by type
 const resourceTypes = [
@@ -102,59 +118,112 @@ const typeIcons: Record<string, string> = {
           </div>
         ) : !showReadingListUrl ? (
           <div class="space-y-12">
-            {grouped.map((group) => (
-              <div>
-                <h2 class="text-xl font-bold text-text mb-6 flex items-center gap-2">
-                  <span>{typeIcons[group.type] || "📌"}</span>
-                  {group.type === "Paper" ? "Papers" : `${group.type}s`}
-                </h2>
-                <div class="space-y-4">
-                  {group.items.map((resource) => (
-                    <div class="card p-5 group">
-                      <div class="flex items-start justify-between gap-4">
-                        <div class="flex-1 min-w-0">
-                          <h3 class="font-semibold text-text group-hover:text-primary transition-colors leading-snug">
-                            {resource.url ? (
+            {hasResearchFieldGrouping
+              ? groupedByResearchField.map(([fieldName, resources]) => (
+                  <div>
+                    <h2 class="text-xl font-bold text-text mb-6">
+                      {fieldName}
+                    </h2>
+                    <div class="space-y-4">
+                      {resources.map((resource) => (
+                        <div class="card p-5 group">
+                          <div class="flex items-start justify-between gap-4">
+                            <div class="flex-1 min-w-0">
+                              <h3 class="font-semibold text-text group-hover:text-primary transition-colors leading-snug">
+                                {resource.url ? (
+                                  <a
+                                    href={resource.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="hover:underline"
+                                  >
+                                    {resource.title}
+                                  </a>
+                                ) : (
+                                  resource.title
+                                )}
+                              </h3>
+                              {resource.authors && (
+                                <p class="text-sm text-text-muted mt-1">
+                                  {resource.authors}
+                                </p>
+                              )}
+                              {resource.description && (
+                                <p class="text-sm text-text-secondary mt-2 leading-relaxed">
+                                  {resource.description}
+                                </p>
+                              )}
+                            </div>
+                            {resource.url && (
                               <a
                                 href={resource.url}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                class="hover:underline"
+                                class="flex-shrink-0 p-2 rounded-lg hover:bg-primary/10 text-text-muted hover:text-primary transition-all"
+                                aria-label={`Open ${resource.title}`}
                               >
-                                {resource.title}
+                                <ExternalLink className="w-4 h-4" />
                               </a>
-                            ) : (
-                              resource.title
                             )}
-                          </h3>
-                          {resource.authors && (
-                            <p class="text-sm text-text-muted mt-1">
-                              {resource.authors}
-                            </p>
-                          )}
-                          {resource.description && (
-                            <p class="text-sm text-text-secondary mt-2 leading-relaxed">
-                              {resource.description}
-                            </p>
-                          )}
+                          </div>
                         </div>
-                        {resource.url && (
-                          <a
-                            href={resource.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="flex-shrink-0 p-2 rounded-lg hover:bg-primary/10 text-text-muted hover:text-primary transition-all"
-                            aria-label={`Open ${resource.title}`}
-                          >
-                            <ExternalLink className="w-4 h-4" />
-                          </a>
-                        )}
-                      </div>
+                      ))}
                     </div>
-                  ))}
-                </div>
-              </div>
-            ))}
+                  </div>
+                ))
+              : grouped.map((group) => (
+                  <div>
+                    <h2 class="text-xl font-bold text-text mb-6 flex items-center gap-2">
+                      <span>{typeIcons[group.type] || "📌"}</span>
+                      {group.type === "Paper" ? "Papers" : `${group.type}s`}
+                    </h2>
+                    <div class="space-y-4">
+                      {group.items.map((resource) => (
+                        <div class="card p-5 group">
+                          <div class="flex items-start justify-between gap-4">
+                            <div class="flex-1 min-w-0">
+                              <h3 class="font-semibold text-text group-hover:text-primary transition-colors leading-snug">
+                                {resource.url ? (
+                                  <a
+                                    href={resource.url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    class="hover:underline"
+                                  >
+                                    {resource.title}
+                                  </a>
+                                ) : (
+                                  resource.title
+                                )}
+                              </h3>
+                              {resource.authors && (
+                                <p class="text-sm text-text-muted mt-1">
+                                  {resource.authors}
+                                </p>
+                              )}
+                              {resource.description && (
+                                <p class="text-sm text-text-secondary mt-2 leading-relaxed">
+                                  {resource.description}
+                                </p>
+                              )}
+                            </div>
+                            {resource.url && (
+                              <a
+                                href={resource.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="flex-shrink-0 p-2 rounded-lg hover:bg-primary/10 text-text-muted hover:text-primary transition-all"
+                                aria-label={`Open ${resource.title}`}
+                              >
+                                <ExternalLink className="w-4 h-4" />
+                              </a>
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                ))}
           </div>
         ) : null
       }

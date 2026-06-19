@@ -2,6 +2,7 @@
 title: "Machine Learning Acceleration"
 status: "Extended"
 description: "Hardware-software co-design and architectural innovations for efficient, high-performance execution of deep learning models on specialized accelerators and edge devices."
+image: "/images/research/machine-learning-acceleration.png"
 icon: "Cpu"
 order: 1
 ---

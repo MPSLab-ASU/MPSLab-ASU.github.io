@@ -2,6 +2,7 @@
 title: "Reliability for Machine Learning"
 status: "Extended"
 description: "Ensuring the dependability and predictable performance of machine learning systems in the presence of hardware faults and adversarial conditions."
+image: "/images/research/reliability-robustness-ml.jpg"
 icon: "Shield"
 order: 5
 ---

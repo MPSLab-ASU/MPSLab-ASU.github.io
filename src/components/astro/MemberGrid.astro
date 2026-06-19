@@ -6,6 +6,7 @@ interface Props {
   researchFilter?: string;
   alumniTypeFilter?: string | string[];
   folderPrefix?: string | string[];
+  activeOnly?: boolean;
   compact?: boolean;
 }
 
@@ -14,6 +15,7 @@ const {
   researchFilter,
   alumniTypeFilter,
   folderPrefix,
+  activeOnly = false,
   compact = false,
 } = Astro.props;
 
@@ -44,6 +46,16 @@ if (alumniTypeFilter) {
     return memberTypes.some(t => types.includes(t));
   });
 }
+
+if (activeOnly) {
+  // Active status is based on current role/folder, not historical prior-degree metadata.
+  allMembers = allMembers.filter(
+    (m) =>
+      m.data.role !== 'Alumni' &&
+      !m.slug.startsWith('alumni/'),
+  );
+}
+
 if (researchFilter) {
   const filterLower = researchFilter.toLowerCase();
   allMembers = allMembers.filter(m => 

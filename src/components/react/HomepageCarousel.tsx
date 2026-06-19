@@ -54,7 +54,7 @@ export default function HomepageCarousel({ images }: HomepageCarouselProps) {
         ))}
       </div>
 
-      <div className="absolute inset-x-0 bottom-0 z-20 flex items-end justify-between gap-4 p-4 md:p-5">
+      <div className="absolute inset-x-0 bottom-0 z-20 flex items-end justify-between gap-4 bg-gradient-to-t from-black/75 via-black/45 to-transparent px-4 pb-4 pt-12 md:px-5 md:pb-5 md:pt-14">
         <div>
           <p className="text-[11px] uppercase tracking-[0.25em] text-white/60">
             MPS Lab in Action
