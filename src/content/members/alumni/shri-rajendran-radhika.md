@@ -9,7 +9,7 @@ image: "/images/members/shri-rajendran-radhika.jpg"
 isAlumni: true
 currentPosition: "‎Graphics Hardware Engineer at Intel, Chandler, Arizona"
 graduated: "Fall 2014"
-alumniType: "Master’s Graduate"
+alumniType: "Masters Graduate"
 ---
 
 Path Selection Based Branching for Coarse Grained Reconfigurable Arrays

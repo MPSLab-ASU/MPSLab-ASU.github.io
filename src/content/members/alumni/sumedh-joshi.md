@@ -7,7 +7,7 @@ linkedin: "https://www.linkedin.com/in/sumedh14/"
 order: 5
 image: "/images/members/sumedh-joshi.jpeg"
 isAlumni: true
-alumniType: "Master’s Graduate"
+alumniType: "Masters Graduate"
 graduated: "Fall 2024"
 ---
 

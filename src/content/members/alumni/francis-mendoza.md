@@ -7,7 +7,7 @@ google_scholar: "https://scholar.google.com/scholar?q=Francis+Mendoza"
 order: 5
 image: "/images/members/francis-mendoza.jpg"
 isAlumni: true
-alumniType: "Master’s Graduate"
+alumniType: "Masters Graduate"
 graduated: "Fall 2024"
 ---
 

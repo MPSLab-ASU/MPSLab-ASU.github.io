@@ -9,7 +9,7 @@ image: "/images/members/sanggu-park.jpg"
 isAlumni: true
 currentPosition: "Military Officer, Republic of Korea"
 graduated: "Summer 2022"
-alumniType: "Master’s Graduate"
+alumniType: "Masters Graduate"
 ---
 
 Blame-Free Motion Planning in Hybrid Traffic

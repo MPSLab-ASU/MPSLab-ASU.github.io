@@ -9,7 +9,7 @@ image: "/images/members/russell-dill.jpg"
 isAlumni: true
 currentPosition: "Lead Operating Systems Engineer at Nikola Motor Company, Phoenix, Arizona"
 graduated: "Spring 2015"
-alumniType: "Master’s Graduate"
+alumniType: "Masters Graduate"
 ---
 
 Optimization of Multi-Channel BCH Error Decoding for Common Cases

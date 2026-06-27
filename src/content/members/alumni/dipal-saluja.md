@@ -9,7 +9,7 @@ image: "/images/members/dipal-saluja.jpg"
 isAlumni: true
 currentPosition: "Senior Software Engineer at Cruise, Nattick, Massachusetts"
 graduated: "Summer 2014"
-alumniType: "Master’s Graduate"
+alumniType: "Masters Graduate"
 ---
 
 Register File Organization for Coarse-Grained Reconfigurable Architectures: Compiler-Microarchitecture Perspective

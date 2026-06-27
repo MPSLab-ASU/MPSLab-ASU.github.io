@@ -7,7 +7,7 @@ linkedin: "https://www.linkedin.com/in/guna-sekhar-sai-harsha-lagudu"
 order: 5
 image: "/images/members/guna-lagudu.png"
 isAlumni: true
-alumniType: "Master’s Graduate"
+alumniType: "Masters Graduate"
 graduated: "Summer 2024"
 ---
 

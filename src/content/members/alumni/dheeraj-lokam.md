@@ -9,5 +9,5 @@ image: "/images/members/dheeraj-lokam.jpg"
 isAlumni: true
 currentPosition: "‎Senior Hardware Safety Engineer at NVIDIA, Santa Clara, California"
 graduated: "Fall 2016"
-alumniType: "Master’s Graduate"
+alumniType: "Masters Graduate"
 ---

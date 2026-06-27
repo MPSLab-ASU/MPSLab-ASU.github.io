@@ -1,11 +1,12 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
+import { marked } from "marked";
 import Footer from "../../components/astro/Footer.astro";
 import Navbar from "../../components/astro/Navbar.astro";
 import NewsSidebar from "../../components/astro/NewsSidebar.astro";
 import Layout from "../../layouts/Layout.astro";
 
-// Fetch all news and filter out awards, then sort by date descending
+// Fetch all news and filter out awards/grants, then sort by date descending
 const allNews = await getCollection("news");
 const labUpdates = allNews
     .filter((item) => item.data.type !== "Award" && item.data.type !== "Grant")
@@ -14,39 +15,58 @@ const labUpdates = allNews
             new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
     );
 
-// Group updates by year
-const groupedUpdates = labUpdates.reduce(
-    (acc, item) => {
+// Server-render each item's markdown body (the content below the frontmatter)
+const renderedItems = await Promise.all(
+    labUpdates.map(async (item) => {
+        const { Content } = await render(item);
+        // body is non-empty if the file has content below the frontmatter
+        const hasBody = item.body && item.body.trim().length > 0;
+
         const dateStr = String(item.data.date);
         const year = dateStr.includes("-")
             ? dateStr.substring(0, 4)
             : new Date(item.data.date).toISOString().substring(0, 4);
 
-        if (!acc[year]) {
-            acc[year] = [];
-        }
-        acc[year].push(item);
-        return acc;
-    },
-    {} as Record<string, typeof labUpdates>,
-);
+        const displayDate =
+            typeof item.data.date === "string" ||
+            typeof item.data.date === "number"
+                ? String(item.data.date)
+                : new Date(item.data.date).toLocaleDateString("en-US", {
+                      timeZone: "UTC",
+                      year: "numeric",
+                      month: "short",
+                  });
 
-const sortedYears = Object.keys(groupedUpdates).sort(
-    (a, b) => parseInt(b) - parseInt(a),
+        // Parse description as inline markdown (renders [text](url) links etc.)
+        const descriptionHtml = marked.parseInline(
+            item.data.description ?? "",
+        );
+
+        return { item, Content, hasBody, year, displayDate, descriptionHtml };
+    }),
 );
 
 const typeColors: Record<string, string> = {
-    Grant:
-        "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300",
-    Publication:
-        "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300",
-    Event: "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300",
-    Announcement:
-        "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300",
-    General: "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400",
+    Grant:        "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300",
+    Publication:  "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300",
+    Event:        "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-300",
+    Announcement: "bg-purple-100 text-purple-700 dark:bg-purple-900/30 dark:text-purple-300",
+    General:      "bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400",
 };
 
+// Group by year (preserving descending order)
+const yearMap: Map<string, typeof renderedItems> = new Map();
+for (const r of renderedItems) {
+    if (!yearMap.has(r.year)) yearMap.set(r.year, []);
+    yearMap.get(r.year)!.push(r);
+}
+
+const ITEMS_PER_PAGE = 15;
 const currentPath = Astro.url.pathname;
+
+// Build a flat, ordered array of {year, items} for the pagination script
+// The client script only needs indices, not content — content is pre-rendered in DOM.
+const flatMeta = renderedItems.map((r) => ({ year: r.year }));
 ---
 
 <Layout title="Lab Updates - MPS Lab">
@@ -76,119 +96,62 @@ const currentPath = Astro.url.pathname;
             <div class="flex flex-col md:flex-row gap-8">
                 <NewsSidebar currentPath={currentPath} />
 
-                <div class="flex-1">
-                    {
-                        sortedYears.length > 1 && (
-                            <div class="mb-6">
-                                <p class="text-xs font-semibold uppercase tracking-wider text-text-muted mb-2">
-                                    Jump to Year
-                                </p>
-                                <div class="flex flex-wrap gap-2">
-                                {sortedYears.slice(0, 8).map((year) => (
-                                    <a
-                                        href={`#year-${year}`}
-                                        class="px-3 py-1.5 rounded-lg text-sm font-medium bg-bg-alt text-text-secondary hover:bg-primary/10 hover:text-primary transition-colors"
-                                    >
-                                        {year}
-                                    </a>
-                                ))}
-                                </div>
-                            </div>
-                        )
-                    }
-                    <div class="grid grid-cols-1 gap-6">
-                        {
-                            sortedYears.map((year, index) => (
-                                <details
-                                    id={`year-${year}`}
-                                    class="mb-12 last:mb-0 group/details"
-                                    open={index === 0}
-                                >
-                                    <summary class="text-2xl font-bold text-text mb-6 flex items-center justify-between gap-3 cursor-pointer list-none hover:text-primary transition-colors select-none [&::-webkit-details-marker]:hidden">
-                                        <div class="flex items-center gap-3">
-                                            <span class="w-1 h-8 bg-primary rounded-full" />
-                                            {year}
-                                        </div>
-                                        <svg
-                                            xmlns="http://www.w3.org/2000/svg"
-                                            class="w-6 h-6 transition-transform duration-300 group-open/details:-rotate-180"
-                                            viewBox="0 0 20 20"
-                                            fill="currentColor"
-                                        >
-                                            <path
-                                                fill-rule="evenodd"
-                                                d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                clip-rule="evenodd"
-                                            />
-                                        </svg>
-                                    </summary>
-                                    <div class="grid grid-cols-1 gap-6 pt-2">
-                                        {groupedUpdates[year].map((item) => (
-                                            <div class="card p-6 border-l-4 border-l-primary hover:translate-y-0 hover:shadow-lg transition-all duration-300 group">
-                                                <div class="flex items-center gap-3 mb-3">
-                                                    <span
-                                                        class:list={[
-                                                            "badge",
-                                                            typeColors[
-                                                                item.data.type
-                                                            ] ??
-                                                                typeColors[
-                                                                    "General"
-                                                                ],
-                                                        ]}
-                                                    >
-                                                        {item.data.type}
-                                                    </span>
-                                                    <time
-                                                        class="text-sm font-medium text-text-secondary"
-                                                        datetime={new Date(
-                                                            item.data.date,
-                                                        ).toISOString()}
-                                                    >
-                                                        {typeof item.data
-                                                            .date ===
-                                                            "string" ||
-                                                        typeof item.data
-                                                            .date === "number"
-                                                            ? item.data.date
-                                                            : new Date(
-                                                                  item.data
-                                                                      .date,
-                                                              ).toLocaleDateString(
-                                                                  "en-US",
-                                                                  {
-                                                                      timeZone:
-                                                                          "UTC",
-                                                                      year: "numeric",
-                                                                      month: "short",
-                                                                  },
-                                                              )}
-                                                    </time>
-                                                </div>
-                                                {item.data.description && (
-                                                    <div
-                                                        class="text-text-secondary leading-relaxed max-w-3xl prose prose-sm dark:prose-invert"
-                                                        set:html={
-                                                            item.data
-                                                                .description
-                                                        }
-                                                    />
-                                                )}
-                                            </div>
-                                        ))}
-                                    </div>
-                                </details>
-                            ))
-                        }
+                <div class="flex-1" id="updates-scroll-target">
 
-                        {
-                            sortedYears.length === 0 && (
-                                <div class="text-center py-12 text-text-muted">
-                                    <p>No lab updates found.</p>
+                    {/* ── All cards pre-rendered server-side, hidden; JS paginates them ── */}
+                    <div id="updates-pool" class="hidden" aria-hidden="true">
+                        {renderedItems.map(({ item, Content, hasBody, displayDate, descriptionHtml }, idx) => {
+                            const colorClass = typeColors[item.data.type] ?? typeColors["General"];
+                            return (
+                                <div data-update-index={idx} class="card border-l-4 border-l-primary transition-all duration-300 overflow-hidden"
+                                     data-has-body={hasBody ? "true" : "false"}>
+
+                                    {/* ── header: always visible ── */}
+                                    <div class:list={["p-6", hasBody && "cursor-pointer select-none group/header"]}
+                                         data-role={hasBody ? "toggle" : undefined}>
+                                        <div class="flex items-center gap-3 mb-3">
+                                            <span class:list={["badge", colorClass]}>{item.data.type}</span>
+                                            <time class="text-sm font-medium text-text-secondary">
+                                                {displayDate}
+                                            </time>
+                                            {hasBody && (
+                                                <span class="ml-auto text-xs font-medium text-primary flex items-center gap-1 group-hover/header:underline">
+                                                    Read more
+                                                    <svg class="w-3.5 h-3.5 chevron transition-transform duration-200" viewBox="0 0 20 20" fill="currentColor">
+                                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/>
+                                                    </svg>
+                                                </span>
+                                            )}
+                                        </div>
+                                        {/* description: parsed from markdown at build time */}
+                                        <div class="text-text-secondary leading-relaxed max-w-3xl prose prose-sm dark:prose-invert"
+                                             set:html={descriptionHtml} />
+                                    </div>
+
+                                    {/* ── expandable body (only when file has body content) ── */}
+                                    {hasBody && (
+                                        <div data-role="body"
+                                             class="hidden border-t border-border px-6 pb-6 pt-4">
+                                            <div class="prose prose-sm dark:prose-invert max-w-3xl text-text-secondary">
+                                                <Content />
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
-                            )
-                        }
+                            );
+                        })}
                     </div>
+
+                    {/* ── Visible area: year headings + cards injected here by JS ── */}
+                    <div id="updates-list"></div>
+
+                    {/* ── Pagination bar ── */}
+                    <nav
+                        id="pagination-bar"
+                        aria-label="Updates pagination"
+                        class="mt-10 flex items-center justify-center gap-1.5 flex-wrap"
+                    >
+                    </nav>
                 </div>
             </div>
         </div>
@@ -196,3 +159,202 @@ const currentPath = Astro.url.pathname;
 
     <Footer slot="footer" />
 </Layout>
+
+<style>
+    /* Smooth expand/collapse for body panels */
+    [data-role="body"].expanding {
+        display: block;
+        animation: slideDown 0.2s ease-out;
+    }
+    @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-6px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Rotate chevron when open */
+    [data-update-index].is-open .chevron {
+        transform: rotate(180deg);
+    }
+
+    /* Hover shadow for cards that have a body */
+    [data-has-body="true"]:hover {
+        @apply shadow-lg;
+    }
+</style>
+
+<script is:inline define:vars={{ flatMeta, ITEMS_PER_PAGE }}>
+    // ─── state ────────────────────────────────────────────────────────────────
+    /* eslint-disable-next-line prefer-const */
+    let currentPage = 1;
+    const totalItems = flatMeta.length;
+    const totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+
+    // ─── helpers ──────────────────────────────────────────────────────────────
+
+    /** Move a pre-rendered card node from the pool into the visible list */
+    function getCard(idx) {
+        return document.querySelector(
+            `#updates-pool [data-update-index="${idx}"]`,
+        );
+    }
+
+    // ─── render updates for a given page ─────────────────────────────────────
+
+    function renderUpdates(page) {
+        const listEl = document.getElementById("updates-list");
+
+        // Return all currently displayed cards back to pool (hidden)
+        listEl.querySelectorAll("[data-update-index]").forEach((el) => {
+            document.getElementById("updates-pool").appendChild(el);
+            el.classList.add("hidden");
+        });
+
+        // Also clear any year-group wrappers from last render
+        listEl.innerHTML = "";
+
+        const start = (page - 1) * ITEMS_PER_PAGE;
+        const pageItems = flatMeta.slice(start, start + ITEMS_PER_PAGE);
+
+        if (pageItems.length === 0) {
+            listEl.innerHTML =
+                '<div class="text-center py-12 text-text-muted"><p>No lab updates found.</p></div>';
+            return;
+        }
+
+        // Group by year while preserving order
+        const yearOrder = [];
+        const groups = {};
+        pageItems.forEach((meta, localIdx) => {
+            const globalIdx = start + localIdx;
+            if (!groups[meta.year]) {
+                groups[meta.year] = [];
+                yearOrder.push(meta.year);
+            }
+            groups[meta.year].push(globalIdx);
+        });
+
+        const outerGrid = document.createElement("div");
+        outerGrid.className = "grid grid-cols-1 gap-6";
+
+        yearOrder.forEach((year) => {
+            // Year section wrapper
+            const section = document.createElement("div");
+            section.className = "mb-12 last:mb-0";
+
+            // Year heading
+            const heading = document.createElement("div");
+            heading.className =
+                "text-2xl font-bold text-text mb-6 flex items-center gap-3";
+            heading.innerHTML = `<span class="w-1 h-8 bg-primary rounded-full inline-block flex-shrink-0"></span>${year}`;
+            section.appendChild(heading);
+
+            // Cards grid
+            const cardsGrid = document.createElement("div");
+            cardsGrid.className = "grid grid-cols-1 gap-6 pt-2";
+
+            groups[year].forEach((globalIdx) => {
+                const card = getCard(globalIdx);
+                if (!card) return;
+                card.classList.remove("hidden");
+                cardsGrid.appendChild(card);
+            });
+
+            section.appendChild(cardsGrid);
+            outerGrid.appendChild(section);
+        });
+
+        listEl.appendChild(outerGrid);
+    }
+
+    // ─── render pagination bar ────────────────────────────────────────────────
+
+    function renderPagination(page) {
+        const bar = document.getElementById("pagination-bar");
+
+        const base =
+            "px-3 py-1.5 rounded-lg text-sm font-medium transition-colors duration-200 cursor-pointer";
+        const active  = `${base} bg-primary text-white shadow-md shadow-primary/20`;
+        const idle    = `${base} bg-bg-alt text-text-secondary hover:bg-primary/10 hover:text-primary`;
+        const disabled = `${base} bg-bg-alt text-text-muted opacity-50 cursor-not-allowed`;
+
+        const tokens = [];
+        if (totalPages <= 7) {
+            for (let i = 1; i <= totalPages; i++) tokens.push(i);
+        } else {
+            tokens.push(1);
+            if (page > 3) tokens.push("…");
+            const lo = Math.max(2, page - 1);
+            const hi = Math.min(totalPages - 1, page + 1);
+            for (let i = lo; i <= hi; i++) tokens.push(i);
+            if (page < totalPages - 2) tokens.push("…");
+            tokens.push(totalPages);
+        }
+
+        let html = "";
+        html +=
+            page > 1
+                ? `<button class="${idle}" data-page="${page - 1}">← Previous</button>`
+                : `<button class="${disabled}" disabled>← Previous</button>`;
+
+        tokens.forEach((t) => {
+            if (t === "…") {
+                html += `<span class="px-2 text-text-muted select-none">…</span>`;
+            } else {
+                html += `<button class="${t === page ? active : idle}" data-page="${t}" ${t === page ? 'aria-current="page"' : ""}>${t}</button>`;
+            }
+        });
+
+        html +=
+            page < totalPages
+                ? `<button class="${idle}" data-page="${page + 1}">Next →</button>`
+                : `<button class="${disabled}" disabled>Next →</button>`;
+
+        bar.innerHTML = html;
+
+        bar.querySelectorAll("button[data-page]").forEach((btn) => {
+            btn.addEventListener("click", () => {
+                goToPage(parseInt(btn.getAttribute("data-page"), 10));
+            });
+        });
+    }
+
+    // ─── expand / collapse body panels ───────────────────────────────────────
+
+    document.getElementById("updates-list").addEventListener("click", (e) => {
+        const toggle = e.target.closest("[data-role='toggle']");
+        if (!toggle) return;
+        const card = toggle.closest("[data-update-index]");
+        if (!card) return;
+        const body = card.querySelector("[data-role='body']");
+        if (!body) return;
+
+        const isOpen = card.classList.toggle("is-open");
+        if (isOpen) {
+            body.classList.remove("hidden");
+            body.classList.add("expanding");
+            // clean up animation class after it runs
+            body.addEventListener("animationend", () => body.classList.remove("expanding"), { once: true });
+        } else {
+            body.classList.add("hidden");
+        }
+    });
+
+    // ─── navigation ──────────────────────────────────────────────────────────
+
+    function goToPage(page) {
+        currentPage = page;
+        renderUpdates(page);
+        renderPagination(page);
+
+        const anchor = document.getElementById("updates-scroll-target");
+        if (anchor) {
+            const top = anchor.getBoundingClientRect().top + window.scrollY - 96;
+            window.scrollTo({ top, behavior: "smooth" });
+        }
+    }
+
+    // ─── boot ─────────────────────────────────────────────────────────────────
+
+    renderUpdates(1);
+    renderPagination(1);
+</script>

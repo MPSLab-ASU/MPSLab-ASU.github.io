@@ -9,7 +9,7 @@ image: "/images/members/di-lu.jpg"
 isAlumni: true
 currentPosition: "Software Engineer at Google, California"
 graduated: "Spring 2012"
-alumniType: "Master’s Graduate"
+alumniType: "Masters Graduate"
 ---
 
 STL on Limited Local Memory (LLM) Multi-core Processors

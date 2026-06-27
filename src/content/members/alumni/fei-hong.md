@@ -9,7 +9,7 @@ image: "/images/members/fei-hong.jpg"
 isAlumni: true
 currentPosition: "Staff II Software Engineer at Broadcom, Santa Clara, California"
 graduated: "Spring 2011"
-alumniType: "Master’s Graduate"
+alumniType: "Masters Graduate"
 ---
 
 UnSync: A Soft-Error Resilient Redundant CMP Architecture

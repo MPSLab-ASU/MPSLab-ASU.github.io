@@ -7,7 +7,7 @@ linkedin: "https://www.linkedin.com/in/sai-shashank-peddiraju"
 order: 5
 image: "/images/members/sai-shashank-peddiraju.jpg"
 isAlumni: true
-alumniType: "Master’s Graduate"
+alumniType: "Masters Graduate"
 graduated: "Summer 2024"
 ---
 

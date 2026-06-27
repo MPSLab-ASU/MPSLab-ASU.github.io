@@ -9,7 +9,7 @@ image: "/images/members/harshith-allamsetti.jpg"
 isAlumni: true
 currentPosition: "System Design Engineer, Western Digital, Milpitas, California"
 graduated: "Summer 2020"
-alumniType: "Master’s Graduate"
+alumniType: "Masters Graduate"
 ---
 
 Cooperative Driving of Connected Autonomous Vehicles Using Responsibility Sensitive Safety Rules

@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import { marked } from "marked";
 import Footer from "../../components/astro/Footer.astro";
 import Navbar from "../../components/astro/Navbar.astro";
 import NewsSidebar from "../../components/astro/NewsSidebar.astro";
@@ -12,7 +13,11 @@ const awards = allNews
     .sort(
         (a, b) =>
             new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
-    );
+    )
+    .map((item) => ({
+        ...item,
+        descriptionHtml: marked.parseInline(item.data.description ?? ""),
+    }));
 
 // Group awards by year
 const groupedAwards = awards.reduce(
@@ -150,13 +155,10 @@ const currentPath = Astro.url.pathname;
                                                               )}
                                                     </time>
                                                 </div>
-                                                {item.data.description && (
+                                                {item.descriptionHtml && (
                                                     <div
                                                         class="text-text-secondary leading-relaxed max-w-3xl prose prose-sm dark:prose-invert"
-                                                        set:html={
-                                                            item.data
-                                                                .description
-                                                        }
+                                                        set:html={item.descriptionHtml}
                                                     />
                                                 )}
                                             </div>

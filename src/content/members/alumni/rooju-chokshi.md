@@ -9,5 +9,5 @@ image: "/images/members/rooju-chokshi.jpg"
 isAlumni: true
 currentPosition: "Principal Software Engineer at Microsoft, Redmond, Washington"
 graduated: "Fall 2009"
-alumniType: "Master’s Graduate"
+alumniType: "Masters Graduate"
 ---

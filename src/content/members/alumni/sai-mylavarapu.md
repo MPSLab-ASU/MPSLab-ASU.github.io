@@ -9,7 +9,7 @@ image: "/images/members/sai-mylavarapu.jpg"
 isAlumni: true
 currentPosition: "Senior Member of Technical Staff at Micron, Milpitas, California"
 graduated: "Fall 2008"
-alumniType: "Master’s Graduate"
+alumniType: "Masters Graduate"
 ---
 
 Improving Application Response Times of Nand Flash based Systems

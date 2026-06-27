@@ -9,7 +9,7 @@ image: "/images/members/tushar-rawat.jpg"
 isAlumni: true
 currentPosition: "Software Engineer at Zoox, Foster City, California"
 graduated: "Fall 2014"
-alumniType: "Master’s Graduate"
+alumniType: "Masters Graduate"
 ---
 
 Enabling Multithreaded Applications on Hybrid Shared Memory Many-core Architectures

@@ -8,7 +8,7 @@ order: 5
 image: "/images/members/quoc-long-vinh-ta.jpg"
 isAlumni: true
 graduated: "Fall 2022"
-alumniType: "Master’s Graduate"
+alumniType: "Masters Graduate"
 ---
 
 COMSAT: Modified Modulo Scheduling Techniques for Acceleration on Unknown Trip Count and Early Exit Loops

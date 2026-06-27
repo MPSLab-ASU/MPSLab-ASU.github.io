@@ -9,8 +9,8 @@ image: "/images/members/rachel-dedinsky.jpg"
 isAlumni: true
 currentPosition: "Software Engineer, Microsoft, Redmond, Washington"
 graduated: "Spring 2019"
-alumniType: 
-  - "Master’s Graduate"
+alumniType:
+  - "Masters Graduate"
   - "Undergraduate Researcher"
 ---
 

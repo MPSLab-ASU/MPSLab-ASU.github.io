@@ -12,7 +12,7 @@ researchInterests: ["Intelligent Transportation Systems"]
 order: 2
 image: "/images/members/kaustubh-harapanahalli.jpeg"
 isAlumni: true
-alumniType: "Master’s Graduate"
+alumniType: "Masters Graduate"
 graduated: "Masters, Summer 2025"
 ---
 

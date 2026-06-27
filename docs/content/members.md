@@ -90,7 +90,7 @@ current students, alumni, and visiting members.
    joinDate: "2023"
    image: "/images/members/jane-doe.jpg"
    isAlumni: true
-   alumniType: "Master’s Graduate"
+   alumniType: "Masters Graduate"
    graduated: "Masters, Spring 2026"
    currentPosition: "ML Engineer at Example Corp"
    ---
@@ -98,7 +98,7 @@ current students, alumni, and visiting members.
 
 3. Set `alumniType` to one of (a single value or an array of these):
    - `"Ph.D. Graduate"`
-   - `"Master’s Graduate"`
+   - `"Masters Graduate"`
    - `"Undergraduate Researcher"`
    - `"Post-Doctoral Researcher"`
 4. Validate: `npm run build`.
@@ -152,7 +152,7 @@ current students, alumni, and visiting members.
 ### Alumni grouping (`alumniType`)
 
 ```
-"Ph.D. Graduate" | "Master’s Graduate" |
+"Ph.D. Graduate" | "Masters Graduate" |
 "Undergraduate Researcher" | "Post-Doctoral Researcher"
 ```
 

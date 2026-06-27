@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import { marked } from "marked";
 import fs from "node:fs";
 import path from "node:path";
 import Footer from "../components/astro/Footer.astro";
@@ -17,9 +18,14 @@ const sponsors = JSON.parse(
   fs.readFileSync(path.join(process.cwd(), "src/data/sponsors.json"), "utf-8"),
 );
 
-const news = (await getCollection("news")).sort(
+const rawNews = (await getCollection("news")).sort(
   (a, b) => new Date(b.data.date).getTime() - new Date(a.data.date).getTime(),
 );
+// Parse description markdown to HTML at build time
+const news = rawNews.map((item) => ({
+  ...item,
+  descriptionHtml: marked.parseInline(item.data.description ?? ""),
+}));
 
 const allResearch = await getCollection("research");
 const activeResearch = allResearch
@@ -264,10 +270,10 @@ const typeColors: Record<string, string> = {
                       })}
                 </time>
               </div>
-              {item.data.description && (
+              {item.descriptionHtml && (
                 <div
                   class="text-sm text-text-secondary leading-relaxed prose prose-sm dark:prose-invert"
-                  set:html={item.data.description}
+                  set:html={item.descriptionHtml}
                 />
               )}
             </div>

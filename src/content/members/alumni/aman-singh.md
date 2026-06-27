@@ -7,9 +7,9 @@ github: "https://github.com/amanyagami"
 linkedin: "https://www.linkedin.com/in/amanyagami"
 order: 3
 isAlumni: true
-alumniType: "Master's Graduate"
+alumniType: "Masters Graduate"
+graduated: "Spring 2026"
 image: "/images/members/aman-singh.jpg"
-researchInterests: ["Reliability for Machine Learning"]
 ---
 
-Portfolio –Aman Singh | Computer Systems
+Viyog: Separating Adversarial and Out-of-Distribution

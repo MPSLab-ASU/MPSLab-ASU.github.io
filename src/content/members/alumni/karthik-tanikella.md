@@ -9,7 +9,7 @@ image: "/images/members/mps.jpg"
 isAlumni: true
 currentPosition: "Software Engineer at Axsys Automation, Scottsdale, Arizona"
 graduated: "Fall 2015"
-alumniType: "Master’s Graduate"
+alumniType: "Masters Graduate"
 ---
 
 GemV: A Validated Micro-architectural Vulnerability Estimation Tool

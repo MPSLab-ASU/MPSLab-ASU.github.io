@@ -9,7 +9,7 @@ image: "/images/members/saleel-kudchadker.jpg"
 isAlumni: true
 currentPosition: "Principal Member of Technical Staff at AMD, Santa Clara, California"
 graduated: "Spring 2010"
-alumniType: "Master’s Graduate"
+alumniType: "Masters Graduate"
 ---
 
 Managing Stack Data on Limited Local Memory Multi-core Architectures

@@ -9,7 +9,7 @@ image: "/images/members/bryce-holton.jpg"
 isAlumni: true
 currentPosition: "CTO at Alaris, Scottsdale, Arizona"
 graduated: "Spring 2014"
-alumniType: "Master’s Graduate"
+alumniType: "Masters Graduate"
 ---
 
 Construction of GCCFG for Inter-procedural Optimizations in Software Managed Manycore (SMM)

@@ -5,11 +5,11 @@ google_scholar: "https://scholar.google.com/scholar?q=Megan+Kuo"
 joinDate: "2024"
 github: "https://github.com/Megan0704-1"
 linkedin: "https://linkedin.com/in/megankuo2001"
-order: 3
+order: 1
 isAlumni: true
-alumniType: "Master's Graduate"
+alumniType: "Masters Graduate"
+graduated: "Spring 2026"
 image: "/images/members/megan-kuo.jpg"
-researchInterests: ["AI-driven Multi-Level Compilers"]
 ---
 
-I am a Master’s student working at the intersection of machine learning, algorithms, Domain-Specific Languages (DSLs), and compilers. I am passionate about advancing the development of the AI stack, including technologies like MoJo, TVM, MLIR, LLVM, AI accelerators, and GPU computing.
+$\mathcal{BO}$3 (Beyond-O3): Workload-Specific Compilation Pipelines for Multi-Level Compilers

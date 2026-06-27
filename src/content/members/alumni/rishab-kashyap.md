@@ -5,9 +5,11 @@ google_scholar: "https://scholar.google.com/scholar?q=Rishab+Kashyap"
 joinDate: "2024"
 github: "https://github.com/Rishabkashyap14"
 linkedin: "https://www.linkedin.com/in/rishab-kashyap-4bb577195/"
-order: 3
+order: 4
 isAlumni: true
-alumniType: "Master's Graduate"
+alumniType: "Masters Graduate"
+graduated: "Spring 2026"
 image: "/images/members/rishab-kashyap.jpeg"
-researchInterests: ["Machine Learning Acceleration"]
 ---
+
+ADAPT: Asymmetric Device Adaptive Parallel Training for Small-Scale Heterogeneous Systems

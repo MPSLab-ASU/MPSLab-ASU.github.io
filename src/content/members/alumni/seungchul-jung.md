@@ -9,7 +9,7 @@ image: "/images/members/seungchul-jung.jpg"
 isAlumni: true
 currentPosition: "Senior Software Engineer at Emcore Corporation, San Francisco, California"
 graduated: "Fall 2010"
-alumniType: "Master’s Graduate"
+alumniType: "Masters Graduate"
 ---
 
 Dynamic Code Mapping for Limited Local Memory Architectures

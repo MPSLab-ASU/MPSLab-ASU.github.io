@@ -9,7 +9,7 @@ image: "/images/members/abhishek-risheekesan.jpg"
 isAlumni: true
 currentPosition: "Engineering Manager, Intel Labs, Bangalore, India"
 graduated: "Spring 2013"
-alumniType: "Master’s Graduate"
+alumniType: "Masters Graduate"
 ---
 
 Quantitative Evaluation of Control-flow based Soft Error Protection Mechanisms

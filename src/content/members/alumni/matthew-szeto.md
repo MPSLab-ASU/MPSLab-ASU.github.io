@@ -7,6 +7,6 @@ linkedin: "https://www.linkedin.com/in/mattaszeto"
 order: 5
 image: "/images/members/matthew-szeto.webp"
 isAlumni: true
-alumniType: "Master’s Graduate"
+alumniType: "Masters Graduate"
 graduated: "Spring 2023"
 ---

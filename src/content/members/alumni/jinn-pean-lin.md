@@ -9,7 +9,7 @@ image: "/images/members/jinn-pean-lin.jpg"
 isAlumni: true
 currentPosition: "Senior Software Engineer at ForcePoint, Campbell, California"
 graduated: "Summer 2017"
-alumniType: "Master’s Graduate"
+alumniType: "Masters Graduate"
 ---
 
 Optimizing Heap Data Management on Software Managed Manycores

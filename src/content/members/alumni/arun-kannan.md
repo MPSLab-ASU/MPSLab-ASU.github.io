@@ -9,7 +9,7 @@ image: "/images/members/arun-kannan.jpg"
 isAlumni: true
 currentPosition: "Software Architect and Engineering Manager at Apple, Cupertino, California"
 graduated: "Spring 2008"
-alumniType: "Master’s Graduate"
+alumniType: "Masters Graduate"
 ---
 
 A Software-Only Solution for Stack Management on Systems with Scratch Pad Memory

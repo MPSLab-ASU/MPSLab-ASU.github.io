@@ -7,7 +7,7 @@ joinDate: "2022"
 order: 2
 image: "/images/members/vinayak-sharma.jpg"
 isAlumni: true
-alumniType: "Master’s Graduates"
+alumniType: "Masters Graduates"
 graduated: "Masters, Spring 2024"
 github: "https://github.com/vinayak19th"
 linkedin: "https://www.linkedin.com/in/vinayak19th/"
