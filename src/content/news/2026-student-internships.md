@@ -1,6 +1,6 @@
 ---
 date: "2026-06-27"
-type: "News"
+type: "General"
 description: "Congratulations to our lab's PhD students Kaustubh Harapanahalli, Vinayak Sharma, and Atharva Khedkar on securing Summer internships!"
 ---
 
