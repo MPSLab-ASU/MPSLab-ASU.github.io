@@ -1,12 +1,13 @@
 ---
 name: "Megan Kuo"
-role: "Masters"
+role: "Alumni"
 google_scholar: "https://scholar.google.com/scholar?q=Megan+Kuo"
 joinDate: "2024"
 github: "https://github.com/Megan0704-1"
 linkedin: "https://linkedin.com/in/megankuo2001"
-resume: "/docs/resumes/megan-kuo.pdf"
 order: 3
+isAlumni: true
+alumniType: "Master's Graduate"
 image: "/images/members/megan-kuo.jpg"
 researchInterests: ["AI-driven Multi-Level Compilers"]
 ---

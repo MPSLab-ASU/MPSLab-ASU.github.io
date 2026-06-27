@@ -1,12 +1,13 @@
 ---
 name: "Curt John Bansil"
-role: "Masters"
+role: "Alumni"
 google_scholar: "https://scholar.google.com/scholar?q=Curt+John+Bansil"
 joinDate: "2024"
 github: "https://github.com/kurtis-b"
 linkedin: "https://www.linkedin.com/in/curtbansil/"
-resume: "/docs/resumes/curt-john-bansil.pdf"
 order: 3
+isAlumni: true
+alumniType: "Master's Graduate"
 image: "/images/members/curt-john-bansil.jpg"
 researchInterests: ["Machine Learning Acceleration"]
 ---

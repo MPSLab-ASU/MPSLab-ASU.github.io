@@ -1,12 +1,13 @@
 ---
 name: "Shashwat Pandey"
-role: "Masters"
+role: "Alumni"
 google_scholar: "https://scholar.google.com/scholar?q=Shashwat+Pandey"
 joinDate: "2024"
 github: "https://github.com/Shashwatpandey4"
 linkedin: "https://www.linkedin.com/in/shashwat023/"
-resume: "/docs/resumes/shashwat-pandey.pdf"
 order: 3
+isAlumni: true
+alumniType: "Master's Graduate"
 image: "/images/members/shashwat-pandey.jpg"
 researchInterests: ["AI-driven Multi-Level Compilers"]
 ---
