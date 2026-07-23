@@ -18,7 +18,7 @@ const BOOKMARK_GROUPS: BookmarkGroup[] = [
     links: [
       {
         label: "Example Link",
-        url: "https://example.com",
+        url: "https://example1.com",
         description: "Replace this with a real bookmark",
       },
     ],
