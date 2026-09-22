@@ -3,6 +3,9 @@ category: On-Campus Resources
 icon: 🏫
 order: 2
 items:
+- question: Where can students get conference posters printed?
+  answer: 'SCAI provides free conference poster printing for students. Use the link below to access the service.'
+  externalLink: http://links.asu.edu/SCAIposterprinting
 - question: Is there a way to get graduate/academic writing support at ASU?
   answer: ''
   externalLink: https://tutoring.asu.edu/graduate-writing-centers
