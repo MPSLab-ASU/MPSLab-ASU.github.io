@@ -63,6 +63,7 @@ Top-level pages:
 - `people.astro` — members listing (folder-driven)
 - `publications.astro` — publications search
 - `software.astro` — software/tools listing (its own page, **not** a publications tab)
+- `blog.astro` — blog listing; `?topic=<research slug>` filters to one research area
 - `teaching.astro` — teaching landing
 - `faq.astro`, `contact.astro`
 
@@ -79,7 +80,7 @@ Nested / dynamic routes:
 ## Content and Data Sources
 
 - **Collections** (`src/content/`): `members`, `news`, `research`, `resources`,
-  `faq`, `gallery`. Each is validated by a Zod schema in
+  `faq`, `gallery`, `blog`. Each is validated by a Zod schema in
   `src/content/config.ts`.
 - **Data files** (`src/data/`): `publications.bib`, `software.json`,
   `sponsors.json`.
@@ -95,7 +96,7 @@ Located in `src/components/react/`:
 - `GlobalSearch.tsx` — site-wide modal search (Pagefind)
 - `HomepageCarousel.tsx` — homepage image carousel
 - `GalleryGrid.tsx` / `ImageLightbox.tsx` — gallery and lightbox
-- `SoftwareCard.tsx` / `PublicationCard.tsx` — cards
+- `SoftwareCard.tsx` / `PublicationCard.tsx` / `BlogCard.tsx` — cards
 - `ThemeToggle.tsx` — light/dark switch
 
 Keep these focused on interactivity. Static markup belongs in Astro components.

@@ -115,6 +115,7 @@ reference.
 | Research areas & reading lists          | [docs/content/research.md](docs/content/research.md)         |
 | Photo gallery                           | [docs/content/gallery.md](docs/content/gallery.md)           |
 | Software / tools                        | [docs/content/software.md](docs/content/software.md)         |
+| Blog posts                              | [docs/content/blog.md](docs/content/blog.md)                 |
 | Sponsors                                | [docs/content/sponsors.md](docs/content/sponsors.md)         |
 | FAQ                                     | [docs/content/faq.md](docs/content/faq.md)                   |
 | Teaching / courses                      | [docs/content/teaching.md](docs/content/teaching.md)         |

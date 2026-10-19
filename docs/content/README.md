@@ -15,6 +15,7 @@ that content, plus its field reference.
 | Research areas and reading lists        | [research.md](research.md)         |
 | Photo gallery / event albums            | [gallery.md](gallery.md)           |
 | Software / tools listing                | [software.md](software.md)         |
+| Blog posts                              | [blog.md](blog.md)                 |
 | Sponsors / funding logos                | [sponsors.md](sponsors.md)         |
 | FAQ entries                             | [faq.md](faq.md)                   |
 | Teaching / courses                      | [teaching.md](teaching.md)         |
