@@ -24,7 +24,7 @@ Each content type has its own self-contained guide under
 - [News, awards & grants](content/news.md)
 - [Research areas & reading lists](content/research.md)
 - [Gallery](content/gallery.md)
-- [Software](content/software.md) · [Sponsors](content/sponsors.md) · [FAQ](content/faq.md) · [Teaching](content/teaching.md)
+- [Software](content/software.md) · [Blogs](content/blog.md) · [Sponsors](content/sponsors.md) · [FAQ](content/faq.md) · [Teaching](content/teaching.md)
 
 ## Golden Rule
 

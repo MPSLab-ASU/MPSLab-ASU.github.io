@@ -132,4 +132,28 @@ const gallery = defineCollection({
   }),
 });
 
-export const collections = { members, news, research, resources, faq, gallery };
+const blog = defineCollection({
+  type: "content",
+  schema: z.object({
+    title: z.string(),
+    url: z.string().url(),
+    description: z.string(),
+    date: z.date(),
+    authors: z.string().optional(),
+    tags: z.array(z.string()).optional(),
+    image: z.string().optional(),
+    // Research page slugs, e.g. "ai-compilers" for /research/ai-compilers;
+    // checked against the research collection in src/pages/blog.astro
+    researchAreas: z.array(z.string()).optional(),
+  }),
+});
+
+export const collections = {
+  members,
+  news,
+  research,
+  resources,
+  faq,
+  gallery,
+  blog,
+};

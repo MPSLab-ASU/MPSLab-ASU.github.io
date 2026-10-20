@@ -1,0 +1,94 @@
+---
+import { getCollection } from "astro:content";
+import Footer from "../components/astro/Footer.astro";
+import Navbar from "../components/astro/Navbar.astro";
+import BlogCard from "../components/react/BlogCard";
+import Layout from "../layouts/Layout.astro";
+
+const blogPosts = (await getCollection("blog")).sort(
+  (a, b) =>
+    b.data.date.getTime() - a.data.date.getTime() ||
+    a.data.title.localeCompare(b.data.title),
+);
+
+const allResearch = await getCollection("research");
+const topicTitles = Object.fromEntries(
+  allResearch.map((entry) => [entry.slug, entry.data.title]),
+);
+
+// Fail the build on a researchAreas typo instead of silently dropping the link
+for (const post of blogPosts) {
+  for (const slug of post.data.researchAreas ?? []) {
+    if (!Object.hasOwn(topicTitles, slug)) {
+      throw new Error(
+        `src/content/blog/${post.id}: unknown research area "${slug}". ` +
+          `Expected one of: ${Object.keys(topicTitles).join(", ")}`,
+      );
+    }
+  }
+}
+---
+
+<Layout title="Blogs">
+  <Navbar slot="header" />
+
+  <section class="py-16 md:py-24">
+    <div class="section-container max-w-5xl mx-auto">
+      <div class="text-center mb-12">
+        <h1 class="text-3xl md:text-4xl font-bold text-text">Blogs</h1>
+      </div>
+
+      <div
+        id="blog-topic-filter"
+        hidden
+        class="mb-6 text-sm text-text-secondary text-center"
+      >
+        Showing blogs on <span
+          id="blog-topic-name"
+          class="font-medium text-text"></span>
+        · <a href="/blog" class="text-primary hover:underline">Show all</a>
+      </div>
+
+      {
+        blogPosts.length === 0 && (
+          <p class="text-center text-text-secondary">No blogs yet.</p>
+        )
+      }
+
+      <div
+        id="blog-grid"
+        class="grid grid-cols-1 md:grid-cols-2 gap-6"
+        data-topic-titles={JSON.stringify(topicTitles)}
+      >
+        {
+          blogPosts.map((post) => (
+            <div
+              data-topics={(post.data.researchAreas ?? []).join(" ")}
+            >
+              <BlogCard post={post.data} />
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</Layout>
+
+<script>
+  // /blog?topic=<research slug> shows only the blogs tagged with that area
+  const topic = new URLSearchParams(window.location.search).get("topic");
+  const grid = document.getElementById("blog-grid");
+  if (topic && grid) {
+    const titles = JSON.parse(grid.dataset.topicTitles ?? "{}");
+    const cards = [...grid.querySelectorAll<HTMLElement>("[data-topics]")];
+    const matches = (card: HTMLElement) =>
+      card.dataset.topics?.split(" ").includes(topic);
+    if (Object.hasOwn(titles, topic) && cards.some(matches)) {
+      cards.forEach((card) => (card.hidden = !matches(card)));
+      document.getElementById("blog-topic-name")!.textContent = titles[topic];
+      document.getElementById("blog-topic-filter")!.hidden = false;
+    }
+  }
+</script>

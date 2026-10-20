@@ -103,6 +103,12 @@ const hasResources = Boolean(resourceEntry) || hasResourceFile;
 const readingListHref = readingListUrl ?? `/research/resources/${entry.slug}`;
 const isExternalReadingList = Boolean(readingListUrl);
 
+// Blogs whose researchAreas include this research area
+const allBlogs = await getCollection("blog");
+const hasBlogs = allBlogs.some((post) =>
+  post.data.researchAreas?.includes(entry.slug),
+);
+
 const allMembers = await getCollection("members");
 const researchFilterLower = entry.data.title.toLowerCase();
 // Active status is based on current role/folder, not historical prior-degree metadata.
@@ -169,29 +175,52 @@ const hasActiveResearchers = allMembers.some(
 
       <!-- Quick Links -->
       {
-        hasResources && (
+        (hasResources || hasBlogs) && (
           <div class="mb-10 flex flex-wrap gap-3">
-            <a
-              href={readingListHref}
-              target={isExternalReadingList ? "_blank" : undefined}
-              rel={isExternalReadingList ? "noopener noreferrer" : undefined}
-              class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 font-medium text-sm transition-all"
-            >
-              <svg
-                class="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+            {hasResources && (
+              <a
+                href={readingListHref}
+                target={isExternalReadingList ? "_blank" : undefined}
+                rel={isExternalReadingList ? "noopener noreferrer" : undefined}
+                class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 font-medium text-sm transition-all"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
-                />
-              </svg>
-              Reading List
-            </a>
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"
+                  />
+                </svg>
+                Reading List
+              </a>
+            )}
+            {hasBlogs && (
+              <a
+                href={`/blog?topic=${encodeURIComponent(entry.slug)}`}
+                class="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-primary/10 text-primary hover:bg-primary/20 font-medium text-sm transition-all"
+              >
+                <svg
+                  class="w-4 h-4"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  />
+                </svg>
+                Blogs
+              </a>
+            )}
           </div>
         )
       }
