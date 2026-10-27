@@ -1,6 +1,6 @@
 ---
 researchArea: "Quantum Machine Learning"
-readingListUrl: "https://docs.google.com/document/d/1pluLDoxEXUVsKBt4dNi0-0i_b4a_1vLP7-xyrzLLWUg/edit?tab=t.0#heading=h.9xb2p2t2oo1l"
+readingListUrl: "https://docs.google.com/document/d/1iqQ9yZZvu72e-9-xQIag8nrxAQRdDS71_by40cehijk/edit?usp=sharing"
 ---
 
 # Quantum Machine Learning Reading List
