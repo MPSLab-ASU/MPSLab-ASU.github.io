@@ -266,7 +266,12 @@ export default function PublicationSearch({
         p.entryTags.research?.toLowerCase().includes(q),
       );
     }
-    return results;
+    // Always show newest first (do not rely on .bib file order)
+    return [...results].sort((a, b) => {
+      const yearA = a.entryTags.year ? parseInt(a.entryTags.year, 10) : 0;
+      const yearB = b.entryTags.year ? parseInt(b.entryTags.year, 10) : 0;
+      return yearB - yearA;
+    });
   }, [query, yearFilter, authorFilter, typeFilter, tagFilter, papers, fuse]);
 
   const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
